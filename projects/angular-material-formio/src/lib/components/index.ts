@@ -1,5 +1,10 @@
 import './Base';
 import { TextFieldComponent } from './textfield/textfield.component';
+import { PasswordComponent } from './password/password.component';
+import { EmailComponent } from './email/email.component';
+import { PhoneNumberComponent } from './phonenumber/phonenumber.component';
+import { NumberComponent } from './number/number.component';
+import { CurrencyComponent } from './currency/currency.component';
 import { ButtonComponent } from './button/button.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { PanelComponent } from './panel/panel.component';
@@ -14,6 +19,11 @@ import { FormioComponent } from './MaterialComponent';
 // Set the components.
 const components: any = {
   textfield: TextFieldComponent,
+  password: PasswordComponent,
+  email: EmailComponent,
+  phoneNumber: PhoneNumberComponent,
+  number: NumberComponent,
+  currency: CurrencyComponent,
   textarea: TextAreaComponent,
   button: ButtonComponent,
   datetime: DateTimeComponent,

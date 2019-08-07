@@ -9,9 +9,8 @@ import { FormControl } from '@angular/forms';
 export class MaterialComponent implements AfterViewInit {
   @Input() instance: any;
   @ViewChild('input', {static: true}) input: ElementRef;
-  public control: FormControl;
+  public control: FormControl = new FormControl();
   setInstance(instance: any) {
-    this.control = new FormControl();
     instance.materialComponent = this;
     this.instance = instance;
     this.renderComponents();

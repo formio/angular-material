@@ -22,6 +22,11 @@ import { MaterialComponent } from './components/MaterialComponent';
 import { MaterialNestedComponent } from './components/MaterialNestedComponent';
 import { MaterialButtonComponent } from './components/button/button.component';
 import { MaterialTextfieldComponent } from './components/textfield/textfield.component';
+import { MaterialPasswordComponent } from './components/password/password.component';
+import { MaterialEmailComponent } from './components/email/email.component';
+import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumber.component';
+import { MaterialNumberComponent } from './components/number/number.component';
+import { MaterialCurrencyComponent } from './components/currency/currency.component';
 import { MaterialTextareaComponent } from './components/textarea/textarea.component';
 import { MaterialColumnsComponent } from './components/columns/columns.component';
 import { MaterialContainerComponent } from './components/container/container.component';
@@ -38,6 +43,11 @@ import { RequiredDirective } from './required.directive';
     FormioComponent,
     MaterialButtonComponent,
     MaterialTextfieldComponent,
+    MaterialPasswordComponent,
+    MaterialEmailComponent,
+    MaterialPhoneNumberComponent,
+    MaterialNumberComponent,
+    MaterialCurrencyComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,
@@ -86,6 +96,11 @@ import { RequiredDirective } from './required.directive';
   entryComponents: [
     MaterialButtonComponent,
     MaterialTextfieldComponent,
+    MaterialPasswordComponent,
+    MaterialEmailComponent,
+    MaterialPhoneNumberComponent,
+    MaterialNumberComponent,
+    MaterialCurrencyComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,

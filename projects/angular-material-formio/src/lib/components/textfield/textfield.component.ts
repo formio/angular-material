@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import TextFieldComponent from 'formiojs/components/textfield/TextField';
 import { MaterialComponent } from '../MaterialComponent';
 @Component({
@@ -8,6 +8,7 @@ import { MaterialComponent } from '../MaterialComponent';
       <mat-label>{{ instance.component.label }}</mat-label>
       <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
       <input matInput
+         type="{{ inputType }}"
          [required]="instance.component.validate?.required"
          [formControl]="control"
          [placeholder]="instance.component.placeholder"
@@ -20,6 +21,8 @@ import { MaterialComponent } from '../MaterialComponent';
   `,
   styles: [':host > * { width: 100%; }']
 })
-export class MaterialTextfieldComponent extends MaterialComponent {}
+export class MaterialTextfieldComponent extends MaterialComponent {
+  @Input() inputType ? = 'text';
+}
 TextFieldComponent.MaterialComponent = MaterialTextfieldComponent;
 export { TextFieldComponent };
