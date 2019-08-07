@@ -1,0 +1,30 @@
+{
+  "name": "angular-material-formio",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/animations": "^8.1.1",
+    "@angular/cdk": "^8.0.2",
+    "@angular/common": "^8.1.1",
+    "@angular/core": "^8.1.1",
+    "@angular/forms": "^8.1.1",
+    "@angular/material": "^8.0.2",
+    "@angular/flex-layout": "^8.0.0-beta.26",
+    "@angular/platform-browser": "^8.1.1",
+    "angular-formio": "^4.0.0-beta.6",
+    "formiojs": "^4.0.0-rc.15",
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {
+    "@angular/animations": "^8.1.1",
+    "@angular/cdk": "^8.0.2",
+    "@angular/common": "^8.1.1",
+    "@angular/core": "^8.1.1",
+    "@angular/forms": "^8.1.1",
+    "@angular/material": "^8.0.2",
+    "@angular/flex-layout": "^8.0.0-beta.26",
+    "@angular/platform-browser": "^8.1.1",
+    "angular-formio": "^4.0.0-beta.6",
+    "formiojs": "^4.0.0-rc.15",
+    "hammerjs": "^2.0.8"
+  }
+}
