@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/animations": "^8.1.1",
     "@angular/cdk": "^8.0.2",
