@@ -7,6 +7,8 @@ import {
   MatInputModule,
   MatButtonModule,
   MatFormFieldModule,
+  MatCheckboxModule,
+  MatRadioModule,
   MatCardModule,
   MatTabsModule,
   MatTableModule,
@@ -30,6 +32,12 @@ import { MaterialCurrencyComponent } from './components/currency/currency.compon
 import { MaterialTextareaComponent } from './components/textarea/textarea.component';
 import { MaterialColumnsComponent } from './components/columns/columns.component';
 import { MaterialContainerComponent } from './components/container/container.component';
+import { MaterialCheckboxComponent } from './components/checkbox/checkbox.component';
+import { MaterialFieldsetComponent } from './components/fieldset/fieldset.component';
+import { MaterialContentComponent } from './components/content/content.component';
+import { MaterialSignatureComponent } from './components/signature/signature.component';
+import { MaterialSelectBoxesComponent } from './components/selectboxes/selectboxes.component';
+import { MaterialRadioComponent } from './components/radio/radio.component';
 import { MaterialPanelComponent } from './components/panel/panel.component';
 import { MaterialTabsComponent } from './components/tabs/tabs.component';
 import { MaterialDateComponent } from './components/date/date.component';
@@ -53,6 +61,12 @@ import { RequiredDirective } from './required.directive';
     MaterialContainerComponent,
     MaterialDataGridComponent,
     MaterialPanelComponent,
+    MaterialCheckboxComponent,
+    MaterialFieldsetComponent,
+    MaterialContentComponent,
+    MaterialSignatureComponent,
+    MaterialSelectBoxesComponent,
+    MaterialRadioComponent,
     MaterialTabsComponent,
     MaterialDateComponent,
     MaterialWellComponent,
@@ -68,6 +82,8 @@ import { RequiredDirective } from './required.directive';
     FlexLayoutModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCheckboxModule,
+    MatRadioModule,
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
@@ -106,6 +122,12 @@ import { RequiredDirective } from './required.directive';
     MaterialContainerComponent,
     MaterialDataGridComponent,
     MaterialPanelComponent,
+    MaterialCheckboxComponent,
+    MaterialFieldsetComponent,
+    MaterialContentComponent,
+    MaterialSignatureComponent,
+    MaterialSelectBoxesComponent,
+    MaterialRadioComponent,
     MaterialTabsComponent,
     MaterialDateComponent,
     MaterialWellComponent,

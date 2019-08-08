@@ -6,7 +6,11 @@ import ColumnsComponent from 'formiojs/components/columns/Columns';
   selector: 'mat-formio-columns',
   template: `
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="{{ flexGap }}%" fxLayoutAlign="center">
-      <div *ngFor="let column of instance.component.columns; let i = index" [fxFlex]="flexWidth(column, i)">
+      <div
+        *ngFor="let column of instance.component.columns; let i = index"
+        [fxFlex]="flexWidth(column, i)"
+        fxLayout="column"
+        fxLayoutGap="1em">
         <ng-template #components></ng-template>
       </div>
     </div>

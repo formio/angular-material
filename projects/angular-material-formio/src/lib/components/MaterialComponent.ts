@@ -19,7 +19,19 @@ export class MaterialComponent implements AfterViewInit {
   renderComponents() {}
 
   onChange() {
-    this.instance.updateValue(this.control.value, {modified: true});
+    this.instance.updateValue(this.getValue(), {modified: true});
+  }
+
+  getValue() {
+    return this.control.value;
+  }
+
+  setValue(value) {
+    this.control.setValue(value);
+  }
+
+  beforeSubmit() {
+    this.control.markAsTouched();
   }
 
   ngAfterViewInit() {

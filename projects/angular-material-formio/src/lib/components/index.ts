@@ -12,6 +12,12 @@ import { ColumnsComponent } from './columns/columns.component';
 import { ContainerComponent } from './container/container.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { DateTimeComponent } from './date/date.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { FieldsetComponent } from './fieldset/fieldset.component';
+import { ContentComponent } from './content/content.component';
+import { SignatureComponent } from './signature/signature.component';
+import { SelectBoxesComponent } from './selectboxes/selectboxes.component';
+import { RadioComponent } from './radio/radio.component';
 import { WellComponent } from './well/well.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
 import { FormioComponent } from './MaterialComponent';
@@ -20,6 +26,7 @@ import { FormioComponent } from './MaterialComponent';
 const components: any = {
   textfield: TextFieldComponent,
   password: PasswordComponent,
+  checkbox: CheckboxComponent,
   email: EmailComponent,
   phoneNumber: PhoneNumberComponent,
   number: NumberComponent,
@@ -31,6 +38,11 @@ const components: any = {
   columns: ColumnsComponent,
   tabs: TabsComponent,
   well: WellComponent,
+  fieldset: FieldsetComponent,
+  content: ContentComponent,
+  signature: SignatureComponent,
+  selectboxes: SelectBoxesComponent,
+  radio: RadioComponent,
   container: ContainerComponent,
   datagrid: DataGridComponent,
   unknown: FormioComponent

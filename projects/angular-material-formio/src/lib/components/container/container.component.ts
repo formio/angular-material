@@ -3,7 +3,7 @@ import { MaterialNestedComponent } from '../MaterialNestedComponent';
 import ContainerComponent from 'formiojs/components/container/Container';
 @Component({
   selector: 'mat-formio-container',
-  template: `<ng-template #components></ng-template>`
+  template: `<div fxLayout="column" fxLayoutGap="1em"><ng-template #components></ng-template></div>`
 })
 export class MaterialContainerComponent extends MaterialNestedComponent {}
 ContainerComponent.MaterialComponent = MaterialContainerComponent;

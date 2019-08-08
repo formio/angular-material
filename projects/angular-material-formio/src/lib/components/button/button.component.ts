@@ -10,7 +10,7 @@ import { MaterialComponent } from '../MaterialComponent';
       (click)="instance.onClick($event)">{{ instance.component.label }}
     </button>
   `,
-  styles: [':host > * { width: 100%; }']
+  styles: []
 })
 export class MaterialButtonComponent extends MaterialComponent {}
 ButtonComponent.MaterialComponent = MaterialButtonComponent;

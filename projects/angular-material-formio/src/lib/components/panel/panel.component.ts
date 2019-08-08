@@ -6,7 +6,7 @@ import PanelComponent from 'formiojs/components/panel/Panel';
   template: `
     <mat-card>
       <mat-card-title *ngIf="instance?.component?.title">{{ instance.component.title }}</mat-card-title>
-      <mat-card-content>
+      <mat-card-content fxLayout="column" fxLayoutGap="1em">
         <ng-template #components></ng-template>
       </mat-card-content>
     </mat-card>

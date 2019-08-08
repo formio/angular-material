@@ -2,7 +2,7 @@ import FormioComponent from 'formiojs/components/_classes/component/Component';
 const setValue = FormioComponent.prototype.setValue;
 FormioComponent.prototype.setValue = function(...args) {
   if (this.materialComponent) {
-    this.materialComponent.control.setValue(args[0]);
+    this.materialComponent.setValue(args[0]);
   }
   return setValue.call(this, ...args);
 };
@@ -10,7 +10,7 @@ FormioComponent.prototype.setValue = function(...args) {
 const beforeSubmit = FormioComponent.prototype.beforeSubmit;
 FormioComponent.prototype.beforeSubmit = function(...args) {
   if (this.materialComponent) {
-    this.materialComponent.control.markAsTouched();
+    this.materialComponent.beforeSubmit();
   }
   return beforeSubmit.call(this, ...args);
 };
