@@ -60,7 +60,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   public footer: string;
   private componentRefs: Array<ComponentRef<any>> = [];
   public displayedColumns: string[];
-  public columns: any[];
+  public columns: any = {};
   constructor(private cfr: ComponentFactoryResolver, private injector: Injector) {
     super();
   }
@@ -68,13 +68,13 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   setInstance(instance) {
     const dataValue = instance.dataValue || [];
     this.displayedColumns = instance.component.components.map((comp) => {
-      if (!comp.tableView) {
+      if (comp.hasOwnProperty('tableView') && !comp.tableView) {
         return false;
       }
 
       this.columns[comp.key] = comp;
       return comp.key;
-    }).filter();
+    }).filter(name => !!name);
 
     if (instance.component.templates && instance.component.templates.header) {
       this.header = instance.renderString(instance.component.templates.header, {
