@@ -6,7 +6,7 @@ const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
 @Component({
   selector: 'mat-formio-date',
   template: `
-    <mat-form-field>
+    <mat-form-field fxFill>
       <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-label>{{ instance.component.label }}</mat-label>
@@ -17,8 +17,7 @@ const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
       <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
       <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
     </mat-form-field>
-  `,
-  styles: [':host > * { width: 100%; }']
+  `
 })
 export class MaterialDateComponent extends MaterialComponent {
   onChange() {

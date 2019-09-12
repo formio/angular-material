@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { SatPopoverModule } from '@ncstate/sat-popover';
 import {
   MatInputModule,
   MatButtonModule,
   MatFormFieldModule,
   MatCheckboxModule,
   MatRadioModule,
+  MatSelectModule,
+  MatListModule,
   MatCardModule,
   MatTabsModule,
   MatTableModule,
@@ -38,10 +41,12 @@ import { MaterialContentComponent } from './components/content/content.component
 import { MaterialSignatureComponent } from './components/signature/signature.component';
 import { MaterialSelectBoxesComponent } from './components/selectboxes/selectboxes.component';
 import { MaterialRadioComponent } from './components/radio/radio.component';
+import { MaterialSelectComponent } from './components/select/select.component';
 import { MaterialPanelComponent } from './components/panel/panel.component';
 import { MaterialTabsComponent } from './components/tabs/tabs.component';
 import { MaterialDateComponent } from './components/date/date.component';
 import { MaterialDataGridComponent } from './components/datagrid/datagrid.component';
+import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 import { RequiredDirective } from './required.directive';
@@ -60,6 +65,7 @@ import { RequiredDirective } from './required.directive';
     MaterialColumnsComponent,
     MaterialContainerComponent,
     MaterialDataGridComponent,
+    MaterialEditGridComponent,
     MaterialPanelComponent,
     MaterialCheckboxComponent,
     MaterialFieldsetComponent,
@@ -67,6 +73,7 @@ import { RequiredDirective } from './required.directive';
     MaterialSignatureComponent,
     MaterialSelectBoxesComponent,
     MaterialRadioComponent,
+    MaterialSelectComponent,
     MaterialTabsComponent,
     MaterialDateComponent,
     MaterialWellComponent,
@@ -80,10 +87,13 @@ import { RequiredDirective } from './required.directive';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    /*SatPopoverModule,*/
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSelectModule,
+    MatListModule,
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
@@ -121,6 +131,7 @@ import { RequiredDirective } from './required.directive';
     MaterialColumnsComponent,
     MaterialContainerComponent,
     MaterialDataGridComponent,
+    MaterialEditGridComponent,
     MaterialPanelComponent,
     MaterialCheckboxComponent,
     MaterialFieldsetComponent,
@@ -128,6 +139,7 @@ import { RequiredDirective } from './required.directive';
     MaterialSignatureComponent,
     MaterialSelectBoxesComponent,
     MaterialRadioComponent,
+    MaterialSelectComponent,
     MaterialTabsComponent,
     MaterialDateComponent,
     MaterialWellComponent,

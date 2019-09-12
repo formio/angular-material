@@ -6,10 +6,10 @@ import DataGridComponent from 'formiojs/components/datagrid/DataGrid';
 @Component({
   selector: 'mat-formio-datagrid',
   template: `
-    <mat-card>
+    <mat-card fxFill>
       <mat-card-title *ngIf="instance?.component?.label">{{ instance.component.label }}</mat-card-title>
       <mat-card-content>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" fxFill>
           <ng-container *ngFor="let column of formColumns" [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef>{{ getColumnLabel(columns[column]) }}</th>
             <td mat-cell *matCellDef="let i = index;" [attr.rowIndex]="i" [attr.component]="column">
@@ -32,8 +32,7 @@ import DataGridComponent from 'formiojs/components/datagrid/DataGrid';
         </button>
       </mat-card-actions>
     </mat-card>
-  `,
-  styles: [':host table { width: 100%; }']
+  `
 })
 export class MaterialDataGridComponent extends MaterialNestedComponent {
   displayedColumns: string[];

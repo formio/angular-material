@@ -4,7 +4,7 @@ import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-textfield',
   template: `
-    <mat-form-field>
+    <mat-form-field fxFill>
       <mat-label>{{ instance.component.label }}</mat-label>
       <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
       <input matInput
@@ -18,8 +18,7 @@ import { MaterialComponent } from '../MaterialComponent';
       <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
       <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
     </mat-form-field>
-  `,
-  styles: [':host > * { width: 100%; }']
+  `
 })
 export class MaterialTextfieldComponent extends MaterialComponent {
   @Input() inputType ? = 'text';

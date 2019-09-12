@@ -18,8 +18,10 @@ import { ContentComponent } from './content/content.component';
 import { SignatureComponent } from './signature/signature.component';
 import { SelectBoxesComponent } from './selectboxes/selectboxes.component';
 import { RadioComponent } from './radio/radio.component';
+import { SelectComponent } from './select/select.component';
 import { WellComponent } from './well/well.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
+import { EditGridComponent } from './editgrid/editgrid.component';
 import { FormioComponent } from './MaterialComponent';
 
 // Set the components.
@@ -43,8 +45,10 @@ const components: any = {
   signature: SignatureComponent,
   selectboxes: SelectBoxesComponent,
   radio: RadioComponent,
+  select: SelectComponent,
   container: ContainerComponent,
   datagrid: DataGridComponent,
+  editgrid: EditGridComponent,
   unknown: FormioComponent
 };
 
