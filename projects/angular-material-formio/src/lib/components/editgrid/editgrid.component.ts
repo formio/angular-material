@@ -90,17 +90,21 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
     }
     super.setInstance(instance);
     setTimeout(() => {
-      this.headerElement.nativeElement.innerHTML = this.header;
+      if (this.headerElement.nativeElement) {
+        this.headerElement.nativeElement.innerHTML = this.header;
+      }
       this.componentRefs = [];
       for (const selector in TEMPLATE_COMPONENTS) {
         if (TEMPLATE_COMPONENTS.hasOwnProperty(selector)) {
-          const elements = (this.headerElement.nativeElement as Element).querySelectorAll(selector);
-          Array.prototype.forEach.call(elements, (el: Element) => {
-            const content = el.innerHTML;
-            const factory: ComponentFactory<any> = this.cfr.resolveComponentFactory(TEMPLATE_COMPONENTS[selector]);
-            const cmpRef = factory.create(this.injector, [], el);
-            this.componentRefs.push(cmpRef);
-          });
+          if (this.headerElement.nativeElement) {
+            const elements = (this.headerElement.nativeElement as Element).querySelectorAll(selector);
+            Array.prototype.forEach.call(elements, (el: Element) => {
+              const content = el.innerHTML;
+              const factory: ComponentFactory<any> = this.cfr.resolveComponentFactory(TEMPLATE_COMPONENTS[selector]);
+              const cmpRef = factory.create(this.injector, [], el);
+              this.componentRefs.push(cmpRef);
+            });
+          }
         }
       }
     }, 0);
