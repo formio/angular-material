@@ -31,6 +31,7 @@ import { MaterialPasswordComponent } from './components/password/password.compon
 import { MaterialEmailComponent } from './components/email/email.component';
 import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumber.component';
 import { MaterialNumberComponent } from './components/number/number.component';
+import { MaterialHiddenComponent } from './components/hidden/hidden.component';
 import { MaterialCurrencyComponent } from './components/currency/currency.component';
 import { MaterialTextareaComponent } from './components/textarea/textarea.component';
 import { MaterialColumnsComponent } from './components/columns/columns.component';
@@ -61,6 +62,7 @@ import { RequiredDirective } from './required.directive';
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
     MaterialCurrencyComponent,
+    MaterialHiddenComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,
@@ -133,6 +135,7 @@ import { RequiredDirective } from './required.directive';
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
     MaterialCurrencyComponent,
+    MaterialHiddenComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,

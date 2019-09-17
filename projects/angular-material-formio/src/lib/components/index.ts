@@ -5,6 +5,7 @@ import { EmailComponent } from './email/email.component';
 import { PhoneNumberComponent } from './phonenumber/phonenumber.component';
 import { NumberComponent } from './number/number.component';
 import { CurrencyComponent } from './currency/currency.component';
+import { HiddenComponent } from './hidden/hidden.component';
 import { ButtonComponent } from './button/button.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { PanelComponent } from './panel/panel.component';
@@ -33,6 +34,7 @@ const components: any = {
   phoneNumber: PhoneNumberComponent,
   number: NumberComponent,
   currency: CurrencyComponent,
+  hidden: HiddenComponent,
   textarea: TextAreaComponent,
   button: ButtonComponent,
   datetime: DateTimeComponent,
