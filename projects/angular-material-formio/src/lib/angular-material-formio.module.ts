@@ -33,6 +33,7 @@ import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumb
 import { MaterialNumberComponent } from './components/number/number.component';
 import { MaterialHiddenComponent } from './components/hidden/hidden.component';
 import { MaterialCurrencyComponent } from './components/currency/currency.component';
+import { MaterialDayComponent } from './components/day/day.component';
 import { MaterialTextareaComponent } from './components/textarea/textarea.component';
 import { MaterialColumnsComponent } from './components/columns/columns.component';
 import { MaterialContainerComponent } from './components/container/container.component';
@@ -62,6 +63,7 @@ import { RequiredDirective } from './required.directive';
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
     MaterialCurrencyComponent,
+    MaterialDayComponent,
     MaterialHiddenComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
@@ -135,6 +137,7 @@ import { RequiredDirective } from './required.directive';
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
     MaterialCurrencyComponent,
+    MaterialDayComponent,
     MaterialHiddenComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
