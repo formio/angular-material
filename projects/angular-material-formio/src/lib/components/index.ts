@@ -2,6 +2,7 @@ import './Base';
 import { TextFieldComponent } from './textfield/textfield.component';
 import { PasswordComponent } from './password/password.component';
 import { EmailComponent } from './email/email.component';
+import { UrlComponent } from './url/url.component';
 import { PhoneNumberComponent } from './phonenumber/phonenumber.component';
 import { NumberComponent } from './number/number.component';
 import { CurrencyComponent } from './currency/currency.component';
@@ -30,6 +31,7 @@ import { FormioComponent } from './MaterialComponent';
 const components: any = {
   textfield: TextFieldComponent,
   password: PasswordComponent,
+  url: UrlComponent,
   checkbox: CheckboxComponent,
   email: EmailComponent,
   phoneNumber: PhoneNumberComponent,

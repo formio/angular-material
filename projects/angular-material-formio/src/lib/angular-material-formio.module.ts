@@ -28,6 +28,7 @@ import { MaterialNestedComponent } from './components/MaterialNestedComponent';
 import { MaterialButtonComponent } from './components/button/button.component';
 import { MaterialTextfieldComponent } from './components/textfield/textfield.component';
 import { MaterialPasswordComponent } from './components/password/password.component';
+import { MaterialUrlComponent } from './components/url/url.component';
 import { MaterialEmailComponent } from './components/email/email.component';
 import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumber.component';
 import { MaterialNumberComponent } from './components/number/number.component';
@@ -59,6 +60,7 @@ import { RequiredDirective } from './required.directive';
     MaterialButtonComponent,
     MaterialTextfieldComponent,
     MaterialPasswordComponent,
+    MaterialUrlComponent,
     MaterialEmailComponent,
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
@@ -133,6 +135,7 @@ import { RequiredDirective } from './required.directive';
     MaterialButtonComponent,
     MaterialTextfieldComponent,
     MaterialPasswordComponent,
+    MaterialUrlComponent,
     MaterialEmailComponent,
     MaterialPhoneNumberComponent,
     MaterialNumberComponent,
