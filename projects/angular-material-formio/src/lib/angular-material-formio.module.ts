@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { SatPopoverModule } from '@ncstate/sat-popover';
 import {
   MatInputModule,
   MatButtonModule,
@@ -12,6 +11,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatListModule,
+  MatExpansionModule,
   MatCardModule,
   MatTabsModule,
   MatTableModule,
@@ -94,6 +94,7 @@ import { RequiredDirective } from './required.directive';
     MatRadioModule,
     MatSelectModule,
     MatListModule,
+    MatExpansionModule,
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
@@ -109,6 +110,11 @@ import { RequiredDirective } from './required.directive';
     FlexLayoutModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatListModule,
+    MatExpansionModule,
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
