@@ -11,6 +11,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatListModule,
+  MatChipsModule,
   MatExpansionModule,
   MatCardModule,
   MatTabsModule,
@@ -33,6 +34,7 @@ import { MaterialEmailComponent } from './components/email/email.component';
 import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumber.component';
 import { MaterialNumberComponent } from './components/number/number.component';
 import { MaterialHiddenComponent } from './components/hidden/hidden.component';
+import { MaterialTagsComponent } from './components/tags/tags.component';
 import { MaterialCurrencyComponent } from './components/currency/currency.component';
 import { MaterialDayComponent } from './components/day/day.component';
 import { MaterialTextareaComponent } from './components/textarea/textarea.component';
@@ -67,6 +69,7 @@ import { RequiredDirective } from './required.directive';
     MaterialCurrencyComponent,
     MaterialDayComponent,
     MaterialHiddenComponent,
+    MaterialTagsComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,
@@ -100,6 +103,7 @@ import { RequiredDirective } from './required.directive';
     MatRadioModule,
     MatSelectModule,
     MatListModule,
+    MatChipsModule,
     MatExpansionModule,
     MatButtonModule,
     MatCardModule,
@@ -120,6 +124,7 @@ import { RequiredDirective } from './required.directive';
     MatRadioModule,
     MatSelectModule,
     MatListModule,
+    MatChipsModule,
     MatExpansionModule,
     MatButtonModule,
     MatCardModule,
@@ -142,6 +147,7 @@ import { RequiredDirective } from './required.directive';
     MaterialCurrencyComponent,
     MaterialDayComponent,
     MaterialHiddenComponent,
+    MaterialTagsComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
     MaterialContainerComponent,
