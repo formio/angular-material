@@ -20,6 +20,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FieldsetComponent } from './fieldset/fieldset.component';
 import { ContentComponent } from './content/content.component';
 import { SignatureComponent } from './signature/signature.component';
+import { SurveyComponent } from './survey/survey.component';
 import { SelectBoxesComponent } from './selectboxes/selectboxes.component';
 import { RadioComponent } from './radio/radio.component';
 import { SelectComponent } from './select/select.component';
@@ -51,6 +52,7 @@ const components: any = {
   fieldset: FieldsetComponent,
   content: ContentComponent,
   signature: SignatureComponent,
+  survey: SurveyComponent,
   selectboxes: SelectBoxesComponent,
   radio: RadioComponent,
   select: SelectComponent,

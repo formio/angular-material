@@ -44,6 +44,7 @@ import { MaterialCheckboxComponent } from './components/checkbox/checkbox.compon
 import { MaterialFieldsetComponent } from './components/fieldset/fieldset.component';
 import { MaterialContentComponent } from './components/content/content.component';
 import { MaterialSignatureComponent } from './components/signature/signature.component';
+import { MaterialSurveyComponent } from './components/survey/survey.component';
 import { MaterialSelectBoxesComponent } from './components/selectboxes/selectboxes.component';
 import { MaterialRadioComponent } from './components/radio/radio.component';
 import { MaterialSelectComponent } from './components/select/select.component';
@@ -80,6 +81,7 @@ import { RequiredDirective } from './required.directive';
     MaterialFieldsetComponent,
     MaterialContentComponent,
     MaterialSignatureComponent,
+    MaterialSurveyComponent,
     MaterialSelectBoxesComponent,
     MaterialRadioComponent,
     MaterialSelectComponent,
@@ -96,7 +98,6 @@ import { RequiredDirective } from './required.directive';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    /*SatPopoverModule,*/
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
@@ -158,6 +159,7 @@ import { RequiredDirective } from './required.directive';
     MaterialFieldsetComponent,
     MaterialContentComponent,
     MaterialSignatureComponent,
+    MaterialSurveyComponent,
     MaterialSelectBoxesComponent,
     MaterialRadioComponent,
     MaterialSelectComponent,
