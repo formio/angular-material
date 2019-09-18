@@ -15,7 +15,7 @@ import { FormControl } from '@angular/forms';
     <tr class="mat-row" *ngFor="let question of instance.component.questions; index as i;">
       <td class="mat-cell">{{ question.label }}</td>
       <td class="mat-cell" *ngFor="let value of instance.component.values; index as j;" style="text-align: center;">
-        <mat-radio-group (change)="onChange()" [formControl]="getFormControl(question.value)">
+        <mat-radio-group (change)="onChange()" [formControl]="getFormControl(question.value)" [name]="question.value">
           <mat-radio-button [value]="value.value"></mat-radio-button>
         </mat-radio-group>
       </td>
