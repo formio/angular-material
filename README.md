@@ -37,7 +37,7 @@ This library can be used to render dynamic JSON powered forms within any Angular
 For example, the following will render a dynamic JSON form within your application.
 
 ```html
-<mat-formio src="https://test-humanresources.form.io/testing"></mat-formio>
+<mat-formio src="https://examples.form.io/kitchensink"></mat-formio>
 ```
 
 You can also use this to render JSON forms as follows.
