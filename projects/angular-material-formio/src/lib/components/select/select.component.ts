@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import SelectComponent from 'formiojs/components/select/Select';
+import SelectComponent from 'formiojs/components/select/Select.js';
 @Component({
   selector: 'mat-formio-select',
   template: `

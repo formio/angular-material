@@ -32,6 +32,7 @@ import { MaterialEmailComponent } from './components/email/email.component';
 import { MaterialPhoneNumberComponent } from './components/phonenumber/phonenumber.component';
 import { MaterialNumberComponent } from './components/number/number.component';
 import { MaterialHiddenComponent } from './components/hidden/hidden.component';
+import { MaterialHtmlComponent } from './components/html/html.component';
 import { MaterialTagsComponent } from './components/tags/tags.component';
 import { MaterialCurrencyComponent } from './components/currency/currency.component';
 import { MaterialDayComponent } from './components/day/day.component';
@@ -53,6 +54,40 @@ import { MaterialDataGridComponent } from './components/datagrid/datagrid.compon
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
+export {
+  FormioComponent,
+  MaterialButtonComponent,
+  MaterialTextfieldComponent,
+  MaterialPasswordComponent,
+  MaterialUrlComponent,
+  MaterialEmailComponent,
+  MaterialPhoneNumberComponent,
+  MaterialNumberComponent,
+  MaterialCurrencyComponent,
+  MaterialDayComponent,
+  MaterialHiddenComponent,
+  MaterialHtmlComponent,
+  MaterialTagsComponent,
+  MaterialTextareaComponent,
+  MaterialColumnsComponent,
+  MaterialContainerComponent,
+  MaterialDataGridComponent,
+  MaterialEditGridComponent,
+  MaterialPanelComponent,
+  MaterialCheckboxComponent,
+  MaterialFieldsetComponent,
+  MaterialContentComponent,
+  MaterialSignatureComponent,
+  MaterialSurveyComponent,
+  MaterialSelectBoxesComponent,
+  MaterialRadioComponent,
+  MaterialSelectComponent,
+  MaterialTabsComponent,
+  MaterialDateComponent,
+  MaterialWellComponent,
+  MaterialComponent,
+  MaterialNestedComponent
+};
 
 @NgModule({
   declarations: [
@@ -67,6 +102,7 @@ import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
     MaterialCurrencyComponent,
     MaterialDayComponent,
     MaterialHiddenComponent,
+    MaterialHtmlComponent,
     MaterialTagsComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
@@ -143,6 +179,7 @@ import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
     MaterialCurrencyComponent,
     MaterialDayComponent,
     MaterialHiddenComponent,
+    MaterialHtmlComponent,
     MaterialTagsComponent,
     MaterialTextareaComponent,
     MaterialColumnsComponent,
@@ -169,3 +206,4 @@ import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
   ]
 })
 export class MatFormioModule { }
+export * from './renderer';

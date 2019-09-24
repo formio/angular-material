@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MatFormioModule } from 'angular-material-formio';
 import 'hammerjs';
+import './CustomComponent';
 
 @NgModule({
   declarations: [

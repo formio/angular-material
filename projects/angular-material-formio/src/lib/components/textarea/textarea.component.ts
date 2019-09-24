@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import TextAreaComponent from 'formiojs/components/textarea/TextArea';
+import TextAreaComponent from 'formiojs/components/textarea/TextArea.js';
 @Component({
   selector: 'mat-formio-textarea',
   template: `

@@ -7,7 +7,7 @@ import {
   AfterViewInit
 } from '@angular/core';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
-import EditGridComponent from 'formiojs/components/editgrid/EditGrid';
+import EditGridComponent from 'formiojs/components/editgrid/EditGrid.js';
 import { FormioComponent } from '../../formio.component';
 import Components from '../index';
 

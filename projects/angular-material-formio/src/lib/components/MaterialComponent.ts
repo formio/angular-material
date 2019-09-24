@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import FormioComponent from 'formiojs/components/_classes/component/Component';
+import FormioComponent from 'formiojs/components/_classes/component/Component.js';
 import { FormControl } from '@angular/forms';
 
 @Component({

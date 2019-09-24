@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import WellComponent from 'formiojs/components/well/Well';
+import WellComponent from 'formiojs/components/well/Well.js';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
 @Component({
   selector: 'mat-formio-well',

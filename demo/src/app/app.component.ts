@@ -6,7 +6,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-material-formio';
+  form: any = {
+    components: [
+      {
+        type: 'textfield',
+        label: 'First Name',
+        key: 'firstName'
+      },
+      {
+        type: 'header',
+        label: 'Header',
+        content: 'This is a header',
+        tag: 'h1'
+      },
+      {
+        type: 'htmlelement',
+        tag: 'strong',
+        content: '{{ data.firstName }}',
+        refreshOnChange: true,
+        key: 'html'
+      }
+    ]
+  };
   onSubmit(submission:any) {
     console.log(submission);
   }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import TagsComponent from 'formiojs/components/tags/Tags';
+import TagsComponent from 'formiojs/components/tags/Tags.js';
 import { MaterialComponent } from '../MaterialComponent';
 import { MatChipInputEvent } from '@angular/material/chips';
 

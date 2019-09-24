@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
-import PanelComponent from 'formiojs/components/panel/Panel';
+import PanelComponent from 'formiojs/components/panel/Panel.js';
 @Component({
   selector: 'mat-formio-panel',
   template: `

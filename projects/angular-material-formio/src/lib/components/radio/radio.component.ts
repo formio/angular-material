@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import RadioComponent from 'formiojs/components/radio/Radio';
+import RadioComponent from 'formiojs/components/radio/Radio.js';
 @Component({
   selector: 'mat-formio-radio',
   template: `

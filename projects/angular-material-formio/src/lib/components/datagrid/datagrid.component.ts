@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
-import DataGridComponent from 'formiojs/components/datagrid/DataGrid';
+import DataGridComponent from 'formiojs/components/datagrid/DataGrid.js';
 
 @Component({
   selector: 'mat-formio-datagrid',

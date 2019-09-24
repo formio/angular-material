@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import FieldsetComponent from 'formiojs/components/fieldset/Fieldset';
+import FieldsetComponent from 'formiojs/components/fieldset/Fieldset.js';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
 @Component({
   selector: 'mat-formio-fieldset',

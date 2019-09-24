@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import DateTimeComponent from 'formiojs/components/datetime/DateTime';
-import { momentDate } from 'formiojs/utils/utils';
+import DateTimeComponent from 'formiojs/components/datetime/DateTime.js';
+import { momentDate } from 'formiojs/utils/utils.js';
 const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
 @Component({
   selector: 'mat-formio-date',

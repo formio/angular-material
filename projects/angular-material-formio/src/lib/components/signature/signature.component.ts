@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import SignatureComponent from 'formiojs/components/signature/Signature';
+import SignatureComponent from 'formiojs/components/signature/Signature.js';
 @Component({
   selector: 'mat-formio-signature',
   template: `<div #signature>

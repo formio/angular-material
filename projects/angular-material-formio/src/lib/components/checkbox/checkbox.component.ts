@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import CheckboxComponent from 'formiojs/components/checkbox/Checkbox';
+import CheckboxComponent from 'formiojs/components/checkbox/Checkbox.js';
 @Component({
   selector: 'mat-formio-checkbox',
   template: `

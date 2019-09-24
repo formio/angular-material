@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
-import ColumnsComponent from 'formiojs/components/columns/Columns';
+import ColumnsComponent from 'formiojs/components/columns/Columns.js';
 
 @Component({
   selector: 'mat-formio-columns',

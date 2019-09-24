@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import TextFieldComponent from 'formiojs/components/textfield/TextField';
+import TextFieldComponent from 'formiojs/components/textfield/TextField.js';
 import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-textfield',

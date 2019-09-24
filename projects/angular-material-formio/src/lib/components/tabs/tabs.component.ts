@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
-import TabsComponent from 'formiojs/components/tabs/Tabs';
+import TabsComponent from 'formiojs/components/tabs/Tabs.js';
 
 @Component({
   selector: 'mat-formio-tabs',

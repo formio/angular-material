@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialRadioComponent } from '../radio/radio.component';
-import SelectBoxesComponent from 'formiojs/components/selectboxes/SelectBoxes';
+import SelectBoxesComponent from 'formiojs/components/selectboxes/SelectBoxes.js';
 @Component({
   selector: 'mat-formio-selectboxes',
   template: `

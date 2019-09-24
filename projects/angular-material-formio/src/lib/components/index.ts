@@ -8,6 +8,7 @@ import { NumberComponent } from './number/number.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { DayComponent } from './day/day.component';
 import { HiddenComponent } from './hidden/hidden.component';
+import { HtmlComponent } from './html/html.component';
 import { TagsComponent } from './tags/tags.component';
 import { ButtonComponent } from './button/button.component';
 import { TextAreaComponent } from './textarea/textarea.component';
@@ -41,6 +42,7 @@ const components: any = {
   currency: CurrencyComponent,
   day: DayComponent,
   hidden: HiddenComponent,
+  htmlelement: HtmlComponent,
   tags: TagsComponent,
   textarea: TextAreaComponent,
   button: ButtonComponent,

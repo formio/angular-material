@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import SurveyComponent from 'formiojs/components/survey/Survey';
+import SurveyComponent from 'formiojs/components/survey/Survey.js';
 import { FormControl } from '@angular/forms';
 @Component({
   selector: 'mat-formio-survey',

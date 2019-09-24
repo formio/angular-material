@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import ButtonComponent from 'formiojs/components/button/Button';
+import ButtonComponent from 'formiojs/components/button/Button.js';
 import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-button',

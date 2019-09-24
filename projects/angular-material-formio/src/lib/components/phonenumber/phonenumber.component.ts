@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialTextfieldComponent } from '../textfield/textfield.component';
-import PhoneNumberComponent from 'formiojs/components/phonenumber/PhoneNumber';
+import PhoneNumberComponent from 'formiojs/components/phonenumber/PhoneNumber.js';
 @Component({
   selector: 'mat-formio-phonenumber',
   template: `<mat-formio-textfield [instance]="instance"></mat-formio-textfield>`

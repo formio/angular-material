@@ -1,4 +1,4 @@
-import FormioComponent from 'formiojs/components/_classes/component/Component';
+import FormioComponent from 'formiojs/components/_classes/component/Component.js';
 const setValue = FormioComponent.prototype.setValue;
 FormioComponent.prototype.setValue = function(...args) {
   if (this.materialComponent) {
