@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatInputModule,
   MatButtonModule,
@@ -22,7 +21,6 @@ import {
   MatIconModule,
   MatTooltipModule
 } from '@angular/material';
-import 'hammerjs';
 import { FormioComponent } from './formio.component';
 import { MaterialComponent } from './components/MaterialComponent';
 import { MaterialNestedComponent } from './components/MaterialNestedComponent';
@@ -55,7 +53,6 @@ import { MaterialDataGridComponent } from './components/datagrid/datagrid.compon
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
-import { RequiredDirective } from './required.directive';
 
 @NgModule({
   declarations: [
@@ -89,12 +86,10 @@ import { RequiredDirective } from './required.directive';
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialComponent,
-    MaterialNestedComponent,
-    RequiredDirective
+    MaterialNestedComponent
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,

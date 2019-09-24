@@ -3,5 +3,9 @@
   "dest": "../../dist",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "angular-formio",
+    "formiojs"
+  ]
 }
