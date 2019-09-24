@@ -44,8 +44,15 @@ export class FormioComponent extends FormioBaseComponent {
   createRenderer() {
     const options = this.getRendererOptions();
     options.viewResolver = this.resolver;
-    const form = new Form(this.form, options);
+    const form = new Form();
+    form._form = this.form;
+    form.options = options;
+    form.options.events = form.events;
+    form.instance = form.create(this.form.display);
     form.instance.viewContainer = () => this.formioViewContainer;
+    form.instance.setForm(this.form)
+      .then(() => form.readyResolve(form.instance))
+      .catch(form.readyReject);
     return form.instance;
   }
 }
