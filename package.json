@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,16 +19,16 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.2.0-rc.9",
-    "formiojs": "^4.2.0-rc.7"
+    "angular-formio": "^4.2.0",
+    "formiojs": "^4.2.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.5",
-    "@angular-devkit/build-ng-packagr": "^0.803.5",
-    "@angular/cli": "^8.3.5",
-    "@angular/compiler": "^8.2.7",
-    "@angular/compiler-cli": "^8.2.7",
-    "@angular/language-service": "^8.2.7",
+    "@angular-devkit/build-angular": "^0.803.6",
+    "@angular-devkit/build-ng-packagr": "^0.803.6",
+    "@angular/cli": "^8.3.6",
+    "@angular/compiler": "^8.2.8",
+    "@angular/compiler-cli": "^8.2.8",
+    "@angular/language-service": "^8.2.8",
     "@types/jasmine": "^3.4.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.7.7",
