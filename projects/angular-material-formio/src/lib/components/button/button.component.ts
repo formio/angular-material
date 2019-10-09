@@ -4,7 +4,7 @@ import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-button',
   template: `
-    <button type="{{ instance.component.action }}" mat-raised-button [color]="color" (click)="instance.onClick($event)">
+    <button *ngIf="instance" type="{{ instance.component.action }}" mat-raised-button [color]="color" (click)="instance.onClick($event)">
       <mat-icon *ngIf="done">done</mat-icon>
       <mat-icon *ngIf="error">close</mat-icon>
       <mat-icon class="mat-icon-spin" *ngIf="loading">autorenew</mat-icon>

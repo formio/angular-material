@@ -11,5 +11,6 @@ Webform.prototype.clear = function() {
 Webform.prototype.render = function() {
   if (this.viewContainer && this.viewContainer()) {
     this.renderComponents();
+    this.setValue(this._submission);
   }
 }

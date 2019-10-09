@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MaterialTextfieldComponent } from '../textfield/textfield.component';
+import { MaterialTextfieldComponent, TEXTFIELD_TEMPLATE } from '../textfield/textfield.component';
 import CurrencyComponent from 'formiojs/components/currency/Currency.js';
 @Component({
   selector: 'mat-formio-currency',
-  template: `<mat-formio-textfield [instance]="instance"></mat-formio-textfield>`
+  template: TEXTFIELD_TEMPLATE
 })
 export class MaterialCurrencyComponent extends MaterialTextfieldComponent {}
 CurrencyComponent.MaterialComponent = MaterialCurrencyComponent;
