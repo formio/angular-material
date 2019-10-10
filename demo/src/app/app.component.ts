@@ -14,19 +14,29 @@ export class AppComponent {
         key: 'firstName'
       },
       {
-        type: 'header',
-        label: 'Header',
-        content: 'This is a header',
-        tag: 'h1'
+        type: 'textfield',
+        label: 'Last Name',
+        key: 'lastName'
       },
       {
-        type: 'htmlelement',
-        tag: 'strong',
-        content: '{{ data.firstName }}',
-        refreshOnChange: true,
-        key: 'html'
+        type: 'email',
+        label: 'Email',
+        key: 'email'
+      },
+      {
+        type: 'phoneNumber',
+        label: 'Phone Number',
+        key: 'phoneNumber'
       }
     ]
+  };
+  submission: any = {
+    data: {
+      firstName: 'Joe',
+      lastName: 'Smith',
+      email: 'joe@example.com',
+      phoneNumber: '123-456-7890'
+    }
   };
   onSubmit(submission:any) {
     console.log(submission);
