@@ -27,9 +27,10 @@ export class MaterialSurveyComponent extends MaterialComponent {
   public controls: any = {};
   getFormControl(question) {
     if (!this.controls[question]) {
-      this.controls[question] = new FormControl({
-        disabled: this.instance.shouldDisabled
-      });
+      this.controls[question] = new FormControl();
+      if (this.instance.shouldDisabled) {
+        this.controls[question].disable();
+      }
     }
     return this.controls[question];
   }
