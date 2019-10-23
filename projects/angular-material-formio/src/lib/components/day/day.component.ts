@@ -46,17 +46,24 @@ export class MaterialDayComponent extends MaterialComponent {
   public monthControl: FormControl = new FormControl();
   public yearControl: FormControl = new FormControl();
   setInstance(instance) {
-    if (instance.shouldDisabled) {
-      this.dayControl.disable();
-      this.monthControl.disable();
-      this.yearControl.disable();
-    }
     instance.refs = {
       day: this.dayControl,
       month: this.monthControl,
       year: this.yearControl
     };
     return super.setInstance(instance);
+  }
+
+  setDisabled(disabled) {
+    if (disabled) {
+      this.dayControl.disable();
+      this.monthControl.disable();
+      this.yearControl.disable();
+    } else {
+      this.dayControl.enable();
+      this.monthControl.enable();
+      this.yearControl.enable();
+    }
   }
 
   getValue() {
