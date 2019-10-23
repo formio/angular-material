@@ -13,6 +13,9 @@ export class MaterialComponent implements AfterViewInit {
   setInstance(instance: any) {
     instance.materialComponent = this;
     this.instance = instance;
+    if (this.instance.shouldDisabled) {
+      this.control.disable();
+    }
     this.renderComponents();
   }
 
