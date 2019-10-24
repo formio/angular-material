@@ -45,6 +45,12 @@ export class MaterialButtonComponent extends MaterialComponent {
     instance.on('submitError', () => this.setState(false, true, false));
     instance.on('requestButton', () => this.setState(true, false, false));
     instance.on('requestDone', () => this.setState(false, false, true));
+    instance.on('change', (event) => {
+      if (event.isValid && this.loading) {
+        this.loading = false;
+        this.error = false;
+      }
+    });
     return retVal;
   }
 }
