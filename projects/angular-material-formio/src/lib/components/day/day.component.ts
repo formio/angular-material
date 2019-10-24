@@ -54,6 +54,18 @@ export class MaterialDayComponent extends MaterialComponent {
     return super.setInstance(instance);
   }
 
+  setDisabled(disabled) {
+    if (disabled) {
+      this.dayControl.disable();
+      this.monthControl.disable();
+      this.yearControl.disable();
+    } else {
+      this.dayControl.enable();
+      this.monthControl.enable();
+      this.yearControl.enable();
+    }
+  }
+
   getValue() {
     return this.instance.getDate();
   }
