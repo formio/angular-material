@@ -1,4 +1,4 @@
-import { Component, Optional, ChangeDetectorRef, ViewContainerRef, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, Optional, ChangeDetectorRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, NgZone } from '@angular/core';
 import { FormioBaseComponent } from 'angular-formio/FormioBaseComponent';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 import { FormioAppConfig } from 'angular-formio/formio.config';
@@ -37,10 +37,11 @@ export class FormioComponent extends FormioBaseComponent {
   constructor(
     private resolver: ComponentFactoryResolver,
     private cd: ChangeDetectorRef,
+    public ngZone: NgZone,
     public loader: FormioLoader,
     @Optional() public config: FormioAppConfig
   ) {
-    super(loader, config);
+    super(ngZone, loader, config);
   }
 
   createRenderer() {
@@ -52,9 +53,10 @@ export class FormioComponent extends FormioBaseComponent {
     form.options.events = form.events;
     form.instance = form.create(this.form.display);
     form.instance.viewContainer = () => this.formioViewContainer;
-    form.instance.setForm(this.form)
+    this.ngZone.run(() => form.instance.setForm(this.form)
       .then(() => form.readyResolve(form.instance))
-      .catch(form.readyReject);
+      .catch(() => form.readyReject())
+    );
     return form.instance;
   }
 }

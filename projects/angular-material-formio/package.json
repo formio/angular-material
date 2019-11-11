@@ -10,7 +10,7 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.2.10",
-    "formiojs": "^4.5.0"
+    "angular-formio": "^4.3.1",
+    "formiojs": "^4.7.4"
   }
 }

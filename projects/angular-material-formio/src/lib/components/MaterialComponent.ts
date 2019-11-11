@@ -10,7 +10,7 @@ export class MaterialComponent implements AfterViewInit {
   @Input() instance: any;
   @ViewChild('input', {static: true}) input: ElementRef;
   public control: FormControl = new FormControl();
-  constructor(public element: ElementRef, private ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 
   setInstance(instance: any) {
     instance.materialComponent = this;

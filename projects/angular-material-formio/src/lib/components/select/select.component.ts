@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import SelectComponent from 'formiojs/components/select/Select.js';
 @Component({
@@ -13,7 +13,7 @@ import SelectComponent from 'formiojs/components/select/Select.js';
         [formControl]="control"
         [placeholder]="instance.component.placeholder"
         (selectionChange)="onChange()">
-        <mat-option *ngFor="let option of instance.selectOptions" [value]="option.value">
+        <mat-option *ngFor="let option of selectOptions | async" [value]="option.value">
           <span [innerHTML]="option.label"></span>
         </mat-option>
       </mat-select>
@@ -24,11 +24,29 @@ import SelectComponent from 'formiojs/components/select/Select.js';
     </mat-form-field>
   `
 })
-export class MaterialSelectComponent extends MaterialComponent {
+export class MaterialSelectComponent extends MaterialComponent implements OnInit {
+  public selectOptions: Promise<any[]>;
+  selectOptionsResolve: any;
   setInstance(instance: any) {
     super.setInstance(instance);
     this.instance.triggerUpdate();
   }
+
+  ngOnInit() {
+    this.selectOptions = new Promise((resolve) => {
+      this.selectOptionsResolve = resolve;
+    });
+  }
 }
 SelectComponent.MaterialComponent = MaterialSelectComponent;
+
+// Make sure we detect changes when new items make their way into the select dropdown.
+const setItems = SelectComponent.prototype.setItems;
+SelectComponent.prototype.setItems = function(...args) {
+  setItems.call(this, ...args);
+  if (this.materialComponent && this.materialComponent.selectOptionsResolve) {
+    this.materialComponent.selectOptionsResolve(this.selectOptions);
+  }
+};
+
 export { SelectComponent };

@@ -46,6 +46,13 @@ export class MaterialDayComponent extends MaterialComponent {
   public monthControl: FormControl = new FormControl();
   public yearControl: FormControl = new FormControl();
   setInstance(instance) {
+    // Add stub methods to match dom elements.
+    (this.dayControl as any).setAttribute = () => {};
+    (this.dayControl as any).removeAttribute = () => {};
+    (this.monthControl as any).setAttribute = () => {};
+    (this.monthControl as any).removeAttribute = () => {};
+    (this.yearControl as any).setAttribute = () => {};
+    (this.yearControl as any).removeAttribute = () => {};
     instance.refs = {
       day: this.dayControl,
       month: this.monthControl,
