@@ -4,7 +4,12 @@ import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-button',
   template: `
-    <button *ngIf="instance" type="{{ instance.component.action }}" mat-raised-button [color]="color" (click)="instance.onClick($event)">
+    <button *ngIf="instance"
+      type="{{ instance.component.action }}"
+      mat-raised-button [color]="color"
+      [disabled]="disabled"
+      (click)="instance.onClick($event)"
+    >
       <mat-icon *ngIf="done">done</mat-icon>
       <mat-icon *ngIf="error">close</mat-icon>
       <mat-icon class="mat-icon-spin" *ngIf="loading">autorenew</mat-icon>
@@ -24,6 +29,7 @@ export class MaterialButtonComponent extends MaterialComponent {
   public loading = false;
   public done = false;
   public error = false;
+  public disabled = false;
   public color = 'primary';
   getColor() {
     if (this.error) {
@@ -39,6 +45,7 @@ export class MaterialButtonComponent extends MaterialComponent {
   }
   setInstance(instance) {
     const retVal = super.setInstance(instance);
+    this.disabled = instance.shouldDisabled;
     this.color = this.getColor();
     instance.on('submitButton', () => this.setState(true, false, false));
     instance.on('submitDone', () => this.setState(false, false, true));
@@ -46,6 +53,7 @@ export class MaterialButtonComponent extends MaterialComponent {
     instance.on('requestButton', () => this.setState(true, false, false));
     instance.on('requestDone', () => this.setState(false, false, true));
     instance.on('change', (event) => {
+      this.disabled = this.instance.component.shouldDisabled || (this.instance.component.disableOnInvalid && !event.isValid);
       if (event.isValid && this.loading) {
         this.loading = false;
         this.error = false;
