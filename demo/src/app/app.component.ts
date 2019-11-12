@@ -11,12 +11,18 @@ export class AppComponent {
       {
         type: 'textfield',
         label: 'First Name',
-        key: 'firstName'
+        key: 'firstName',
+        validate: {
+          required: true
+        }
       },
       {
         type: 'textfield',
         label: 'Last Name',
-        key: 'lastName'
+        key: 'lastName',
+        validate: {
+          required: true
+        }
       },
       {
         type: 'email',
@@ -27,6 +33,13 @@ export class AppComponent {
         type: 'phoneNumber',
         label: 'Phone Number',
         key: 'phoneNumber'
+      },
+      {
+        key: 'submit',
+        type: 'button',
+        disableOnInvalid: true,
+        action: 'submit',
+        label: 'Submit'
       }
     ]
   };

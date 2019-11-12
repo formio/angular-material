@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MaterialTextfieldComponent, TEXTFIELD_TEMPLATE } from '../textfield/textfield.component';
+import { MaterialTextfieldComponent } from '../textfield/textfield.component';
 import NumberComponent from 'formiojs/components/number/Number.js';
 @Component({
   selector: 'mat-formio-number',
-  template: TEXTFIELD_TEMPLATE
+  template: `<mat-formio-input [instance]="instance" [control]="control" inputType="text"></mat-formio-input>`
 })
 export class MaterialNumberComponent extends MaterialTextfieldComponent {
   getValue() {
