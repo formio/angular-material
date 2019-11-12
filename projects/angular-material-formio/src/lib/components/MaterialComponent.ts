@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import FormioComponent from 'formiojs/components/_classes/component/Component.js';
-import { FormControl } from '@angular/forms';
+import { FormioControl } from '../FormioControl';
 
 @Component({
   selector: 'mat-formio-comp',
@@ -9,10 +9,11 @@ import { FormControl } from '@angular/forms';
 export class MaterialComponent implements AfterViewInit {
   @Input() instance: any;
   @ViewChild('input', {static: true}) input: ElementRef;
-  public control: FormControl = new FormControl();
+  @Input() control: FormioControl = new FormioControl();
   constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 
   setInstance(instance: any) {
+    this.control.setInstance(instance);
     instance.materialComponent = this;
     this.instance = instance;
     this.instance.disabled = this.instance.shouldDisabled;
