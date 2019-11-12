@@ -10,10 +10,12 @@ import { MaterialComponent } from '../MaterialComponent';
       [disabled]="disabled"
       (click)="instance.onClick($event)"
     >
+      <mat-icon *ngIf="instance.component.leftIcon">{{ instance.component.leftIcon }}</mat-icon>
       <mat-icon *ngIf="done">done</mat-icon>
       <mat-icon *ngIf="error">close</mat-icon>
       <mat-icon class="mat-icon-spin" *ngIf="loading">autorenew</mat-icon>
       {{ instance.component.label }}
+      <mat-icon *ngIf="instance.component.rightIcon">{{ instance.component.rightIcon }}</mat-icon>
     </button>
   `,
   styles: ['@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } } ' +
@@ -30,12 +32,20 @@ export class MaterialButtonComponent extends MaterialComponent {
   public done = false;
   public error = false;
   public disabled = false;
+  public clicked = false;
   public color = 'primary';
   getColor() {
     if (this.error) {
       return 'warn';
     }
     return this.instance.component.theme || 'primary';
+  }
+  onClick(event) {
+    this.clicked = true;
+    this.instance.onClick(event);
+  }
+  getValue() {
+    return this.clicked;
   }
   setState(loading, error, done) {
     this.loading = loading;

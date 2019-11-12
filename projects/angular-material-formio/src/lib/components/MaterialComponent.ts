@@ -62,6 +62,13 @@ export class MaterialComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (this.element && this.element.nativeElement) {
+      // Add custom classes to elements.
+      if (this.instance.component.customClass) {
+        this.element.nativeElement.classList.add(this.instance.component.customClass);
+      }
+    }
+
     if (this.input) {
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
