@@ -35,6 +35,11 @@ export class AppComponent {
         key: 'phoneNumber'
       },
       {
+        type: 'currency',
+        label: 'Salary',
+        key: 'salary'
+      },
+      {
         key: 'submit',
         type: 'button',
         disableOnInvalid: true,
@@ -48,10 +53,11 @@ export class AppComponent {
       firstName: 'Joe',
       lastName: 'Smith',
       email: 'joe@example.com',
-      phoneNumber: '123-456-7890'
+      phoneNumber: '(123) 456-7890',
+      salary: 45000
     }
   };
-  onSubmit(submission:any) {
+  onSubmit(submission) {
     console.log(submission);
   }
 }

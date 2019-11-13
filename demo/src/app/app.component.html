@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-card>
-  <mat-formio src="https://examples.form.io/kitchensink"></mat-formio>
-  <!--<mat-formio [form]="form" [submission]="submission"></mat-formio>-->
+  <mat-formio src="https://examples.form.io/kitchensink" (submit)="onSubmit($event)"></mat-formio>
+  <!--<mat-formio [form]="form" [submission]="submission" (submit)="onSubmit($event)"></mat-formio>-->
 </mat-card>
 
