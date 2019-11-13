@@ -23,7 +23,6 @@ import {
 } from '@angular/material';
 import { FormioComponent } from './formio.component';
 import { MaterialComponent } from './components/MaterialComponent';
-import { MaterialInputComponent } from './components/MaterialInputComponent';
 import { MaterialNestedComponent } from './components/MaterialNestedComponent';
 import { MaterialButtonComponent } from './components/button/button.component';
 import { MaterialTextfieldComponent } from './components/textfield/textfield.component';
@@ -57,7 +56,6 @@ import { MaterialWellComponent } from './components/well/well.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 export {
   FormioComponent,
-  MaterialInputComponent,
   MaterialButtonComponent,
   MaterialTextfieldComponent,
   MaterialPasswordComponent,
@@ -94,7 +92,6 @@ export {
 @NgModule({
   declarations: [
     FormioComponent,
-    MaterialInputComponent,
     MaterialButtonComponent,
     MaterialTextfieldComponent,
     MaterialPasswordComponent,
@@ -172,7 +169,6 @@ export {
     MatIconModule
   ],
   entryComponents: [
-    MaterialInputComponent,
     MaterialButtonComponent,
     MaterialTextfieldComponent,
     MaterialPasswordComponent,
