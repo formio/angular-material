@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { MaterialTextfieldComponent } from '../textfield/textfield.component';
+import { MaterialTextfieldComponent, TEXTFIELD_TEMPLATE } from '../textfield/textfield.component';
 import PasswordComponent from 'formiojs/components/password/Password.js';
 @Component({
   selector: 'mat-formio-password',
-  template: `<mat-formio-input [instance]="instance" [control]="control" inputType="password"></mat-formio-input>`
+  template: TEXTFIELD_TEMPLATE
 })
-export class MaterialPasswordComponent extends MaterialTextfieldComponent {}
+export class MaterialPasswordComponent extends MaterialTextfieldComponent {
+  public inputType = 'password';
+}
 PasswordComponent.MaterialComponent = MaterialPasswordComponent;
 export { PasswordComponent };

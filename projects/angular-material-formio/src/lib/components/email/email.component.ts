@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { MaterialTextfieldComponent } from '../textfield/textfield.component';
+import { MaterialTextfieldComponent, TEXTFIELD_TEMPLATE } from '../textfield/textfield.component';
 import EmailComponent from 'formiojs/components/email/Email.js';
 @Component({
   selector: 'mat-formio-email',
-  template: `<mat-formio-input [instance]="instance" [control]="control" inputType="email"></mat-formio-input>`
+  template: TEXTFIELD_TEMPLATE
 })
-export class MaterialEmailComponent extends MaterialTextfieldComponent {}
+export class MaterialEmailComponent extends MaterialTextfieldComponent {
+  public inputType = 'email';
+}
 EmailComponent.MaterialComponent = MaterialEmailComponent;
 export { EmailComponent };
