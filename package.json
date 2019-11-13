@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "angular-formio": "^4.3.1",
-    "formiojs": "^4.7.4"
+    "formiojs": "^4.7.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.18",
