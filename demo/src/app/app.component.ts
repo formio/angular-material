@@ -25,6 +25,29 @@ export class AppComponent {
         }
       },
       {
+        type: 'select',
+        key: 'favoriteColor',
+        label: 'Favorite Color',
+        defaultValue: 'orange',
+        dataSrc: 'values',
+        data: {
+          values: [
+            {
+              label: 'Apple',
+              value: 'apple'
+            },
+            {
+              label: 'Banana',
+              value: 'banana'
+            },
+            {
+              label: 'Orange',
+              value: 'orange'
+            }
+          ]
+        }
+      },
+      {
         type: 'email',
         label: 'Email',
         key: 'email'
@@ -53,6 +76,7 @@ export class AppComponent {
       firstName: 'Joe',
       lastName: 'Smith',
       email: 'joe@example.com',
+      favoriteColor: 'banana',
       phoneNumber: '(123) 456-7890',
       salary: 45000
     }
