@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,25 +19,25 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.3.1",
-    "formiojs": "^4.7.5"
+    "angular-formio": "^4.3.2",
+    "formiojs": "^4.7.6"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.18",
-    "@angular-devkit/build-ng-packagr": "^0.803.18",
-    "@angular/animations": "^8.2.13",
+    "@angular-devkit/build-angular": "^0.803.19",
+    "@angular-devkit/build-ng-packagr": "^0.803.19",
+    "@angular/animations": "^8.2.14",
     "@angular/cdk": "^8.2.3",
-    "@angular/cli": "^8.3.18",
-    "@angular/common": "^8.2.13",
-    "@angular/compiler": "^8.2.13",
-    "@angular/compiler-cli": "^8.2.13",
-    "@angular/core": "^8.2.13",
-    "@angular/elements": "^8.2.13",
+    "@angular/cli": "^8.3.19",
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/elements": "^8.2.14",
     "@angular/flex-layout": "^8.0.0-beta.27",
-    "@angular/forms": "^8.2.13",
-    "@angular/language-service": "^8.2.13",
+    "@angular/forms": "^8.2.14",
+    "@angular/language-service": "^8.2.14",
     "@angular/material": "^8.2.3",
-    "@angular/platform-browser": "^8.2.13",
+    "@angular/platform-browser": "^8.2.14",
     "@types/jasmine": "^3.4.6",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.12.7",
