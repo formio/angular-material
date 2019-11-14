@@ -81,6 +81,14 @@ for (const type in components) {
       const componentRef =  viewContainer.createComponent(factory);
       (componentRef.instance as any).setInstance(this);
     };
+
+    const setValue = CompClass.prototype.setValue;
+    CompClass.prototype.setValue = function(...args) {
+      if (this.materialComponent) {
+        this.materialComponent.setValue(args[0]);
+      }
+      return setValue.call(this, ...args);
+    };
   }
 }
 
