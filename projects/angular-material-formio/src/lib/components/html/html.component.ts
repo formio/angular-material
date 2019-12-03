@@ -8,12 +8,16 @@ import HtmlComponent from 'formiojs/components/html/HTML.js';
 export class MaterialHtmlComponent extends MaterialComponent implements AfterViewInit {
   ngAfterViewInit() {
     super.ngAfterViewInit();
-    this.element.nativeElement.innerHTML = this.instance.renderTemplate('html', {
-      component: this.instance.component,
-      tag: this.instance.component.tag,
-      attrs: this.instance.component.attrs || {},
-      content: this.instance.content,
-    });
+    this.element.nativeElement.innerHTML = this.instance.renderContent();
+  }
+
+  setInstance(instance) {
+    if (instance.component.refreshOnChange) {
+      instance.checkRefreshOn = () => {
+        this.element.nativeElement.innerHTML = instance.renderContent();
+      };
+    }
+    return super.setInstance(instance);
   }
 }
 HtmlComponent.MaterialComponent = MaterialHtmlComponent;
