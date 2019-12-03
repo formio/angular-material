@@ -19,7 +19,9 @@ import PanelComponent from 'formiojs/components/panel/Panel.js';
       <ng-template #components></ng-template>
     </mat-expansion-panel>
   `,
-  styles: []
+  styles: [
+    ':host { margin-bottom: 1em; }'
+  ]
 })
 export class MaterialPanelComponent extends MaterialNestedComponent {}
 PanelComponent.MaterialComponent = MaterialPanelComponent;
