@@ -63,7 +63,7 @@ export class MaterialButtonComponent extends MaterialComponent {
     instance.on('requestButton', () => this.setState(true, false, false));
     instance.on('requestDone', () => this.setState(false, false, true));
     instance.on('change', (event) => {
-      this.disabled = this.instance.component.shouldDisabled || (this.instance.component.disableOnInvalid && !event.isValid);
+      this.disabled = this.instance.shouldDisabled || (this.instance.component.disableOnInvalid && !event.isValid);
       if (event.isValid && this.loading) {
         this.loading = false;
         this.error = false;

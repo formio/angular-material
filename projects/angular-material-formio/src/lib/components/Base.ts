@@ -10,11 +10,6 @@ FormioComponent.prototype.beforeSubmit = function(...args) {
 
 Object.defineProperty(FormioComponent.prototype, 'disabled', {
   set(disabled) {
-    // Do not allow a component to be disabled if it should be always...
-    if (disabled && !this.canDisable) {
-      return;
-    }
-
     this._disabled = disabled;
     if (this.materialComponent) {
       this.materialComponent.setDisabled(disabled);
