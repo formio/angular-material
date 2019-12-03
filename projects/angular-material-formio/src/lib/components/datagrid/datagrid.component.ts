@@ -26,7 +26,7 @@ import DataGridComponent from 'formiojs/components/datagrid/DataGrid.js';
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions *ngIf="instance.hasAddButton()">
         <button mat-raised-button color="primary" (click)="addAnother()">
           <mat-icon>add</mat-icon> Add Another
         </button>

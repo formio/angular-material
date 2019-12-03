@@ -9,7 +9,7 @@ import {
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
 import EditGridComponent from 'formiojs/components/editgrid/EditGrid.js';
 import { FormioComponent } from '../../formio.component';
-import Components from '../index';
+import Components from 'formiojs/components/Components';
 
 /* tslint:disable no-bitwise only-arrow-functions */
 const hashCode = function(str) {
@@ -106,7 +106,7 @@ const DEFAULT_ROW_TEMPLATES = [
           </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
-      <span fxFill="none">
+      <span fxFill="none" *ngIf="instance.hasAddButton()">
         <button mat-raised-button color="primary" (click)="addAnother()">
           <mat-icon>add</mat-icon> Add Another
         </button>
@@ -202,7 +202,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
    * @param row
    * @param index
    */
-  updateRowTemplate(rowElement: ElementRef, index) {
+  updateRowTemplate(rowElement: ElementRef, index, comps) {
     const self = this;
     const editRow: any = {...this.instance.editRows[index]};
     if (!editRow.isNew) {
@@ -213,10 +213,10 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
         colWidth: this.colWidth,
         components: this.instance.component.components,
         getView: function getView(component, data) {
-          if ((Components as any).hasOwnProperty(component.type)) {
-            return Components[component.type].prototype.getView.call(self.instance, data);
+          if (!comps[component.type]) {
+            comps[component.type] = Components.create(component, {}, {}, true);
           }
-          return '';
+          return comps[component.type] ? comps[component.type].getView(data) : '';
         }
       }));
     }
@@ -237,7 +237,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
       this.instance.saveRow(index);
       const rows = this.rowElements.toArray();
       if (rows && rows[index]) {
-        this.updateRowTemplate(rows[index], index);
+        this.updateRowTemplate(rows[index], index, {});
       }
     }
   }
@@ -251,7 +251,8 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
 
   ngAfterViewInit() {
     this.rowElements.changes.subscribe((rows: QueryList<ElementRef>) => {
-      rows.forEach((row: ElementRef, index) => this.updateRowTemplate(row, index));
+      const rowCache = {};
+      rows.forEach((row: ElementRef, index) => this.updateRowTemplate(row, index, rowCache));
     });
   }
 }
