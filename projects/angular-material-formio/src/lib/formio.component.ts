@@ -29,7 +29,9 @@ import { Form } from './renderer';
     <div *ngIf="!this.options?.disableAlerts">
       <div *ngFor="let alert of alerts.alerts" class="alert alert-{{ alert.type }}" role="alert">{{ alert.message }}</div>
     </div>
-    <div fxLayout="column" fxLayoutGap="1em"><ng-template #formio></ng-template></div>
+    <div fxLayout="column" fxLayoutGap="1em">
+      <ng-template #formio></ng-template>
+    </div>
   `
 })
 export class FormioComponent extends FormioBaseComponent {

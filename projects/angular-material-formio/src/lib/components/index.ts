@@ -29,6 +29,7 @@ import { WellComponent } from './well/well.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
 import { EditGridComponent } from './editgrid/editgrid.component';
 import { FormioComponent } from './MaterialComponent';
+import { Wizard } from './formio.wizard';
 
 // Set the components.
 const components: any = {
@@ -61,7 +62,8 @@ const components: any = {
   container: ContainerComponent,
   datagrid: DataGridComponent,
   editgrid: EditGridComponent,
-  unknown: FormioComponent
+  unknown: FormioComponent,
+  wizard: Wizard
 };
 
 // Decorate each component.
@@ -73,7 +75,7 @@ for (const type in components) {
         return this.materialComponent.renderComponents();
       }
 
-      const viewContainer = this.parent.viewContainer(this);
+      const viewContainer = this.parent ? this.parent.viewContainer(this) : this.viewContainer(this);
       if (!viewContainer) {
         return;
       }

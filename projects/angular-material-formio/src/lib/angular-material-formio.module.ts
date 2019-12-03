@@ -13,6 +13,7 @@ import {
   MatChipsModule,
   MatExpansionModule,
   MatCardModule,
+  MatStepperModule,
   MatTabsModule,
   MatTableModule,
   MatDatepickerModule,
@@ -53,6 +54,7 @@ import { MaterialDateComponent } from './components/date/date.component';
 import { MaterialDataGridComponent } from './components/datagrid/datagrid.component';
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
+import { MaterialWizardComponent } from './components/formio.wizard';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 export {
   FormioComponent,
@@ -121,6 +123,7 @@ export {
     MaterialTabsComponent,
     MaterialDateComponent,
     MaterialWellComponent,
+    MaterialWizardComponent,
     MaterialComponent,
     MaterialNestedComponent
   ],
@@ -139,6 +142,7 @@ export {
     MatExpansionModule,
     MatButtonModule,
     MatCardModule,
+    MatStepperModule,
     MatTabsModule,
     MatTableModule,
     MatNativeDateModule,
@@ -199,7 +203,8 @@ export {
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialComponent,
-    MaterialNestedComponent
+    MaterialNestedComponent,
+    MaterialWizardComponent
   ],
   providers: [
     FormioLoader
