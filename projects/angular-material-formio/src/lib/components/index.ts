@@ -28,6 +28,7 @@ import { SelectComponent } from './select/select.component';
 import { WellComponent } from './well/well.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
 import { EditGridComponent } from './editgrid/editgrid.component';
+import { TableComponent } from './table/table.component';
 import { FormioComponent } from './MaterialComponent';
 import { Wizard } from './formio.wizard';
 
@@ -51,6 +52,7 @@ const components: any = {
   panel: PanelComponent,
   columns: ColumnsComponent,
   tabs: TabsComponent,
+  table: TableComponent,
   well: WellComponent,
   fieldset: FieldsetComponent,
   content: ContentComponent,

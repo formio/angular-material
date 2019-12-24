@@ -50,6 +50,7 @@ import { MaterialRadioComponent } from './components/radio/radio.component';
 import { MaterialSelectComponent } from './components/select/select.component';
 import { MaterialPanelComponent } from './components/panel/panel.component';
 import { MaterialTabsComponent } from './components/tabs/tabs.component';
+import { MaterialTableComponent } from './components/table/table.component';
 import { MaterialDateComponent } from './components/date/date.component';
 import { MaterialDataGridComponent } from './components/datagrid/datagrid.component';
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
@@ -70,6 +71,7 @@ export {
   MaterialHiddenComponent,
   MaterialHtmlComponent,
   MaterialTagsComponent,
+  MaterialTableComponent,
   MaterialTextareaComponent,
   MaterialColumnsComponent,
   MaterialContainerComponent,
@@ -121,6 +123,7 @@ export {
     MaterialRadioComponent,
     MaterialSelectComponent,
     MaterialTabsComponent,
+    MaterialTableComponent,
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialWizardComponent,
@@ -200,6 +203,7 @@ export {
     MaterialRadioComponent,
     MaterialSelectComponent,
     MaterialTabsComponent,
+    MaterialTableComponent,
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialComponent,
