@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio-demo",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,8 +23,8 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
-    "angular-material-formio": "1.5.0",
-    "formiojs": "^4.8.0-rc.6",
+    "angular-material-formio": "1.6.0",
+    "formiojs": "^4.8.0-rc.9",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
@@ -45,7 +45,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-jasmine-html-reporter": "^1.5.1",
     "protractor": "~5.4.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
