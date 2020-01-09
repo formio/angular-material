@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
 import FormioComponent from 'formiojs/components/_classes/component/Component.js';
 import { FormioControl } from '../FormioControl';
 
@@ -6,7 +6,7 @@ import { FormioControl } from '../FormioControl';
   selector: 'mat-formio-comp',
   template: '<mat-card>Unknown Component: {{ instance.component.type }}</mat-card>'
 })
-export class MaterialComponent implements AfterViewInit {
+export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
   @ViewChild('input', {static: true}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
@@ -19,6 +19,11 @@ export class MaterialComponent implements AfterViewInit {
     this.instance.disabled = this.instance.shouldDisabled;
     this.setVisible(this.instance.visible);
     this.renderComponents();
+  }
+
+  ngOnInit() {
+    this.control.markAsTouched();
+    this.setValue(this.instance.component.defaultValue);
   }
 
   renderComponents() {}
