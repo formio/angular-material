@@ -27,7 +27,12 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   setInstance(instance) {
+    this.timeControl.setValue(this.getDefaultValue(instance));
     super.setInstance(instance);
+  }
+
+  getDefaultValue(instance) {
+    return instance.component.defaultValue || '';
   }
 }
 
