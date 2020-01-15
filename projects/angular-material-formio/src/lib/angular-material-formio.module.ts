@@ -56,6 +56,7 @@ import { MaterialDataGridComponent } from './components/datagrid/datagrid.compon
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
 import { MaterialWizardComponent } from './components/formio.wizard';
+import { MaterialTimeComponent } from './components/time/time.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 export {
   FormioComponent,
@@ -90,7 +91,8 @@ export {
   MaterialDateComponent,
   MaterialWellComponent,
   MaterialComponent,
-  MaterialNestedComponent
+  MaterialNestedComponent,
+  MaterialTimeComponent
 };
 
 @NgModule({
@@ -128,7 +130,8 @@ export {
     MaterialWellComponent,
     MaterialWizardComponent,
     MaterialComponent,
-    MaterialNestedComponent
+    MaterialNestedComponent,
+    MaterialTimeComponent
   ],
   imports: [
     CommonModule,
@@ -208,6 +211,7 @@ export {
     MaterialWellComponent,
     MaterialComponent,
     MaterialNestedComponent,
+    MaterialTimeComponent,
     MaterialWizardComponent
   ],
   providers: [
