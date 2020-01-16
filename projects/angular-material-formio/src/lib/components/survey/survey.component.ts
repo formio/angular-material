@@ -21,7 +21,10 @@ import { FormControl } from '@angular/forms';
       </td>
     </tr>
     </tbody>
-  </table>`
+  </table>
+  <div class="help-block">
+      {{ instance.component.description  }}
+  </div>`
 })
 export class MaterialSurveyComponent extends MaterialComponent {
   public controls: any = {};
