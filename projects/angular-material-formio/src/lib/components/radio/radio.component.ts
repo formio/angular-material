@@ -16,7 +16,7 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
         fxFlexOffset="10px"
         fxLayout="{{ getLayout() }}"
         fxLayoutGap="10px">
-        <mat-radio-button *ngFor="let option of instance.component.values" value="{{ option.value }}">{{ option.label }}</mat-radio-button>
+        <mat-radio-button *ngFor="let option of instance.component.values" value="{{ option.value }}" [checked]="isRadioChecked(option)">{{ option.label }}</mat-radio-button>
       </mat-radio-group>
     </div>
   `
@@ -24,6 +24,10 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
 export class MaterialRadioComponent extends MaterialComponent {
   getLayout() {
     return this.instance.component.inline ? 'row' : 'column';
+  }
+
+  isRadioChecked(option) {
+    return option.value === this.instance.component.defaultValue;
   }
 }
 RadioComponent.MaterialComponent = MaterialRadioComponent;
