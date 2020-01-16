@@ -31,6 +31,7 @@ import { EditGridComponent } from './editgrid/editgrid.component';
 import { TableComponent } from './table/table.component';
 import { FormioComponent } from './MaterialComponent';
 import { Wizard } from './formio.wizard';
+import { TimeComponent } from './time/time.component'
 
 // Set the components.
 const components: any = {
@@ -65,6 +66,7 @@ const components: any = {
   datagrid: DataGridComponent,
   editgrid: EditGridComponent,
   unknown: FormioComponent,
+  time: TimeComponent,
   wizard: Wizard
 };
 
