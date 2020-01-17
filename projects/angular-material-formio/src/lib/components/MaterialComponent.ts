@@ -22,7 +22,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.control.markAsTouched();
+    if (this.shouldValidateOnInit()) {
+      this.instance.shouldValidateOnInit = true;
+      this.control.markAsTouched();
+    }
     this.setValue(this.instance.component.defaultValue);
   }
 
@@ -34,6 +37,11 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   getValue() {
     return this.control.value;
+  }
+
+  shouldValidateOnInit() {
+    return (this.instance.parent._form && this.instance.parent._form.shouldValidateOnInit) || this.instance.shouldValidateOnInit
+      || this.instance.parent.shouldValidateOnInit;
   }
 
   setValue(value) {
