@@ -70,11 +70,10 @@ const components: any = {
   wizard: Wizard
 };
 
-// Decorate each component.
-for (const type in components) {
-  if (components.hasOwnProperty(type)) {
+export function getComponents() {
+  for (const type of Object.keys(components)) {
     const CompClass = components[type];
-    CompClass.prototype.render = function() {
+    CompClass.prototype.render = (function () {
       if (this.materialComponent) {
         return this.materialComponent.renderComponents();
       }
@@ -84,18 +83,20 @@ for (const type in components) {
         return;
       }
       const factory = this.options.viewResolver.resolveComponentFactory(CompClass.MaterialComponent);
-      const componentRef =  viewContainer.createComponent(factory);
+      const componentRef = viewContainer.createComponent(factory);
       (componentRef.instance as any).setInstance(this);
-    };
+    });
 
     const setValue = CompClass.prototype.setValue;
-    CompClass.prototype.setValue = function(...args) {
+    CompClass.prototype.setValue = (function (...args) {
       if (this.materialComponent) {
         this.materialComponent.setValue(args[0]);
       }
       return setValue.call(this, ...args);
-    };
-  }
-}
+    });
 
-export default components;
+    components[type] = CompClass;
+  }
+
+  return components;
+}

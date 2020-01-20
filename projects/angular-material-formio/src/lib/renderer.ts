@@ -1,10 +1,14 @@
-import AllComponents from './components';
 const Components = require('formiojs/components/Components').default;
 import './components/Webform';
+import { getComponents } from './components';
 const Formio = require('formiojs/Formio').default;
 const Form = require('formiojs/Form').default;
 const Utils = require('formiojs/utils').default;
-Components.setComponents(AllComponents);
-Formio.Components = Components;
-Formio.Templates = {};
-export { Form, Utils, Components, Formio };
+
+function initRenderer() {
+    Components.setComponents(getComponents());
+    Formio.Components = Components;
+    Formio.Templates = {};
+}
+
+export { Form, Utils, Components, Formio, initRenderer };
