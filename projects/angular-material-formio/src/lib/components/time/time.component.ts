@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MaterialComponent } from '../MaterialComponent';
 import TimeComponent from 'formiojs/components/time/Time.js';
@@ -7,12 +7,12 @@ import TimeComponent from 'formiojs/components/time/Time.js';
   selector: 'mat-formio-time',
   template: `
     <mat-form-field>
-      <mat-label>
+      <mat-label *ngIf="instance">
           {{ instance.component.label }}
       </mat-label>
-      <input type="time" matInput [formControl]="timeControl">
+      <input type="time" matInput [formControl]="timeControl" (input)="sendMessage()">
     </mat-form-field>
-    <div class="help-block">
+    <div class="help-block" *ngIf="instance">
         {{ instance.component.description  }}
     </div>
   `
@@ -21,6 +21,7 @@ import TimeComponent from 'formiojs/components/time/Time.js';
 export class MaterialTimeComponent extends MaterialComponent {
   public disabled: boolean = false;
   public timeControl: FormControl = new FormControl();
+  @Output() selectedEvent = new EventEmitter<any>();
 
   setDisabled(disabled) {
     disabled ? this.timeControl.disable() : this.timeControl.enable();
@@ -29,6 +30,10 @@ export class MaterialTimeComponent extends MaterialComponent {
   setInstance(instance) {
     this.timeControl.setValue(this.getDefaultValue(instance));
     super.setInstance(instance);
+  }
+
+  sendMessage() {
+    this.selectedEvent.emit(this.timeControl)
   }
 
   getDefaultValue(instance) {
