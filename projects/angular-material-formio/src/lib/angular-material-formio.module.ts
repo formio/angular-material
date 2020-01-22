@@ -22,6 +22,8 @@ import {
   MatIconModule,
   MatTooltipModule, MatMenuModule
 } from '@angular/material';
+
+import { initRenderer } from './renderer';
 import { FormioComponent } from './formio.component';
 import { MaterialComponent } from './components/MaterialComponent';
 import { MaterialNestedComponent } from './components/MaterialNestedComponent';
@@ -221,5 +223,9 @@ export {
     FormioLoader
   ]
 })
-export class MatFormioModule { }
+export class MatFormioModule {
+  constructor() {
+    initRenderer();
+  }
+}
 export * from './renderer';
