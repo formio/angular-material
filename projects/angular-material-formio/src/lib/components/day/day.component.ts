@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MaterialComponent } from '../MaterialComponent';
 import DayComponent from 'formiojs/components/day/Day.js';
 DayComponent.prototype.getFieldValue = function(name) {
-  return this.refs[name].value;
+  return this.refs[name] ? this.refs[name].value : '';
 };
 
 @Component({
