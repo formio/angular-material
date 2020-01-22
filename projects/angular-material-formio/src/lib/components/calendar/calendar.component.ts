@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, NgModule, Output} from '@angular/core';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MaterialComponent } from '../MaterialComponent';
 import { momentDate } from 'formiojs/utils/utils.js';
 import {FormControl} from "@angular/forms";
