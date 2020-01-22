@@ -22,8 +22,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.control.markAsTouched();
-    this.setValue(this.instance.component.defaultValue);
+    if (this.instance) {
+      this.control.markAsTouched();
+      this.setValue(this.instance.component.defaultValue);
+    }
   }
 
   renderComponents() {}
@@ -67,7 +69,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.element && this.element.nativeElement) {
+    if (this.element && this.element.nativeElement && this.instance) {
       // Add custom classes to elements.
       if (this.instance.component.customClass) {
         this.element.nativeElement.classList.add(this.instance.component.customClass);

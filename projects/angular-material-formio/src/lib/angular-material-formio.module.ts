@@ -20,7 +20,7 @@ import {
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule, MatMenuModule
 } from '@angular/material';
 import { FormioComponent } from './formio.component';
 import { MaterialComponent } from './components/MaterialComponent';
@@ -58,6 +58,7 @@ import { MaterialWellComponent } from './components/well/well.component';
 import { MaterialWizardComponent } from './components/formio.wizard';
 import { MaterialTimeComponent } from './components/time/time.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
+import {MaterialCalendarComponent} from "./components/calendar/calendar.component";
 export {
   FormioComponent,
   MaterialButtonComponent,
@@ -131,7 +132,8 @@ export {
     MaterialWizardComponent,
     MaterialComponent,
     MaterialNestedComponent,
-    MaterialTimeComponent
+    MaterialTimeComponent,
+    MaterialCalendarComponent
   ],
   imports: [
     CommonModule,
@@ -155,7 +157,8 @@ export {
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     FormioComponent,
