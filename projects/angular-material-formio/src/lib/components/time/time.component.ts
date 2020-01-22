@@ -10,7 +10,7 @@ import TimeComponent from 'formiojs/components/time/Time.js';
       <mat-label *ngIf="instance">
           {{ instance.component.label }}
       </mat-label>
-      <input type="time" matInput [formControl]="timeControl" (input)="sendMessage()">
+      <input type="time" matInput [formControl]="timeControl" (input)="sendMessage()" value="00:00:00">
     </mat-form-field>
     <div class="help-block" *ngIf="instance">
         {{ instance.component.description  }}
@@ -20,7 +20,7 @@ import TimeComponent from 'formiojs/components/time/Time.js';
 
 export class MaterialTimeComponent extends MaterialComponent {
   public disabled: boolean = false;
-  public timeControl: FormControl = new FormControl();
+  public timeControl: FormControl = new FormControl({value: '00:00:00'});
   @Output() selectedEvent = new EventEmitter<any>();
 
   setDisabled(disabled) {

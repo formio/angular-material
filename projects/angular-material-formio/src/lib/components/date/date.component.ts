@@ -7,7 +7,7 @@ import {FormControl} from "@angular/forms";
 @Component({
   selector: 'mat-formio-date',
   template: `    
-      <div>
+      <form class="example-form">
         <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input 
@@ -31,23 +31,20 @@ import {FormControl} from "@angular/forms";
             [enableDate]="instance.component.enableDate"
             [enableTime]="instance.component.enableTime"
           ></mat-formio-calendar>
-      </div>
+      </form>
   `
 })
 
 export class MaterialDateComponent extends MaterialComponent {
   public timeControl: FormControl = new FormControl();
-  public isDateEnabled: Boolean;
   public isPickerOpened: Boolean;
   public selectedDate: any;
-  public selectedTime: any;
+  public selectedTime: any = '00:00';
 
   onChangeDate(event) {
     this.selectedDate = momentDate(event).format('YYYY-MM-DD');
     this.control.setValue(this.selectedDate);
-    if (this.selectedTime || !this.instance.component.enableTime) {
-      this.setDateTime();
-    }
+    this.setDateTime();
   }
 
   onChangeTime(time) {
@@ -58,11 +55,8 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   setDateTime() {
-    this.control.setValue(`${this.selectedDate}T${this.selectedTime}`)
-  }
-
-  ngOnInit() {
-    this.isDateEnabled = this.instance.component.enableDate
+    this.instance.component.enableTime ? this.control.setValue(`${this.selectedDate}T${this.selectedTime}`) :
+      this.control.setValue(this.selectedDate);
   }
 
   setInstance(instance: any) {
@@ -71,6 +65,14 @@ export class MaterialDateComponent extends MaterialComponent {
 
   toggleCalendar() {
     this.isPickerOpened = !this.isPickerOpened;
+  }
+
+  getDate() {
+    return momentDate(this.control).format('YYYY-MM-DD');
+  }
+
+  getTime() {
+    return momentDate(this.control).format('HH.mm');
   }
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
