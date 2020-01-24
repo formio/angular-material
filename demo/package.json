@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio-demo",
-  "version": "1.6.4",
+  "version": "1.7.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,8 +23,8 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
-    "angular-material-formio": "1.6.4",
-    "formiojs": "^4.8.0-rc.14",
+    "angular-material-formio": "1.7.0",
+    "formiojs": "^4.8.0",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.5.4",
     "tslib": "^1.9.0",
@@ -37,7 +37,7 @@
     "@angular/language-service": "^8.2.14",
     "@types/jasmine": "^3.5.1",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.1.8",
+    "@types/node": "^13.5.0",
     "codelyzer": "^5.2.1",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -48,7 +48,7 @@
     "karma-jasmine-html-reporter": "^1.5.1",
     "protractor": "~5.4.0",
     "ts-node": "^8.6.2",
-    "tslint": "^5.20.1",
+    "tslint": "^6.0.0",
     "typescript": "~3.5.3"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.",
