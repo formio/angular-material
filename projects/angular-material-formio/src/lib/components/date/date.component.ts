@@ -57,6 +57,7 @@ export class MaterialDateComponent extends MaterialComponent {
   setDateTime() {
     this.instance.component.enableTime ? this.control.setValue(`${this.selectedDate}T${this.selectedTime}`) :
       this.control.setValue(this.selectedDate);
+    this.onChange();
   }
 
   setInstance(instance: any) {
@@ -74,6 +75,11 @@ export class MaterialDateComponent extends MaterialComponent {
   getTime() {
     return momentDate(this.control).format('HH.mm');
   }
+
+  setValue(value) {
+    super.setValue(value);
+  }
+
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
 export { DateTimeComponent };
