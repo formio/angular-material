@@ -24,7 +24,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     if (this.instance) {
       this.control.markAsTouched();
-      this.setValue(this.instance.component.defaultValue);
+      this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
   }
 
