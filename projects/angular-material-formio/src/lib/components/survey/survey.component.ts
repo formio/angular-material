@@ -20,11 +20,11 @@ import { FormControl } from '@angular/forms';
         </mat-radio-group>
       </td>
     </tr>
+    <mat-hint *ngIf="instance.component.description">
+        {{ instance.component.description  }}
+    </mat-hint>
     </tbody>
-  </table>
-  <div class="help-block">
-      {{ instance.component.description  }}
-  </div>`
+  </table>`
 })
 export class MaterialSurveyComponent extends MaterialComponent {
   public controls: any = {};
