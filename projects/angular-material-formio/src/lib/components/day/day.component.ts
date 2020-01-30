@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MaterialComponent } from '../MaterialComponent';
 import DayComponent from 'formiojs/components/day/Day.js';
+import { momentDate } from 'formiojs/utils/utils.js';
 DayComponent.prototype.getFieldValue = function(name) {
   return this.refs[name] ? this.refs[name].value : '';
 };
@@ -78,6 +79,11 @@ export class MaterialDayComponent extends MaterialComponent {
   }
 
   setValue(value) {
+    if (value) {
+      this.dayControl.setValue(parseInt(momentDate(value).format('D')));
+      this.monthControl.setValue(parseInt(momentDate(value).format('M')));
+      this.yearControl.setValue(parseInt(momentDate(value).format('YYYY')));
+    }
     this.instance.setValueAt(0, value);
   }
 }
