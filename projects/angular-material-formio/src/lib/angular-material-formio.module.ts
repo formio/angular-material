@@ -20,8 +20,10 @@ import {
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule, MatMenuModule
 } from '@angular/material';
+
+import { initRenderer } from './renderer';
 import { FormioComponent } from './formio.component';
 import { MaterialComponent } from './components/MaterialComponent';
 import { MaterialNestedComponent } from './components/MaterialNestedComponent';
@@ -50,12 +52,15 @@ import { MaterialRadioComponent } from './components/radio/radio.component';
 import { MaterialSelectComponent } from './components/select/select.component';
 import { MaterialPanelComponent } from './components/panel/panel.component';
 import { MaterialTabsComponent } from './components/tabs/tabs.component';
+import { MaterialTableComponent } from './components/table/table.component';
 import { MaterialDateComponent } from './components/date/date.component';
 import { MaterialDataGridComponent } from './components/datagrid/datagrid.component';
 import { MaterialEditGridComponent } from './components/editgrid/editgrid.component';
 import { MaterialWellComponent } from './components/well/well.component';
 import { MaterialWizardComponent } from './components/formio.wizard';
+import { MaterialTimeComponent } from './components/time/time.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
+import {MaterialCalendarComponent} from "./components/calendar/calendar.component";
 export {
   FormioComponent,
   MaterialButtonComponent,
@@ -70,6 +75,7 @@ export {
   MaterialHiddenComponent,
   MaterialHtmlComponent,
   MaterialTagsComponent,
+  MaterialTableComponent,
   MaterialTextareaComponent,
   MaterialColumnsComponent,
   MaterialContainerComponent,
@@ -88,7 +94,8 @@ export {
   MaterialDateComponent,
   MaterialWellComponent,
   MaterialComponent,
-  MaterialNestedComponent
+  MaterialNestedComponent,
+  MaterialTimeComponent
 };
 
 @NgModule({
@@ -121,11 +128,14 @@ export {
     MaterialRadioComponent,
     MaterialSelectComponent,
     MaterialTabsComponent,
+    MaterialTableComponent,
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialWizardComponent,
     MaterialComponent,
-    MaterialNestedComponent
+    MaterialNestedComponent,
+    MaterialTimeComponent,
+    MaterialCalendarComponent
   ],
   imports: [
     CommonModule,
@@ -149,7 +159,8 @@ export {
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     FormioComponent,
@@ -200,15 +211,21 @@ export {
     MaterialRadioComponent,
     MaterialSelectComponent,
     MaterialTabsComponent,
+    MaterialTableComponent,
     MaterialDateComponent,
     MaterialWellComponent,
     MaterialComponent,
     MaterialNestedComponent,
+    MaterialTimeComponent,
     MaterialWizardComponent
   ],
   providers: [
     FormioLoader
   ]
 })
-export class MatFormioModule { }
+export class MatFormioModule {
+  constructor() {
+    initRenderer();
+  }
+}
 export * from './renderer';

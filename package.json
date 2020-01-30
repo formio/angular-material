@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.4.0",
+  "version": "1.8.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,20 +14,20 @@
     "@angular/cdk": "^8.0.0",
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
-    "@angular/flex-layout": "^8.0.0-beta.27",
+    "@angular/flex-layout": "^8.0.0",
     "@angular/forms": "^8.0.0",
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.3.6",
-    "formiojs": "^4.8.0-beta.6"
+    "angular-formio": "^4.5.1",
+    "formiojs": "^4.8.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.20",
-    "@angular-devkit/build-ng-packagr": "^0.803.20",
+    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular-devkit/build-ng-packagr": "^0.803.23",
     "@angular/animations": "^8.2.14",
     "@angular/cdk": "^8.2.3",
-    "@angular/cli": "^8.3.20",
+    "@angular/cli": "^8.3.23",
     "@angular/common": "^8.2.14",
     "@angular/compiler": "^8.2.14",
     "@angular/compiler-cli": "^8.2.14",
@@ -38,23 +38,23 @@
     "@angular/language-service": "^8.2.14",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.2.14",
-    "@types/jasmine": "^3.5.0",
+    "@types/jasmine": "^3.5.2",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^12.12.14",
-    "codelyzer": "^5.2.0",
+    "@types/node": "^13.5.2",
+    "codelyzer": "^5.2.1",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
-    "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-jasmine": "^3.1.0",
+    "karma-jasmine-html-reporter": "^1.5.1",
     "ng-packagr": "^5.7.1",
-    "protractor": "~5.4.0",
-    "ts-node": "^8.5.4",
-    "tsickle": "^0.37.1",
+    "protractor": "^5.4.3",
+    "ts-node": "^8.6.2",
+    "tsickle": "0.35.0",
     "tslib": "^1.9.0",
-    "tslint": "^5.20.1",
+    "tslint": "^6.0.0",
     "typescript": "~3.5.3"
   }
 }

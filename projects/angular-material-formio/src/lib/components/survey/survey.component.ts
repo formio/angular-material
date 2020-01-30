@@ -20,6 +20,9 @@ import { FormControl } from '@angular/forms';
         </mat-radio-group>
       </td>
     </tr>
+    <mat-hint *ngIf="instance.component.description">
+        {{ instance.component.description  }}
+    </mat-hint>
     </tbody>
   </table>`
 })

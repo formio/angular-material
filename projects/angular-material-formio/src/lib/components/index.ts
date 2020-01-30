@@ -28,8 +28,10 @@ import { SelectComponent } from './select/select.component';
 import { WellComponent } from './well/well.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
 import { EditGridComponent } from './editgrid/editgrid.component';
+import { TableComponent } from './table/table.component';
 import { FormioComponent } from './MaterialComponent';
 import { Wizard } from './formio.wizard';
+import { TimeComponent } from './time/time.component'
 
 // Set the components.
 const components: any = {
@@ -51,6 +53,7 @@ const components: any = {
   panel: PanelComponent,
   columns: ColumnsComponent,
   tabs: TabsComponent,
+  table: TableComponent,
   well: WellComponent,
   fieldset: FieldsetComponent,
   content: ContentComponent,
@@ -63,14 +66,14 @@ const components: any = {
   datagrid: DataGridComponent,
   editgrid: EditGridComponent,
   unknown: FormioComponent,
+  time: TimeComponent,
   wizard: Wizard
 };
 
-// Decorate each component.
-for (const type in components) {
-  if (components.hasOwnProperty(type)) {
+export function getComponents() {
+  for (const type of Object.keys(components)) {
     const CompClass = components[type];
-    CompClass.prototype.render = function() {
+    CompClass.prototype.render = (function () {
       if (this.materialComponent) {
         return this.materialComponent.renderComponents();
       }
@@ -80,18 +83,20 @@ for (const type in components) {
         return;
       }
       const factory = this.options.viewResolver.resolveComponentFactory(CompClass.MaterialComponent);
-      const componentRef =  viewContainer.createComponent(factory);
+      const componentRef = viewContainer.createComponent(factory);
       (componentRef.instance as any).setInstance(this);
-    };
+    });
 
     const setValue = CompClass.prototype.setValue;
-    CompClass.prototype.setValue = function(...args) {
+    CompClass.prototype.setValue = (function (...args) {
       if (this.materialComponent) {
         this.materialComponent.setValue(args[0]);
       }
       return setValue.call(this, ...args);
-    };
-  }
-}
+    });
 
-export default components;
+    components[type] = CompClass;
+  }
+
+  return components;
+}

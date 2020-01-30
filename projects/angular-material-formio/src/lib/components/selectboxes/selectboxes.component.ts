@@ -17,7 +17,8 @@ import SelectBoxesComponent from 'formiojs/components/selectboxes/SelectBoxes.js
         <mat-checkbox
           *ngFor="let option of instance.component.values"
           (change)="onChange()"
-          [(ngModel)]="value[option.value]">
+          [(ngModel)]="value[option.value]"
+          [disabled]="disabled">
           {{ option.label }}
         </mat-checkbox>
       </div>
@@ -25,6 +26,7 @@ import SelectBoxesComponent from 'formiojs/components/selectboxes/SelectBoxes.js
 })
 export class MaterialSelectBoxesComponent extends MaterialRadioComponent {
   public value: any = {};
+  public disabled: boolean = false;
   setInstance(instance) {
     instance.component.values.forEach((option) => {
       this.value[option.value] = false;
@@ -40,6 +42,9 @@ export class MaterialSelectBoxesComponent extends MaterialRadioComponent {
         this.value[prop] = value[prop];
       }
     }
+  }
+  setDisabled(disabled) {
+    this.disabled = !!disabled;
   }
 }
 SelectBoxesComponent.MaterialComponent = MaterialSelectBoxesComponent;
