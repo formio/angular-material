@@ -24,6 +24,7 @@ import { FormControl } from '@angular/forms';
         {{ instance.component.description  }}
     </mat-hint>
     </tbody>
+      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
   </table>`
 })
 export class MaterialSurveyComponent extends MaterialComponent {
