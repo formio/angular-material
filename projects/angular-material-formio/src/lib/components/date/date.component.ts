@@ -14,7 +14,6 @@ import {FormControl} from '@angular/forms';
           <input
             *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
             matInput
-            [readonly]="true"
             type="datetime-local"
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
@@ -23,7 +22,6 @@ import {FormControl} from '@angular/forms';
           <input
             *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
             matInput
-            [readonly]="true"
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
             (click)="toggleCalendar()"
