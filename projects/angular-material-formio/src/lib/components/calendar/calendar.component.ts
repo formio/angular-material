@@ -5,7 +5,7 @@ import {FormControl} from "@angular/forms";
 const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
 @Component({
   selector: 'mat-formio-calendar',
-  template: `    
+  template: `
           <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
             <mat-card>
               <mat-calendar [selected]="selectedDate" (selectedChange)="onDate($event)" *ngIf="enableDate !== false"></mat-calendar>

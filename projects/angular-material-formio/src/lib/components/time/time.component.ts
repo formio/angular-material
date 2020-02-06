@@ -33,7 +33,9 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   sendMessage() {
-    this.onChange();
+    if (this.instance) {
+      this.onChange();
+    }
     this.selectedEvent.emit(this.control)
   }
 }
