@@ -3,6 +3,7 @@ import { FormioBaseComponent } from 'angular-formio/FormioBaseComponent';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 import { FormioAppConfig } from 'angular-formio/formio.config';
 import { Form } from './renderer';
+import { get } from 'lodash';
 @Component({
   selector: 'mat-formio',
   styles: [
@@ -44,6 +45,10 @@ export class FormioComponent extends FormioBaseComponent {
     @Optional() public config: FormioAppConfig
   ) {
     super(ngZone, loader, config);
+  }
+
+  getRendererOptions(): any {
+    return {...super.getRendererOptions(), validateOnInit: get(this.options, 'validateOnInit', true) }
   }
 
   createRenderer() {
