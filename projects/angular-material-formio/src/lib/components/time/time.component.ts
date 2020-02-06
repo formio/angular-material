@@ -6,11 +6,12 @@ import TimeComponent from 'formiojs/components/time/Time.js';
 @Component({
   selector: 'mat-formio-time',
   template: `
-    <mat-form-field>
+    <mat-form-field *ngIf="instance">
       <mat-label *ngIf="instance">
           {{ instance.component.label }}
       </mat-label>
       <input type="time" matInput [formControl]="control" (input)="sendMessage()">
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
     </mat-form-field>
     <div class="help-block" *ngIf="instance">
         {{ instance.component.description  }}

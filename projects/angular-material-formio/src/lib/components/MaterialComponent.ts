@@ -19,11 +19,14 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     this.instance.disabled = this.instance.shouldDisabled;
     this.setVisible(this.instance.visible);
     this.renderComponents();
+    this.onChange();
   }
 
   ngOnInit() {
     if (this.instance) {
-      this.control.markAsTouched();
+      if (this.instance.parent.options.validateOnInit) {
+        this.control.markAsTouched();
+      }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
   }

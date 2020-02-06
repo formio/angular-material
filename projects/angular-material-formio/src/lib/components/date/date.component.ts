@@ -17,14 +17,14 @@ import {FormControl} from '@angular/forms';
             type="datetime-local"
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
-            (click)="toggleCalendar()"
+            (input)="onChange()"
           >
           <input
             *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
             matInput
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
-            (click)="toggleCalendar()"
+            (input)="onChange()"
           >
         </mat-form-field>
           <mat-formio-calendar
@@ -34,6 +34,7 @@ import {FormControl} from '@angular/forms';
             [enableDate]="instance.component.enableDate"
             [enableTime]="instance.component.enableTime"
           ></mat-formio-calendar>
+          <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>
       <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
   `
