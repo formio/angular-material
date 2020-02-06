@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import TextAreaComponent from 'formiojs/components/textarea/TextArea.js';
+import _ from 'lodash';
+
 @Component({
   selector: 'mat-formio-textarea',
   template: `
@@ -15,6 +17,7 @@ import TextAreaComponent from 'formiojs/components/textarea/TextArea.js';
       </textarea>
       <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
       <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
+      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
     </mat-form-field>
   `
 })
@@ -23,6 +26,10 @@ export class MaterialTextareaComponent extends MaterialComponent implements Afte
   ngAfterViewInit() {
     // Attach the element so the wysiwyg will work.
     this.instance.attachElement(this.textarea.nativeElement);
+  }
+
+  getValue() {
+    return _.isNil(this.control.value) ? '' : this.control.value;
   }
 }
 TextAreaComponent.MaterialComponent = MaterialTextareaComponent;

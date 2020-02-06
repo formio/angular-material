@@ -11,7 +11,7 @@ DayComponent.prototype.getFieldValue = function(name) {
   selector: 'mat-formio-day',
   template: `<mat-form-field *ngIf="instance.dayFirst && instance.showDay">
     <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
-    <mat-select [formControl]="dayControl" (selectionChange)="onChange()">
+    <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
       <mat-option *ngFor="let day of instance.days" [value]="day.value">
         {{day.label}}
       </mat-option>
@@ -19,7 +19,7 @@ DayComponent.prototype.getFieldValue = function(name) {
   </mat-form-field>
   <mat-form-field *ngIf="instance.showMonth">
     <mat-label *ngIf="!instance.component.hideInputLabels">Month</mat-label>
-    <mat-select [formControl]="monthControl" (selectionChange)="onChange()">
+    <mat-select [formControl]="monthControl" (selectionChange)="onChange()" [required]="instance.monthRequired">
       <mat-option *ngFor="let month of instance.months" [value]="month.value">
         {{month.label}}
       </mat-option>
@@ -27,7 +27,7 @@ DayComponent.prototype.getFieldValue = function(name) {
   </mat-form-field>
   <mat-form-field *ngIf="!instance.dayFirst && instance.showDay">
     <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
-    <mat-select [formControl]="dayControl" (selectionChange)="onChange()">
+    <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
       <mat-option *ngFor="let day of instance.days" [value]="day.value">
         {{day.label}}
       </mat-option>
@@ -35,12 +35,14 @@ DayComponent.prototype.getFieldValue = function(name) {
   </mat-form-field>
   <mat-form-field *ngIf="instance.showYear">
     <mat-label *ngIf="!instance.component.hideInputLabels">Year</mat-label>
-    <mat-select [formControl]="yearControl" (selectionChange)="onChange()">
+    <mat-select [formControl]="yearControl" (selectionChange)="onChange()" [required]="instance.yearRequired">
       <mat-option *ngFor="let year of instance.years" [value]="year.value">
         {{year.label}}
       </mat-option>
     </mat-select>
-  </mat-form-field>`
+  </mat-form-field>
+  <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+  `
 })
 export class MaterialDayComponent extends MaterialComponent {
   public dayControl: FormControl = new FormControl();

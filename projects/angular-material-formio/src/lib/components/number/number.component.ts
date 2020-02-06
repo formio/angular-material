@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MaterialTextfieldComponent, TEXTFIELD_TEMPLATE } from '../textfield/textfield.component';
 import NumberComponent from 'formiojs/components/number/Number.js';
+import _ from 'lodash';
+
 @Component({
   selector: 'mat-formio-number',
   template: TEXTFIELD_TEMPLATE
@@ -8,7 +10,7 @@ import NumberComponent from 'formiojs/components/number/Number.js';
 export class MaterialNumberComponent extends MaterialTextfieldComponent {
   public inputType = 'text';
   getValue() {
-    return this.instance ? this.instance.parseNumber(this.control.value) : this.control.value;
+    return this.instance && !_.isNil(this.control.value) ? this.instance.parseNumber(this.control.value) : this.control.value;
   }
 
   setValue(value) {
