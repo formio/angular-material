@@ -29,7 +29,7 @@ import {FormControl} from "@angular/forms";
           <mat-formio-calendar
             [minDate]="instance.component.minDate || ''"
             [maxDate]="instance.component.maxDate || ''"
-            [dateFilter]="instance.component.dateFlter || dateFilter"
+            [dateFilter]="dateFilter"
             [hidden]="!isPickerOpened"
             (dateSelectEvent)="onChangeDate($event)"
             (timeSelectEvent)="onChangeTime($event)"
