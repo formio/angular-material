@@ -6,12 +6,12 @@ import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'mat-formio-date',
-  template: `    
+  template: `
       <form class="example-form">
         <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
-          <input 
-            *ngIf="instance.component.enableTime && instance.component.enableDate !== false"      
+          <input
+            *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
             matInput
             type="datetime-local"
             [placeholder]="instance.component.placeholder"
@@ -26,9 +26,12 @@ import {FormControl} from "@angular/forms";
             (input)="onChange()"
           >
         </mat-form-field>
-          <mat-formio-calendar 
-            [hidden]="!isPickerOpened" 
-            (dateSelectEvent)="onChangeDate($event)" 
+          <mat-formio-calendar
+            [minDate]="instance.component.minDate || ''"
+            [maxDate]="instance.component.maxDate || ''"
+            [dateFilter]="instance.component.dateFlter || dateFilter"
+            [hidden]="!isPickerOpened"
+            (dateSelectEvent)="onChangeDate($event)"
             (timeSelectEvent)="onChangeTime($event)"
             [enableDate]="instance.component.enableDate"
             [enableTime]="instance.component.enableTime"
@@ -40,7 +43,7 @@ import {FormControl} from "@angular/forms";
 
 export class MaterialDateComponent extends MaterialComponent {
   public timeControl: FormControl = new FormControl();
-  public isPickerOpened: Boolean;
+  public isPickerOpened: boolean;
   public selectedDate: any;
   public selectedTime: any = '00:00';
 
@@ -83,6 +86,21 @@ export class MaterialDateComponent extends MaterialComponent {
     super.setValue(value);
   }
 
+  disableWeekends(d: Date) {
+    const day = d.getDay();
+    return day !== 0 && day !== 6;
+  }
+
+  disableDates(dates: Array<string>, d: Date) {
+    const formattedDates = dates.map((date) => momentDate(date).format('YYYY-MM-DD'));
+    return !formattedDates.includes(momentDate(d).format('YYYY-MM-DD'));
+  }
+
+  dateFilter = (d: Date | null): boolean => {
+    const isValid = this.instance.component.disableWeekends ? this.disableWeekends(d) : true;
+    return this.instance.component.disabledDates && isValid ?
+      this.disableDates(this.instance.component.disabledDates, d) : isValid;
+  }
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
 export { DateTimeComponent };
