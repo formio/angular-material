@@ -6,12 +6,12 @@ import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'mat-formio-date',
-  template: `    
+  template: `
       <form class="example-form">
-        <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="instance.component.readonly || instance.component.disabled" (click)="toggleCalendar()"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
-          <input 
-            *ngIf="instance.component.enableTime && instance.component.enableDate !== false"      
+          <input
+            *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
             matInput
             type="datetime-local"
             [placeholder]="instance.component.placeholder"
@@ -68,7 +68,9 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   toggleCalendar() {
-    this.isPickerOpened = !this.isPickerOpened;
+    if (!this.instance.component.readonly && !this.instance.component.disabled) {
+      this.isPickerOpened = !this.isPickerOpened;
+    }
   }
 
   getDate() {
