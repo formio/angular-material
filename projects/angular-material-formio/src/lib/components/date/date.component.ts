@@ -2,13 +2,14 @@ import {Component, NgModule} from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import DateTimeComponent from 'formiojs/components/datetime/DateTime.js';
 import { momentDate } from 'formiojs/utils/utils.js';
-import {FormControl} from "@angular/forms";
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'mat-formio-date',
   template: `
+      <mat-label fxFill>{{ instance.component.label }}</mat-label>
       <form class="example-form">
-        <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
+          <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
             *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
@@ -38,6 +39,7 @@ import {FormControl} from "@angular/forms";
           ></mat-formio-calendar>
           <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>
+      <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
   `
 })
 
