@@ -9,7 +9,7 @@ import {FormControl} from '@angular/forms';
   template: `
       <mat-label fxFill>{{ instance.component.label }}</mat-label>
       <form class="example-form">
-          <mat-datepicker-toggle (click)="toggleCalendar()"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="instance.component.readonly || instance.component.disabled" (click)="toggleCalendar()"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
             *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
@@ -73,7 +73,9 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   toggleCalendar() {
-    this.isPickerOpened = !this.isPickerOpened;
+    if (!this.instance.component.readonly && !this.instance.component.disabled) {
+      this.isPickerOpened = !this.isPickerOpened;
+    }
   }
 
   getDate() {
