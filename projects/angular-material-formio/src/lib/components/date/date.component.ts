@@ -28,6 +28,9 @@ import {FormControl} from '@angular/forms';
           >
         </mat-form-field>
           <mat-formio-calendar
+            [minDate]="instance.component.minDate || ''"
+            [maxDate]="instance.component.maxDate || ''"
+            [dateFilter]="dateFilter"
             [hidden]="!isPickerOpened"
             (dateSelectEvent)="onChangeDate($event)"
             (timeSelectEvent)="onChangeTime($event)"
@@ -42,7 +45,7 @@ import {FormControl} from '@angular/forms';
 
 export class MaterialDateComponent extends MaterialComponent {
   public timeControl: FormControl = new FormControl();
-  public isPickerOpened: Boolean;
+  public isPickerOpened: boolean;
   public selectedDate: any;
   public selectedTime: any = '00:00';
 
@@ -85,6 +88,21 @@ export class MaterialDateComponent extends MaterialComponent {
     super.setValue(value);
   }
 
+  disableWeekends(d: Date) {
+    const day = d.getDay();
+    return day !== 0 && day !== 6;
+  }
+
+  disableDates(dates: Array<string>, d: Date) {
+    const formattedDates = dates.map((date) => momentDate(date).format('YYYY-MM-DD'));
+    return !formattedDates.includes(momentDate(d).format('YYYY-MM-DD'));
+  }
+
+  dateFilter = (d: Date | null): boolean => {
+    const isValid = this.instance.component.disableWeekends ? this.disableWeekends(d) : true;
+    return this.instance.component.disabledDates && isValid ?
+      this.disableDates(this.instance.component.disabledDates, d) : isValid;
+  }
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
 export { DateTimeComponent };
