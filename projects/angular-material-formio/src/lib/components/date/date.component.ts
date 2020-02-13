@@ -18,6 +18,7 @@ import {FormControl} from '@angular/forms';
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
             (input)="onChange()"
+            readonly
           >
           <input
             *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
@@ -25,6 +26,7 @@ import {FormControl} from '@angular/forms';
             [placeholder]="instance.component.placeholder"
             [formControl]="control"
             (input)="onChange()"
+            readonly
           >
         </mat-form-field>
           <mat-formio-calendar
@@ -94,7 +96,30 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   setValue(value) {
-    super.setValue(value);
+    if (this.dateFilter(value) && this.checkMinMax(value)) {
+      super.setValue(value);
+    }
+  }
+
+  onChange() {
+    const value = this.dateFilter(this.getValue()) && this.checkMinMax(this.getValue()) ? this.getValue() : '';
+    this.instance.updateValue(value, {modified: true});
+  }
+
+  beforeSubmit() {
+    this.onChange();
+    super.beforeSubmit();
+  }
+
+  checkMinMax(value) {
+    let isValid = true;
+    if (this.instance.component.minDate) {
+      isValid = momentDate(value).isSameOrAfter(this.instance.component.minDate);
+    }
+    if (this.instance.component.maxDate && isValid) {
+      isValid = momentDate(value).isSameOrBefore(this.instance.component.maxDate);
+    }
+    return isValid;
   }
 
   disableWeekends(d: Date) {
