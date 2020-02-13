@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,8 +19,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.5.2",
-    "formiojs": "^4.9.0-beta.3"
+    "angular-formio": "^4.5.3",
+    "formiojs": "^4.9.0-beta.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.23",
@@ -40,14 +40,14 @@
     "@angular/platform-browser": "^8.2.14",
     "@types/jasmine": "^3.5.3",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.7.0",
+    "@types/node": "^13.7.1",
     "codelyzer": "^5.2.1",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
-    "karma-jasmine": "^3.1.0",
+    "karma-jasmine": "^3.1.1",
     "karma-jasmine-html-reporter": "^1.5.2",
     "ng-packagr": "^5.7.1",
     "protractor": "^5.4.3",
