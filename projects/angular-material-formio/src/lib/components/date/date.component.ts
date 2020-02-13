@@ -36,6 +36,8 @@ import {FormControl} from '@angular/forms';
             (timeSelectEvent)="onChangeTime($event)"
             [enableDate]="instance.component.enableDate"
             [enableTime]="instance.component.enableTime"
+            [hourStep]="instance.component.timePicker.hourStep"
+            [minuteStep]="instance.component.timePicker.minuteStep"
           ></mat-formio-calendar>
           <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>

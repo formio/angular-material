@@ -9,7 +9,7 @@ const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
           <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
             <mat-card>
               <mat-calendar [dateFilter]="dateFilter" [maxDate]="maxDate" [minDate]="minDate" [selected]="selectedDate" (selectedChange)="onDate($event)" *ngIf="enableDate !== false"></mat-calendar>
-              <mat-formio-time (selectedEvent)="onTime($event)" class="ml-3" *ngIf="enableTime"></mat-formio-time>
+              <mat-formio-time [hourStep]="hourStep" [minuteStep]="minuteStep" (selectedEvent)="onTime($event)" class="ml-3" *ngIf="enableTime"></mat-formio-time>
             </mat-card>
           </div>
   `
@@ -24,7 +24,8 @@ export class MaterialCalendarComponent extends MaterialComponent {
   @Input() minDate: any;
   @Input() maxDate: any;
   @Input() dateFilter: any;
-
+  @Input() hourStep: any;
+  @Input() minuteStep: any;
   @Output() timeSelectEvent = new EventEmitter<any>();
   @Output() dateSelectEvent = new EventEmitter<any>();
 
