@@ -1,4 +1,4 @@
-import {Component, NgModule} from '@angular/core';
+import { Component, NgModule, ViewChild } from '@angular/core'
 import { MaterialComponent } from '../MaterialComponent';
 import DateTimeComponent from 'formiojs/components/datetime/DateTime.js';
 import { momentDate } from 'formiojs/utils/utils.js';
@@ -6,10 +6,13 @@ import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'mat-formio-date',
+  host: {
+    '(document:click)': 'clickOutside($event)',
+  },
   template: `
       <mat-label fxFill>{{ instance.component.label }}</mat-label>
       <form class="example-form">
-        <mat-datepicker-toggle [disabled]="isDisabled()" (click)="toggleCalendar()"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="isDisabled()" (click)="toggleCalendar($event)"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
             *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
@@ -30,6 +33,7 @@ import {FormControl} from '@angular/forms';
           >
         </mat-form-field>
           <mat-formio-calendar
+            #calendar
             [minDate]="instance.component.minDate || ''"
             [maxDate]="instance.component.maxDate || ''"
             [dateFilter]="dateFilter"
@@ -52,6 +56,8 @@ export class MaterialDateComponent extends MaterialComponent {
   public isPickerOpened: boolean;
   public selectedDate: any;
   public selectedTime: any = '00:00';
+
+  @ViewChild('calendar', {static: false}) calendar;
 
   onChangeDate(event) {
     this.selectedDate = momentDate(event).format('YYYY-MM-DD');
@@ -77,9 +83,10 @@ export class MaterialDateComponent extends MaterialComponent {
     this.isDisabled() ? this.control.disable() : this.control.enable();
   }
 
-  toggleCalendar() {
+  toggleCalendar(event) {
     if (!this.isDisabled()) {
       this.isPickerOpened = !this.isPickerOpened;
+      event.stopPropagation();
     }
   }
 
@@ -136,6 +143,11 @@ export class MaterialDateComponent extends MaterialComponent {
     const isValid = this.instance.component.disableWeekends ? this.disableWeekends(d) : true;
     return this.instance.component.disabledDates && isValid ?
       this.disableDates(this.instance.component.disabledDates, d) : isValid;
+  }
+
+  clickOutside(event) {
+    if (!this.calendar.element.nativeElement.contains(event.target) && this.isPickerOpened)
+      this.toggleCalendar(event);
   }
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
