@@ -9,6 +9,12 @@ import DataGridComponent from 'formiojs/components/datagrid/DataGrid.js';
     <mat-card fxFill>
       <mat-card-title *ngIf="instance?.component?.label">{{ instance.component.label }}</mat-card-title>
       <mat-card-content>
+        <mat-card-actions *ngIf="instance.hasAddButton() && (instance.component.addAnotherPosition === 'both' || instance.component.addAnotherPosition === 'top')">
+          <button mat-raised-button color="primary" (click)="addAnother()">
+            <mat-icon>add</mat-icon>
+            {{instance.component.addAnother || 'Add Another'}}
+          </button>
+        </mat-card-actions>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" fxFill>
           <ng-container *ngFor="let column of formColumns" [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef>{{ getColumnLabel(columns[column]) }}</th>
@@ -19,16 +25,17 @@ import DataGridComponent from 'formiojs/components/datagrid/DataGrid.js';
           <ng-container matColumnDef="__removeRow">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let i = index;">
-              <button mat-button><mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon></button>
+              <button mat-button *ngIf="instance.hasRemoveButtons()"><mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon></button>
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </mat-card-content>
-      <mat-card-actions *ngIf="instance.hasAddButton()">
+      <mat-card-actions *ngIf="instance.hasAddButton() && instance.component.addAnotherPosition !== 'top'">
         <button mat-raised-button color="primary" (click)="addAnother()">
-          <mat-icon>add</mat-icon> Add Another
+          <mat-icon>add</mat-icon>
+          {{instance.component.addAnother || 'Add Another'}}
         </button>
       </mat-card-actions>
     </mat-card>
