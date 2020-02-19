@@ -74,16 +74,30 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
 
   addAnother() {
     this.instance.addRow();
-    this.dataSource.data = this.instance.dataValue;
+    if (this.dataSource.data.length < this.instance.rows.length) {
+      this.dataSource.data.push({});
+    }
+    this.dataSource.data = [...this.dataSource.data];
   }
 
   removeRow(index) {
     this.instance.removeRow(index);
-    this.dataSource.data = this.instance.dataValue;
+    this.dataSource.data.splice(index, 1);
+    this.dataSource.data = [...this.dataSource.data];
   }
 
   renderComponents() {
     this.instance.getRows();
+    this.instance.setValue(this.control.value || []);
+  }
+
+  setValue(value) {
+    while (this.instance.rows.length < value.length) {
+      this.addAnother();
+      this.instance.dataValue = value;
+      this.instance.setValue(value);
+    }
+    super.setValue(value);
   }
 }
 DataGridComponent.MaterialComponent = MaterialDataGridComponent;
