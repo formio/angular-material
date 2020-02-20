@@ -80,7 +80,7 @@ const DEFAULT_ROW_TEMPLATES = [
   styles: [':host .delete-button { margin-left: auto; order: 2; }'],
   template: `
     <span fxLayout="column" fxLayoutGap="1em" fxFill>
-      <h3 *ngIf="instance?.component?.label">{{ instance.component.label }}</h3>
+       <h3 *ngIf="instance?.component?.label && !instance?.component?.hideLabel">{{ instance.component.label }}</h3>
       <mat-accordion>
         <mat-expansion-panel *ngIf="header" disabled="true">
           <mat-expansion-panel-header>
@@ -111,6 +111,7 @@ const DEFAULT_ROW_TEMPLATES = [
           <mat-icon>add</mat-icon> Add Another
         </button>
       </span>
+      <mat-hint *ngIf="instance?.component?.description">{{ instance.component.description }}</mat-hint>
     </span>
   `
 })
