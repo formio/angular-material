@@ -10,6 +10,7 @@ export const TEXTFIELD_TEMPLATE = `
            [required]="instance.component.validate?.required"
            [formControl]="control"
            [placeholder]="instance.component.placeholder"
+           [disabled]="instance?.component?.disabled"
            (input)="onChange()" #input>
     <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
     <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>

@@ -61,6 +61,7 @@ import { MaterialWizardComponent } from './components/formio.wizard';
 import { MaterialTimeComponent } from './components/time/time.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 import {MaterialCalendarComponent} from "./components/calendar/calendar.component";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 export {
   FormioComponent,
   MaterialButtonComponent,
@@ -137,31 +138,32 @@ export {
     MaterialTimeComponent,
     MaterialCalendarComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatListModule,
-    MatChipsModule,
-    MatExpansionModule,
-    MatButtonModule,
-    MatCardModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatTableModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatMenuModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatListModule,
+        MatChipsModule,
+        MatExpansionModule,
+        MatButtonModule,
+        MatCardModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatTableModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatMenuModule,
+        DragDropModule
+    ],
   exports: [
     FormioComponent,
     FlexLayoutModule,
