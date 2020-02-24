@@ -9,6 +9,7 @@ export const TEXTFIELD_TEMPLATE = `
            type="{{ inputType }}"
            [required]="instance.component.validate?.required"
            [formControl]="control"
+           [disabled]="instance.component.disabled"
            [placeholder]="instance.component.placeholder"
            (input)="onChange()" #input>
     <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>

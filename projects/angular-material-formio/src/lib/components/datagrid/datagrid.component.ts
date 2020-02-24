@@ -58,6 +58,9 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
     this.displayedColumns.push('__removeRow');
     instance.viewContainer = (component) => {
       let viewContainer;
+      if (this.instance.component.disabled) {
+        component.component.disabled = true;
+      }
       this.viewContainers.forEach((container) => {
         const td = container.element.nativeElement.parentNode;
         if (
