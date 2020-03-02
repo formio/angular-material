@@ -4,7 +4,7 @@ import { MaterialComponent } from '../MaterialComponent';
 export const TEXTFIELD_TEMPLATE = `
   <mat-form-field fxFill>
     <mat-label>{{ instance.component.label }}</mat-label>
-    <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
+    <span *ngIf="instance.component.prefix && instance.type !== 'currency'" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
     <input matInput
            type="{{ inputType }}"
            [required]="instance.component.validate?.required"
