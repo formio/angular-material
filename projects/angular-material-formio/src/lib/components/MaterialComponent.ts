@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit } from '@angular/core';
 import FormioComponent from 'formiojs/components/_classes/component/Component.js';
 import { FormioControl } from '../FormioControl';
 
@@ -8,9 +8,9 @@ import { FormioControl } from '../FormioControl';
 })
 export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
-  @ViewChild('input', {static: true}) input: ElementRef;
+  @ViewChild('input', { static: true }) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
-  constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, public ref: ChangeDetectorRef) { }
 
   setInstance(instance: any) {
     this.control.setInstance(instance);
@@ -24,17 +24,23 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     if (this.instance) {
-      if (this.instance.parent.options.validateOnInit) {
-        this.control.markAsTouched();
+      if (this.instance.parent !== undefined && this.instance.parent.options.validateOnInit) {
+          this.control.markAsTouched();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
-    }
+      if (this.instance.component.hasOwnProperty('key') && this.instance.hasOwnProperty('path')) {
+          const splitted = this.instance.path.split('.');
+          const obj = this.instance.root._data;
+          const value = splitted.reduce((obj, level) => obj && obj[level], obj);
+          if(value !== undefined) this.setValue(value);
+      }
+  }
   }
 
-  renderComponents() {}
+  renderComponents() { }
 
   onChange() {
-    this.instance.updateValue(this.getValue(), {modified: true});
+    this.instance.updateValue(this.getValue(), { modified: true });
   }
 
   getValue() {
