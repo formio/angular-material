@@ -18,7 +18,7 @@ export const TEXTFIELD_TEMPLATE = `
       {{  instance.component.showCharCount ? getWordsCount() + ' words, ' : getWordsCount() + 'words'  }}
     </mat-hint>
     <mat-hint *ngIf="instance.component.showCharCount">
-      {{  control.value.length  }} characters
+      {{  control.value?.length  }} characters
     </mat-hint>
     <br/>
     <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
@@ -33,8 +33,8 @@ export class MaterialTextfieldComponent extends MaterialComponent {
   public inputType = 'text';
 
   getWordsCount() {
-    const matches = this.control.value.match(/[\w\d’'-]+/gi);
-    return matches ? matches.length : 0;
+    const matches = this.control.value ? this.control.value.match(/[\w\d’'-]+/gi) : [];
+    return matches.length ? matches.length : 0;
   }
 }
 TextFieldComponent.MaterialComponent = MaterialTextfieldComponent;
