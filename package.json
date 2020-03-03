@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,8 +19,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.5.8",
-    "formiojs": "^4.9.0-beta.8"
+    "angular-formio": "^4.6.0",
+    "formiojs": "^4.9.0-rc.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.23",
@@ -38,9 +38,9 @@
     "@angular/language-service": "^8.2.14",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.2.14",
-    "@types/jasmine": "^3.5.5",
+    "@types/jasmine": "^3.5.7",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.7.2",
+    "@types/node": "^13.7.7",
     "codelyzer": "^5.2.1",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -53,7 +53,7 @@
     "protractor": "^5.4.3",
     "ts-node": "^8.6.2",
     "tsickle": "0.35.0",
-    "tslib": "^1.9.0",
+    "tslib": "^1.11.1",
     "tslint": "^6.0.0",
     "typescript": "~3.5.3"
   }
