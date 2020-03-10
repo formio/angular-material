@@ -1,0 +1,19 @@
+.mat-table.is-bordered {
+  border: 1px solid #ddd;
+}
+
+.mat-row.is-hover:hover {
+  background-color: #f5f5f5;
+}
+
+.mat-cell {
+  padding: 8px;
+}
+
+.mat-cell.is-condensed {
+  padding: 3px;
+}
+
+.mat-row.is-striped {
+  background-color: #eee;
+}
