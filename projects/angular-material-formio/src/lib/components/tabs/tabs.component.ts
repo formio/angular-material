@@ -7,7 +7,7 @@ import TabsComponent from 'formiojs/components/tabs/Tabs.js';
   template: `
     <mat-tab-group>
       <mat-tab *ngFor="let tab of instance.component.components" [label]="tab.label">
-        <div fxLayout="column" fxLayoutGap="1em">
+        <div fxLayout="column" fxLayoutGap="1em" style="border: 1px dotted rgba(0, 0, 0, 0.125)">
           <ng-template #components></ng-template>
         </div>
       </mat-tab>
