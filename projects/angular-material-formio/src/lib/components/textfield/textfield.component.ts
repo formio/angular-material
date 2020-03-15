@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import TextFieldComponent from 'formiojs/components/textfield/TextField.js';
 import { MaterialComponent } from '../MaterialComponent';
 export const TEXTFIELD_TEMPLATE = `
-  <mat-form-field fxFill>
+  <mat-form-field fxFill [appearance]="getFormFieldAppearance()">
     <mat-label>{{ instance.component.label }}</mat-label>
     <span *ngIf="instance.component.prefix && instance.type !== 'currency'" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
     <input matInput
@@ -36,6 +36,12 @@ export class MaterialTextfieldComponent extends MaterialComponent {
   getWordsCount() {
     const matches = this.control.value ? this.control.value.match(/[\w\d’'-]+/gi) : [];
     return matches.length ? matches.length : 0;
+  }
+
+  getFormFieldAppearance() {
+    const appearances = ['legacy', 'standard', 'fill', 'outline'];
+    const appearance = this.instance.component.appearance ? this.instance.component.appearance.toLowerCase() : '';
+    return appearances.includes(appearance) ? appearance : 'legacy';
   }
 }
 TextFieldComponent.MaterialComponent = MaterialTextfieldComponent;
