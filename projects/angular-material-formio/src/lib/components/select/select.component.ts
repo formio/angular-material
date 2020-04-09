@@ -13,7 +13,10 @@ import SelectComponent from 'formiojs/components/select/Select.js';
         [formControl]="control"
         [placeholder]="instance.component.placeholder"
         (selectionChange)="onChange()">
-        <mat-option *ngFor="let option of selectOptions | async" [value]="option.value">
+        <div class="mat-option">
+          <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
+        </div>
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
           <span [innerHTML]="option.label"></span>
         </mat-option>
       </mat-select>
@@ -25,7 +28,9 @@ import SelectComponent from 'formiojs/components/select/Select.js';
   `
 })
 export class MaterialSelectComponent extends MaterialComponent implements OnInit {
-  public selectOptions: Promise<any[]>;
+  selectOptions: Promise<any[]>;
+  filteredOptions: Promise<any[]>;
+
   selectOptionsResolve: any;
   setInstance(instance: any) {
     super.setInstance(instance);
@@ -36,6 +41,14 @@ export class MaterialSelectComponent extends MaterialComponent implements OnInit
     this.selectOptions = new Promise((resolve) => {
       this.selectOptionsResolve = resolve;
     });
+
+    this.filteredOptions = this.selectOptions;
+  }
+
+  onFilter(value) {
+    this.filteredOptions = this.selectOptions.then((options) => {
+      return options.filter((option) => option.label.indexOf(value) !== -1)
+    })
   }
 }
 SelectComponent.MaterialComponent = MaterialSelectComponent;
