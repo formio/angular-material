@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,8 +19,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.6.13",
-    "formiojs": "^4.9.0"
+    "angular-formio": "^4.7.3",
+    "formiojs": "^4.9.16"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.23",
@@ -38,23 +38,23 @@
     "@angular/language-service": "^8.2.14",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.2.14",
-    "@types/jasmine": "^3.5.9",
+    "@types/jasmine": "^3.5.10",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.9.2",
-    "codelyzer": "^5.2.1",
+    "@types/node": "^13.11.1",
+    "codelyzer": "^5.2.2",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-jasmine": "^3.1.1",
-    "karma-jasmine-html-reporter": "^1.5.2",
+    "karma-jasmine-html-reporter": "^1.5.3",
     "ng-packagr": "^5.7.1",
     "protractor": "^5.4.3",
-    "ts-node": "^8.7.0",
+    "ts-node": "^8.8.2",
     "tsickle": "0.35.0",
     "tslib": "^1.11.1",
-    "tslint": "^6.1.0",
+    "tslint": "^6.1.1",
     "typescript": "~3.5.3"
   }
 }
