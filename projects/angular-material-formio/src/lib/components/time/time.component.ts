@@ -69,6 +69,9 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   setValue(value) {
+    if (!value) {
+      return;
+    }
     super.setValue(value);
     const controls = value.split(':');
     this.hourControl.setValue(controls[0]);
