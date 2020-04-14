@@ -14,7 +14,7 @@ import * as moment_ from 'moment';
         <input [formControl]="minuteControl" [min]="0" [max]="59" [step]="minuteStep" type="number" fxFlex="30%" (input)="onChange()">
         <button fxFlex="15%" (click)="changePeriod()">{{period}}</button>
       </div>
-        <mat-error *ngIf="instance">{{ instance.error.message }}</mat-error>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
     <div class="help-block" *ngIf="instance">
         {{ instance.component.description  }}
     </div>
@@ -40,19 +40,13 @@ export class MaterialTimeComponent extends MaterialComponent {
     this.onChange();
   }
 
-  sendMessage() {
-    if (this.instance) {
-      this.onChange();
-    }
-    this.selectedEvent.emit(this.control)
-  }
-
   onChange() {
-    this.control.setValue(this.getTwentyFourHourTime(`${this.hourControl.value}:${this.minuteControl.value} ${this.period}`));
+    const value = this.getTwentyFourHourTime(`${this.hourControl.value}:${this.minuteControl.value} ${this.period}`);
+    this.control.setValue(value);
     if (this.instance) {
       super.onChange();
     }
-    this.sendMessage();
+    this.selectedEvent.emit(this.control)
   }
 
   setValue(value) {
