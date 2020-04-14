@@ -73,10 +73,11 @@ export class MaterialTimeComponent extends MaterialComponent {
       return;
     }
     super.setValue(value);
-    const controls = value.split(':');
-    this.hourControl.setValue(controls[0]);
-    this.minuteControl.setValue(controls[1]);
-    this.period = controls[2];
+    const [hourValue, minuteValue, period] = value.split(':');
+    this.hourControl.setValue(hourValue);
+    this.minuteControl.setValue(minuteValue);
+    // fix for default value with seconds instead of period
+    this.period = period === ('AM' || 'PM') ? period : this.period;
   }
 
   getTwentyFourHourTime(amPmString) {
