@@ -7,15 +7,15 @@ import * as moment_ from 'moment';
   selector: 'mat-formio-time',
   template: `
     <mat-label *ngIf="instance">
-      {{ instance.component.label }}
+      {{ instance.component?.label }}
     </mat-label>
     <div style="margin-left: 1rem;" fxLayout="row" fxFlex="205px" fxLayoutGap="5%">
       <input [formControl]="hourControl" [step]="hourStep" [min]="0" [max]="12" type="number" fxFlex="30%" (input)="onChange()">
       <input [formControl]="minuteControl" [min]="0" [max]="59" [step]="minuteStep" type="number" fxFlex="30%" (input)="onChange()">
       <button fxFlex="15%" (click)="changePeriod()">{{period}}</button>
     </div>
-    <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
-    <div class="help-block" *ngIf="instance">
+    <mat-error *ngIf="instance?.error">{{ instance.error.message }}</mat-error>
+    <div class="help-block" *ngIf="instance?.component?.description && !instance?.component?.hideLabel">
       {{ instance.component.description  }}
     </div>
   `
