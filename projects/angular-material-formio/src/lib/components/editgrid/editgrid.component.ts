@@ -10,6 +10,7 @@ import { MaterialNestedComponent } from '../MaterialNestedComponent';
 import EditGridComponent from 'formiojs/components/editgrid/EditGrid.js';
 import { FormioComponent } from '../../formio.component';
 import Components from 'formiojs/components/Components';
+import isString from 'lodash/isString';
 
 /* tslint:disable no-bitwise only-arrow-functions */
 const hashCode = function(str) {
@@ -91,9 +92,9 @@ const DEFAULT_ROW_TEMPLATES = [
           <mat-expansion-panel-header (click)="editRow(row, i)">
             <span *ngIf="!row.isNew" #rows fxFill></span>
           </mat-expansion-panel-header>
-          <mat-formio [form]="instance.component" #forms></mat-formio>
+          <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
           <span fxLayout="row" fxLayoutGap="1em">
-            <button mat-raised-button color="primary" (click)="saveRow(row, i)">Save</button>
+            <button mat-raised-button color="primary" [disabled]="!valid" (click)="saveRow(row, i)">Save</button>
             <button mat-raised-button color="secondary" (click)="instance.cancelRow(i)">Cancel</button>
             <button mat-raised-button color="warn" (click)="instance.removeRow(i)" class="delete-button">
               <mat-icon>delete</mat-icon>
@@ -125,6 +126,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   public displayedColumns: string[];
   public columns: any = {};
   public colWidth = 0;
+  public valid = true;
 
   getRowTemplate(content) {
     return `<mat-list style="display: flex;">
@@ -134,6 +136,27 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
         {% } %}
       {% }) %}
     </mat-list>`;
+  }
+
+  validate(index) {
+    if (!this.forms) {
+      return;
+    }
+    const forms = this.forms.toArray();
+    if (!forms[index]) {
+      return;
+    }
+    const formioComponent = forms[index];
+    const {data} = formioComponent.formio.submission;
+    const isInvalid = Object.keys(data).some(
+      value => isString(data[value]) && data[value].length === 0
+    );
+
+    if (isInvalid) {
+      this.valid = false;
+    } else {
+      this.valid = true;
+    }
   }
 
   setInstance(instance) {
