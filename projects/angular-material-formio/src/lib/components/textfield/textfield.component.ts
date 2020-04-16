@@ -39,7 +39,7 @@ export class MaterialTextfieldComponent extends MaterialComponent implements OnI
 
   getWordsCount() {
     const matches = this.control.value ? this.control.value.match(/[\w\d’'-]+/gi) : [];
-    return matches.length ? matches.length : 0;
+    return matches ? matches.length : 0;
   }
 
   getFormFieldAppearance() {
