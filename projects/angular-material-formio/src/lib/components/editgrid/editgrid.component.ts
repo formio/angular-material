@@ -10,6 +10,7 @@ import { MaterialNestedComponent } from '../MaterialNestedComponent';
 import EditGridComponent from 'formiojs/components/editgrid/EditGrid.js';
 import { FormioComponent } from '../../formio.component';
 import Components from 'formiojs/components/Components';
+import isString from 'lodash/isString';
 
 /* tslint:disable no-bitwise only-arrow-functions */
 const hashCode = function(str) {
@@ -87,14 +88,14 @@ const DEFAULT_ROW_TEMPLATES = [
             <span #header fxFill></span>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
-        <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;" [expanded]="row.isOpen">
+        <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;" [expanded]="row.isOpen" (closed)="onExpanderClose()">
           <mat-expansion-panel-header (click)="editRow(row, i)">
             <span *ngIf="!row.isNew" #rows fxFill></span>
           </mat-expansion-panel-header>
-          <mat-formio [form]="instance.component" #forms></mat-formio>
+          <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
           <span fxLayout="row" fxLayoutGap="1em">
-            <button mat-raised-button color="primary" (click)="saveRow(row, i)">Save</button>
-            <button mat-raised-button color="secondary" (click)="instance.cancelRow(i)">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="!valid" (click)="saveRow(row, i)">Save</button>
+            <button mat-raised-button color="secondary" (click)="cancelRow(i)">Cancel</button>
             <button mat-raised-button color="warn" (click)="instance.removeRow(i)" class="delete-button">
               <mat-icon>delete</mat-icon>
             </button>
@@ -125,6 +126,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   public displayedColumns: string[];
   public columns: any = {};
   public colWidth = 0;
+  public valid = true;
 
   getRowTemplate(content) {
     return `<mat-list style="display: flex;">
@@ -134,6 +136,33 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
         {% } %}
       {% }) %}
     </mat-list>`;
+  }
+
+  onExpanderClose() {
+    if (this.forms && !this.valid) {
+      this.instance.removeRow(this.forms.length - 1);
+    }
+  }
+
+  validate(index) {
+    if (!this.forms) {
+      return;
+    }
+    const forms = this.forms.toArray();
+    if (!forms[index]) {
+      return;
+    }
+    const formioComponent = forms[index];
+    const {data} = formioComponent.formio.submission;
+    const isInvalid = Object.keys(data).some(
+      value => isString(data[value]) && data[value].length === 0
+    );
+
+    if (isInvalid) {
+      this.valid = false;
+    } else {
+      this.valid = true;
+    }
   }
 
   setInstance(instance) {
@@ -241,6 +270,11 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
         this.updateRowTemplate(rows[index], index, {});
       }
     }
+  }
+
+  cancelRow(index) {
+    this.instance.cancelRow(index);
+    this.valid = true;
   }
 
   renderTemplate(element: ElementRef, template) {
