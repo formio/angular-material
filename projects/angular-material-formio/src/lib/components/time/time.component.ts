@@ -6,17 +6,33 @@ import * as moment_ from 'moment';
 @Component({
   selector: 'mat-formio-time',
   template: `
-      <mat-label *ngIf="instance">
-          {{ instance.component.label }}
-      </mat-label>
-      <div style="margin-left: 1rem;" fxLayout="row" fxFlex="205px" fxLayoutGap="5%">
-        <input [formControl]="hourControl" [step]="hourStep" [min]="0" [max]="12" type="number" fxFlex="30%" (input)="onChange()">
-        <input [formControl]="minuteControl" [min]="0" [max]="59" [step]="minuteStep" type="number" fxFlex="30%" (input)="onChange()">
-        <button fxFlex="15%" (click)="changePeriod()">{{period}}</button>
-      </div>
-        <mat-error *ngIf="instance">{{ instance.error.message }}</mat-error>
-    <div class="help-block" *ngIf="instance">
-        {{ instance.component.description  }}
+    <mat-label *ngIf="instance">
+      {{ instance.component?.label }}
+    </mat-label>
+    <div style="margin-left: 1rem;" fxLayout="row" fxFlex="205px" fxLayoutGap="5%">
+      <input
+        [formControl]="hourControl"
+        [step]="hourStep"
+        [min]="0"
+        [max]="12"
+        type="number"
+        fxFlex="30%"
+        (input)="onChange()"
+      >
+      <input
+        [formControl]="minuteControl"
+        [step]="minuteStep"
+        [min]="0"
+        [max]="59"
+        type="number"
+        fxFlex="30%"
+        (input)="onChange()"
+      >
+      <button [disabled]="instance?.component?.disabled" fxFlex="15%" (click)="changePeriod()">{{period}}</button>
+    </div>
+    <mat-error *ngIf="instance?.error">{{ instance.error.message }}</mat-error>
+    <div class="help-block" *ngIf="instance?.component?.description && !instance?.component?.hideLabel">
+      {{ instance.component.description  }}
     </div>
   `
 })
@@ -31,7 +47,10 @@ export class MaterialTimeComponent extends MaterialComponent {
   @Input() minuteStep = 1;
 
   setDisabled(disabled) {
-    disabled ? this.control.disable() : this.control.enable();
+    if (disabled) {
+      this.hourControl.disable();
+      this.minuteControl.disable();
+    }
   }
 
   setInstance(instance) {
@@ -40,27 +59,25 @@ export class MaterialTimeComponent extends MaterialComponent {
     this.onChange();
   }
 
-  sendMessage() {
+  onChange() {
+    const value = this.getTwentyFourHourTime(`${this.hourControl.value}:${this.minuteControl.value} ${this.period}`);
+    this.control.setValue(value);
     if (this.instance) {
-      this.onChange();
+      super.onChange();
     }
     this.selectedEvent.emit(this.control)
   }
 
-  onChange() {
-    this.control.setValue(this.getTwentyFourHourTime(`${this.hourControl.value}:${this.minuteControl.value} ${this.period}`));
-    if (this.instance) {
-      super.onChange();
-    }
-    this.sendMessage();
-  }
-
   setValue(value) {
+    if (!value) {
+      return;
+    }
     super.setValue(value);
-    const controls = value.split(':');
-    this.hourControl.setValue(controls[0]);
-    this.minuteControl.setValue(controls[1]);
-    this.period = controls[2];
+    const [hourValue, minuteValue, period] = value.split(':');
+    this.hourControl.setValue(hourValue);
+    this.minuteControl.setValue(minuteValue);
+    // fix for default value with seconds instead of period
+    this.period = period === ('AM' || 'PM') ? period : this.period;
   }
 
   getTwentyFourHourTime(amPmString) {
