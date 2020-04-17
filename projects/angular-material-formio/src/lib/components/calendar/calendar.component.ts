@@ -1,16 +1,30 @@
 import {Component, EventEmitter, Input, NgModule, Output} from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
-import { momentDate } from 'formiojs/utils/utils.js';
-import {FormControl} from "@angular/forms";
-const ISO_8601_FORMAT = 'yyyy-MM-ddTHH:mm:ssZ';
 @Component({
   selector: 'mat-formio-calendar',
   template: `
           <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
             <div [ngStyle]="getPopupStyles()">
               <mat-card style="padding: 0;">
-                <mat-calendar [ngStyle]="getWidgetStyles()" [dateFilter]="dateFilter" [maxDate]="maxDate" [minDate]="minDate" [selected]="selectedDate" (selectedChange)="onDate($event)" *ngIf="enableDate !== false"></mat-calendar>
-                <mat-formio-time [ngStyle]="getWidgetStyles()" [hourStep]="hourStep" [minuteStep]="minuteStep" (selectedEvent)="onTime($event)" class="ml-3" *ngIf="enableTime"></mat-formio-time>
+                <mat-calendar
+                  [ngStyle]="getWidgetStyles()"
+                  [dateFilter]="dateFilter"
+                  [maxDate]="maxDate"
+                  [minDate]="minDate"
+                  [selected]="selectedDate"
+                  (selectedChange)="onDate($event)"
+                  *ngIf="enableDate !== false"
+                >
+                </mat-calendar>
+                <mat-formio-time
+                  [ngStyle]="getWidgetStyles()"
+                  [hourStep]="hourStep"
+                  [minuteStep]="minuteStep"
+                  (selectedEvent)="onTime($event)"
+                  class="ml-3"
+                  *ngIf="enableTime"
+                >
+                </mat-formio-time>
               </mat-card>
             </div>
           </div>
