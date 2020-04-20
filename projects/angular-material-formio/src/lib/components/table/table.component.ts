@@ -18,7 +18,7 @@ import TableComponent from 'formiojs/components/table/Table.js';
           'is-striped': instance.component.striped && i % 2 === 0
         }">
           <td *ngFor="let col of row" role="gridcell" class="mat-cell"
-              [ngClass]="{'is-condensed': instance.component.condensed}"
+              [ngClass]="getTableColClasses()"
           >
             <ng-template #components></ng-template></td>
         </tr>
@@ -35,6 +35,17 @@ export class MaterialTableComponent extends MaterialNestedComponent {
         this.viewContainers[(component.tableRow * this.instance.component.numCols) + component.tableColumn] :
         null;
     };
+  }
+
+  getTableColClasses() {
+    if (!this.instance) {
+      return;
+    }
+    const {condensed, cellAlignment} = this.instance.component;
+    return {
+      'is-condensed': condensed,
+      ...(cellAlignment && {[cellAlignment]: true})
+    }
   }
 }
 TableComponent.MaterialComponent = MaterialTableComponent;
