@@ -46,6 +46,10 @@ export class MaterialSelectBoxesComponent extends MaterialRadioComponent {
   setDisabled(disabled) {
     this.disabled = !!disabled;
   }
+  onChange() {
+    this.instance.updateValue(this.getValue(), {modified: true});
+    this.instance.triggerChange({modified: true});
+  }
 }
 SelectBoxesComponent.MaterialComponent = MaterialSelectBoxesComponent;
 export { SelectBoxesComponent };
