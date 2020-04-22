@@ -70,7 +70,7 @@ export class MaterialSurveyComponent extends MaterialComponent {
   }
 
   getUniqueName(question) {
-    return `${this.instance.key}-${question}`;
+    return `${this.instance.id}-${question}`;
   }
 }
 SurveyComponent.MaterialComponent = MaterialSurveyComponent;
