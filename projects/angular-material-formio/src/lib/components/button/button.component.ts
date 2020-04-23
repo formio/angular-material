@@ -6,7 +6,7 @@ import { MaterialComponent } from '../MaterialComponent';
   template: `
     <button *ngIf="instance"
       type="{{ instance.component.action }}"
-      mat-raised-button [color]="color"
+      mat-raised-button [color]="getColor()"
       [disabled]="disabled"
       (click)="instance.onClick($event)"
     >
@@ -33,17 +33,19 @@ export class MaterialButtonComponent extends MaterialComponent {
   public error = false;
   public disabled = false;
   public clicked = false;
-  public color = 'primary';
+
   getColor() {
     if (this.error) {
       return 'warn';
     }
     return this.instance.component.theme || 'primary';
   }
+
   onClick(event) {
     this.clicked = true;
     this.instance.onClick(event);
   }
+
   getValue() {
     return this.clicked;
   }
@@ -51,12 +53,10 @@ export class MaterialButtonComponent extends MaterialComponent {
     this.loading = loading;
     this.done = done;
     this.error = error;
-    this.color = this.getColor();
   }
   setInstance(instance) {
     const retVal = super.setInstance(instance);
     this.disabled = instance.shouldDisabled;
-    this.color = this.getColor();
     instance.on('submitButton', () => this.setState(true, false, false));
     instance.on('submitDone', () => this.setState(false, false, true));
     instance.on('submitError', () => this.setState(false, true, false));
@@ -64,7 +64,7 @@ export class MaterialButtonComponent extends MaterialComponent {
     instance.on('requestDone', () => this.setState(false, false, true));
     instance.on('change', (event) => {
       this.disabled = this.instance.shouldDisabled || (this.instance.component.disableOnInvalid && !event.isValid);
-      if (event.isValid && this.loading) {
+      if (event.isValid) {
         this.loading = false;
         this.error = false;
       }
