@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import TextFieldComponent from 'formiojs/components/textfield/TextField.js';
 import { MaterialComponent } from '../MaterialComponent';
 export const TEXTFIELD_TEMPLATE = `
@@ -9,9 +9,7 @@ export const TEXTFIELD_TEMPLATE = `
            type="{{ inputType }}"
            [required]="instance.component.validate?.required"
            [formControl]="control"
-           [disabled]="instance.component.disabled"
            [placeholder]="instance.component.placeholder"
-           [disabled]="instance?.component?.disabled"
            (input)="onChange()" #input>
     <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
     <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
@@ -30,12 +28,18 @@ export const TEXTFIELD_TEMPLATE = `
   selector: 'mat-formio-textfield',
   template: TEXTFIELD_TEMPLATE
 })
-export class MaterialTextfieldComponent extends MaterialComponent {
+export class MaterialTextfieldComponent extends MaterialComponent implements OnInit {
   public inputType = 'text';
+
+  ngOnInit() {
+    if (this.instance && this.control && this.instance.component.disabled) {
+      this.control.disable();
+    }
+  }
 
   getWordsCount() {
     const matches = this.control.value ? this.control.value.match(/[\w\d’'-]+/gi) : [];
-    return matches.length ? matches.length : 0;
+    return matches ? matches.length : 0;
   }
 
   getFormFieldAppearance() {
