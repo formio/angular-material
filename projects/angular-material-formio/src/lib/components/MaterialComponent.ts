@@ -34,6 +34,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   renderComponents() {}
 
   onChange() {
+    if (this.input && this.input.nativeElement.mask) {
+      this.input.nativeElement.mask.textMaskInputElement.update(this.getValue());
+      this.control.setValue(this.input.nativeElement.value);
+    }
     this.instance.updateValue(this.getValue(), {modified: true});
   }
 
