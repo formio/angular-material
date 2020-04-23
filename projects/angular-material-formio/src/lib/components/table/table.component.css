@@ -17,3 +17,11 @@
 .mat-row.is-striped {
   background-color: #eee;
 }
+
+.mat-cell.center {
+  text-align: center;
+}
+
+.mat-cell.right {
+  text-align: right;
+}
