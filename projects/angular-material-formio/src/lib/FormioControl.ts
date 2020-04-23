@@ -1,4 +1,5 @@
 import { FormControl, ValidationErrors } from '@angular/forms';
+import unescape from 'lodash/unescape';
 
 // @dynamic
 export class FormioControl extends FormControl {
@@ -21,10 +22,18 @@ export class FormioControl extends FormControl {
   setInstance(instance: any) {
     this.instance = instance;
     const setCustomValidity = instance.setCustomValidity;
-    instance.setCustomValidity = (message, dirty, external, isWarning = false) => {
-      setCustomValidity.call(instance, message, dirty, external, isWarning);
+    instance.setCustomValidity = (message: any, dirty, external, isWarning = false) => {
+      let decodedMessage = message;
+      if (Array.isArray(message)) {
+        decodedMessage = message.map(msg => Object.assign(msg, { message: unescape(msg.message) }));
+      }
+      else if (message) {
+        decodedMessage = unescape(message);
+      }
+
+      setCustomValidity.call(instance, decodedMessage, dirty, external, isWarning);
       if (instance.validateResolve) {
-        instance.validateResolve(message ? {custom: true} : null);
+        instance.validateResolve(decodedMessage ? {custom: true} : null);
       }
     };
   }
