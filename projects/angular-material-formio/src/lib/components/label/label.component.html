@@ -1,0 +1,7 @@
+<ng-container *ngIf="instance">
+  {{ instance.component.label }}
+  <mat-icon *ngIf="instance.component.tooltip" style="font-size: 1rem;"
+            matTooltip="{{ instance.component.tooltip }}" matSuffix>
+    info
+  </mat-icon>
+</ng-container>

@@ -1,0 +1,11 @@
+<ng-container *ngIf="instance">
+
+  <ng-container *ngTemplateOutlet="componentTemplate; context: componentTemplateContext"></ng-container>
+
+  <mat-label>
+    <span style="display: block;"
+          [instance]="instance" matFormioLabel *ngIf="hasLabel('bottom')">
+    </span>
+  </mat-label>
+  <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
+</ng-container>
