@@ -1,18 +1,23 @@
-import { AfterViewInit, Component, ContentChild, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatFormField, MatFormFieldControl } from "@angular/material/form-field";
+import { Component, Input, TemplateRef } from '@angular/core';
+import { LabelPositions } from '../../const/LabelPositions';
 
 @Component({
   selector: 'mat-formio-form-field',
   templateUrl: './formio-form-field.component.html',
   styleUrls: ['./formio-form-field.component.css']
 })
-export class FormioFormFieldComponent implements OnInit {
+export class FormioFormFieldComponent {
   private _instance;
+  public labelPositions = LabelPositions;
+  @Input() labelTemplate: TemplateRef<any>;
+  @Input() renderTopLabel = false;
 
   @Input('instance')
   set instance(instance) {
     this._instance = instance;
-    this.componentTemplateContext = {$implicit: this.hasLabel('top')};
+    if (instance) {
+      this.componentTemplateContext = {$implicit: this.hasLabel(['top'])};
+    }
   }
 
   get instance() {
@@ -22,20 +27,18 @@ export class FormioFormFieldComponent implements OnInit {
   @Input() componentTemplate: TemplateRef<any>;
   componentTemplateContext;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  hasLabel(labelPosition?: string) {
+  hasLabel(labelPositions?: string[]) {
     const { component } = this.instance;
-    if (!component.label || component.hideLabel) {
+    const hasNoLabel = !component.label || component.hideLabel;
+    const labelPositionIsNotSpecified = !labelPositions ||
+                                        !labelPositions.length ||
+                                        !component.labelPosition;
+
+    if (hasNoLabel || labelPositionIsNotSpecified) {
       return false;
     }
-    if (!labelPosition && !component.labelPosition) {
-      return true;
-    }
-    if (component.labelPosition === labelPosition) {
+
+    if (labelPositions.includes(component.labelPosition)) {
       return true;
     }
   }

@@ -1,20 +1,33 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import HtmlComponent from 'formiojs/components/html/HTML.js';
+import { LabelPositions } from "../../const/LabelPositions";
+
 @Component({
   selector: 'mat-formio-html',
-  template: `<div></div>`
+  template: `
+    <mat-formio-form-field [instance]="instance"
+                           [componentTemplate]="componentTemplate"
+                           [renderTopLabel]="true"
+    ></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <div #htmlBody></div>
+    </ng-template>
+  `
 })
 export class MaterialHtmlComponent extends MaterialComponent implements AfterViewInit {
+  labelPositions = LabelPositions;
+  @ViewChild('htmlBody', {static: false}) htmlBody: ElementRef;
+
   ngAfterViewInit() {
     super.ngAfterViewInit();
-    this.element.nativeElement.innerHTML = this.instance.renderContent();
+    this.htmlBody.nativeElement.innerHTML = this.instance.renderContent();
   }
 
   setInstance(instance) {
     if (instance.component.refreshOnChange) {
       instance.checkRefreshOn = () => {
-        this.element.nativeElement.innerHTML = instance.renderContent();
+        this.htmlBody.nativeElement.innerHTML = instance.renderContent();
       };
     }
     return super.setInstance(instance);

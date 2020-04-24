@@ -1,11 +1,46 @@
-<ng-container *ngIf="instance">
+<div class="mat-formio-component-wrapper" *ngIf="instance"
+     [ngClass]="{
+        'mat-formio-label-right': hasLabel([labelPositions.RIGHT_RIGHT, labelPositions.RIGHT_LEFT]),
+        'mat-formio-label-left': hasLabel([labelPositions.LEFT_LEFT, labelPositions.LEFT_RIGHT])
+     }"
+>
+  <span *ngIf="renderTopLabel && hasLabel([labelPositions.TOP])"
+        class="mat-formio-label"
+        [ngClass]="{
+          'mat-formio-label-align-right': hasLabel([labelPositions.LEFT_RIGHT, labelPositions.RIGHT_RIGHT]),
+          'mat-formio-label-align-left': hasLabel([labelPositions.LEFT_LEFT, labelPositions.RIGHT_LEFT])
+        }"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate || defaultLabel"></ng-container>
+  </span>
 
-  <ng-container *ngTemplateOutlet="componentTemplate; context: componentTemplateContext"></ng-container>
+  <div class="mat-formio-component" *ngTemplateOutlet="componentTemplate; context: componentTemplateContext"></div>
 
+  <span *ngIf="hasLabel([
+                                      labelPositions.BOTTOM,
+                                      labelPositions.RIGHT_RIGHT,
+                                      labelPositions.RIGHT_LEFT,
+                                      labelPositions.LEFT_LEFT,
+                                      labelPositions.LEFT_RIGHT
+                                   ])"
+        class="mat-formio-label"
+        [ngClass]="{
+          'mat-formio-label-align-right': hasLabel([labelPositions.LEFT_RIGHT, labelPositions.RIGHT_RIGHT]),
+          'mat-formio-label-align-left': hasLabel([labelPositions.LEFT_LEFT, labelPositions.RIGHT_LEFT])
+        }"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate || defaultLabel"></ng-container>
+  </span>
+
+  <mat-hint *ngIf="instance.component.description" class="mat-formio-component-description">
+    {{ instance.component.description }}
+  </mat-hint>
+</div>
+
+<ng-template #defaultLabel>
   <mat-label>
     <span style="display: block;"
-          [instance]="instance" matFormioLabel *ngIf="hasLabel('bottom')">
+          [instance]="instance" matFormioLabel>
     </span>
   </mat-label>
-  <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
-</ng-container>
+</ng-template>

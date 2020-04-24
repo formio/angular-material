@@ -3,28 +3,38 @@ import TextFieldComponent from 'formiojs/components/textfield/TextField.js';
 import { MaterialComponent } from '../MaterialComponent';
 
 export const TEXTFIELD_TEMPLATE = `
- <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
- <ng-template #componentTemplate let-hasLabel>
-  <mat-form-field fxFill [appearance]="getFormFieldAppearance()">
-    <mat-label *ngIf="hasLabel">
-        <span [instance]="instance" matFormioLabel></span>
-    </mat-label>
-    <span *ngIf="instance.component.prefix && instance.type !== 'currency'" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
-       <input matInput
-              type="{{ inputType }}"
-              [required]="instance.component.validate?.required"
-              [formControl]="control"
-              [placeholder]="instance.component.placeholder"
-              (input)="onChange()" #input>
-       <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
-       <mat-hint *ngIf="instance.component.showWordCount">
-         {{  instance.component.showCharCount ? getWordsCount() + ' words, ' : getWordsCount() + 'words'  }}
-       </mat-hint>
-       <mat-hint *ngIf="instance.component.showCharCount">
-         {{  control.value?.length  }} characters
-       </mat-hint>
-       <br/>
-       <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+  <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+  <ng-template #componentTemplate let-hasLabel>
+    <mat-form-field [appearance]="getFormFieldAppearance()">
+
+      <mat-label *ngIf="hasLabel">
+          <span [instance]="instance" matFormioLabel></span>
+      </mat-label>
+
+      <span *ngIf="instance.component.prefix && instance.type !== 'currency'"
+            matPrefix
+      >
+        {{ instance.component.prefix }}&nbsp;
+      </span>
+      <input matInput
+            type="{{ inputType }}"
+            [required]="instance.component.validate?.required"
+            [formControl]="control"
+            [placeholder]="instance.component.placeholder"
+            (input)="onChange()" #input
+      >
+      <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
+
+      <mat-hint *ngIf="instance.component.showWordCount">
+        {{  instance.component.showCharCount ? getWordsCount() + ' words, ' : getWordsCount() + 'words'  }}
+      </mat-hint>
+
+      <mat-hint *ngIf="instance.component.showCharCount">
+        {{  control.value?.length  }} characters
+      </mat-hint>
+
+      <br/>
+      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
     </mat-form-field>
   </ng-template>
 `;

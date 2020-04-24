@@ -4,21 +4,29 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
 @Component({
   selector: 'mat-formio-radio',
   template: `
-    <div fxLayout="column">
-      <mat-label>
-        {{ instance.component.label }}
-        <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
-      </mat-label>
-      <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
-      <mat-radio-group
-        (change)="onChange()"
-        [formControl]="control"
-        fxFlexOffset="10px"
-        fxLayout="{{ getLayout() }}"
-        fxLayoutGap="10px">
-        <mat-radio-button *ngFor="let option of instance.component.values" value="{{ option.value }}" [checked]="isRadioChecked(option)">{{ option.label }}</mat-radio-button>
-      </mat-radio-group>
-    </div>
+    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <div fxLayout="column">
+        <mat-label *ngIf="hasLabel">
+          <span [instance]="instance" matFormioLabel></span>
+        </mat-label>
+
+        <mat-radio-group
+                (change)="onChange()"
+                [formControl]="control"
+                fxFlexOffset="10px"
+                fxLayout="{{ getLayout() }}"
+                fxLayoutGap="10px"
+        >
+          <mat-radio-button *ngFor="let option of instance.component.values"
+                            value="{{ option.value }}"
+                            [checked]="isRadioChecked(option)"
+          >
+            {{ option.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </ng-template>
   `
 })
 export class MaterialRadioComponent extends MaterialComponent {
