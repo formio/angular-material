@@ -38,8 +38,8 @@ import {FormControl} from '@angular/forms';
         </mat-form-field>
         <mat-formio-calendar
                 #calendar
-                [minDate]="instance.component.minDate || ''"
-                [maxDate]="instance.component.maxDate || ''"
+                [minDate]="instance.component.datePicker.minDate || ''"
+                [maxDate]="instance.component.datePicker.maxDate || ''"
                 [dateFilter]="dateFilter"
                 [hidden]="!isPickerOpened"
                 (dateSelectEvent)="onChangeDate($event)"
@@ -85,6 +85,17 @@ export class MaterialDateComponent extends MaterialComponent {
   setInstance(instance: any) {
     super.setInstance(instance);
     this.isDisabled() ? this.control.disable() : this.control.enable();
+
+    if (this.instance) {
+      if (this.instance.component && this.instance.component.datePicker) {
+       const {minDate: min, maxDate: max} = this.instance.component.datePicker;
+
+       // It improves the date to the full format if the customer set only a year. Otherwise we will have conflicts into the moment.js.
+       const { minDate, maxDate } = this.improveMinMaxDate(min, max);
+       this.instance.component.datePicker.minDate = minDate;
+       this.instance.component.datePicker.maxDate = maxDate;
+      }
+     }
   }
 
   toggleCalendar(event) {
@@ -124,11 +135,14 @@ export class MaterialDateComponent extends MaterialComponent {
 
   checkMinMax(value) {
     let isValid = true;
-    if (this.instance.component.minDate) {
-      isValid = momentDate(value).isSameOrAfter(this.instance.component.minDate);
+    const { minDate: min, maxDate: max } = this.instance.component.datePicker;
+    const { minDate, maxDate } = this.improveMinMaxDate(min, max);
+
+    if (minDate) {
+      isValid = momentDate(value).isSameOrAfter(minDate);
     }
-    if (this.instance.component.maxDate && isValid) {
-      isValid = momentDate(value).isSameOrBefore(this.instance.component.maxDate);
+    if (maxDate && isValid) {
+      isValid = momentDate(value).isSameOrBefore(maxDate);
     }
     return isValid;
   }
@@ -152,6 +166,17 @@ export class MaterialDateComponent extends MaterialComponent {
   clickOutside(event) {
     if (!this.calendar.element.nativeElement.contains(event.target) && this.isPickerOpened)
       this.toggleCalendar(event);
+  }
+
+  improveMinMaxDate(minDate, maxDate) {
+    if (minDate && minDate.length === 4) {
+      minDate = momentDate(`${minDate}-01-01`).format('YYYY-MM-DD');
+    }
+
+    if (maxDate && maxDate.length === 4) {
+      maxDate = momentDate(`${maxDate}-01-01`).subtract(1, 'day').format('YYYY-MM-DD');
+    }
+    return {minDate, maxDate};
   }
 }
 DateTimeComponent.MaterialComponent = MaterialDateComponent;
