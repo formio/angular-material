@@ -13,11 +13,8 @@ export const TEXTFIELD_TEMPLATE = `
            (input)="onChange()" #input>
     <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
     <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
-    <mat-hint *ngIf="instance.component.showWordCount">
-      {{  instance.component.showCharCount ? getWordsCount() + ' words, ' : getWordsCount() + 'words'  }}
-    </mat-hint>
-    <mat-hint *ngIf="instance.component.showCharCount">
-      {{  control.value?.length  }} characters
+    <mat-hint *ngIf="instance.component.showWordCount || instance.component.showCharCount">
+      {{ getHint() }}
     </mat-hint>
     <br/>
     <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
@@ -34,6 +31,22 @@ export class MaterialTextfieldComponent extends MaterialComponent implements OnI
   ngOnInit() {
     if (this.instance && this.control && this.instance.component.disabled) {
       this.control.disable();
+    }
+  }
+
+  getHint() {
+    if (!this.instance || !this.control || !this.control.value) {
+      return '';
+    }
+
+    const {showWordCount, showCharCount} = this.instance.component;
+
+    if (showWordCount && showCharCount) {
+      return `${this.getWordsCount()} words, ${this.control.value.length} characters`;
+    } else if (showWordCount) {
+      return `${this.getWordsCount()} words`;
+    } else {
+      return `${this.control.value.length} characters`;
     }
   }
 
