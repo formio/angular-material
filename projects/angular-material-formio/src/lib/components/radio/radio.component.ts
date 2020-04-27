@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import RadioComponent from 'formiojs/components/radio/Radio.js';
+
 @Component({
   selector: 'mat-formio-radio',
   template: `
@@ -16,7 +17,14 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
         fxFlexOffset="10px"
         fxLayout="{{ getLayout() }}"
         fxLayoutGap="10px">
-        <mat-radio-button *ngFor="let option of instance.component.values" value="{{ option.value }}" [checked]="isRadioChecked(option)">{{ option.label }}</mat-radio-button>
+        <mat-radio-button *ngFor="let option of instance.component.values"
+                          value="{{ option.value }}"
+                          [checked]="isRadioChecked(option)"
+                          (keyup.space)="clearValue($event, option)"
+                          (click)="clearValue($event, option)"
+        >
+          {{ option.label }}
+        </mat-radio-button>
       </mat-radio-group>
     </div>
   `
@@ -27,7 +35,20 @@ export class MaterialRadioComponent extends MaterialComponent {
   }
 
   isRadioChecked(option) {
-    return option.value === this.instance.component.defaultValue;
+    return option.value === this.instance.dataValue;
+  }
+
+  clearValue(event, option) {
+    if (this.isRadioChecked(option)) {
+      event.preventDefault();
+      this.deselectValue();
+    }
+  }
+
+  deselectValue() {
+    this.instance.updateValue(null, {
+      modified: true,
+    });
   }
 }
 RadioComponent.MaterialComponent = MaterialRadioComponent;

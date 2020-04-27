@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import SelectComponent from 'formiojs/components/select/Select.js';
 @Component({
@@ -16,7 +16,7 @@ import SelectComponent from 'formiojs/components/select/Select.js';
         <div class="mat-option">
           <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
         </div>
-        <mat-option [value]="''"></mat-option>
+        <mat-option></mat-option>
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
           <span [innerHTML]="option.label"></span>
         </mat-option>
