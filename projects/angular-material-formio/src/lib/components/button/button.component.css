@@ -1,0 +1,23 @@
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+:host .mat-icon-spin {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.material-formio-theme-success {
+  background-color: rgb(99, 214, 68) !important;
+}
+
+.material-formio-theme-warning {
+  background-color: rgb(244, 194, 38) !important;
+}
