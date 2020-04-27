@@ -23,6 +23,7 @@ import SelectBoxesComponent from 'formiojs/components/selectboxes/SelectBoxes.js
           >
             {{ option.label }}
           </mat-checkbox>
+          <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
         </div>
       </div>
     </ng-template>
