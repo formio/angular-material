@@ -28,7 +28,7 @@ export class MaterialButtonComponent extends MaterialComponent {
       case ButtonsThemes.PRIMARY:
         return AngularButtonsThemes.PRIMARY;
 
-      case ButtonsThemes.INFO:
+      case ButtonsThemes.WARNING:
         return AngularButtonsThemes.ACCENT;
 
       case ButtonsThemes.DANGER:
@@ -42,12 +42,11 @@ export class MaterialButtonComponent extends MaterialComponent {
     }
   }
 
-  get themeClass() {
-    const theme = this.angularButtonTheme;
-    if (!theme) {
-      return `material-formio-theme-${this.instance.component.theme}`;
-    }
-    return '';
+  get buttonClass() {
+    let className = this.instance.component.block ? 'mat-formio-button-block' : '';
+    className += this.instance.component.size ? ` mat-formio-button-${this.instance.component.size}` : '';
+    className += !this.angularButtonTheme ? ` mat-formio-theme-${this.instance.component.theme}` : '';
+    return className;
   }
 
   onClick(event) {
@@ -63,6 +62,15 @@ export class MaterialButtonComponent extends MaterialComponent {
     this.loading = loading;
     this.done = done;
     this.error = error;
+  }
+
+  getIconFontSet(icon: string) {
+    const fontSet = icon.split(' ')[0];
+    return fontSet;
+  }
+
+  getIconName(icon: string) {
+    return icon.replace(this.getIconFontSet(icon), '');
   }
 
   setInstance(instance) {
