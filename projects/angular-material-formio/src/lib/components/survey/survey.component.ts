@@ -7,7 +7,11 @@ import { FormControl } from '@angular/forms';
     selector: 'mat-formio-survey',
     template: `
 
-      <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+      <mat-formio-form-field
+              [instance]="instance"
+              [componentTemplate]="componentTemplate"
+              [showDescription]="false"
+      ></mat-formio-form-field>
       <ng-template #componentTemplate let-hasLabel>
 
         <table class="mat-elevation-z8 mat-table" fxFill>
@@ -42,6 +46,9 @@ import { FormControl } from '@angular/forms';
               </mat-radio-group>
             </td>
           </tr>
+          <mat-hint *ngIf="instance.component.description" class="mat-formio-component-description">
+            {{ instance.component.description }}
+          </mat-hint>
           </tbody>
 
           <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>

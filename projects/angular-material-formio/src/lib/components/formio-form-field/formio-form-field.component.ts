@@ -11,6 +11,7 @@ export class FormioFormFieldComponent {
   public labelPositions = LabelPositions;
   @Input() labelTemplate: TemplateRef<any>;
   @Input() renderTopLabel = false;
+  @Input() showDescription = true;
 
   @Input('instance')
   set instance(instance) {
