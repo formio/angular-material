@@ -25,6 +25,7 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
         >
           {{ option.label }}
         </mat-radio-button>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </mat-radio-group>
     </div>
   `
