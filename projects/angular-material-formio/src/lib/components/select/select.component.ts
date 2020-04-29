@@ -26,6 +26,9 @@ import SelectComponent from 'formiojs/components/select/Select.js';
             <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
           </div>
           <mat-option></mat-option>
+          <mat-option *ngIf="!filteredOptionsLength" disabled>
+            <span>Nothing was found</span>
+          </mat-option>
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
             <span [innerHTML]="option.label"></span>
           </mat-option>
@@ -42,8 +45,10 @@ import SelectComponent from 'formiojs/components/select/Select.js';
 export class MaterialSelectComponent extends MaterialComponent implements OnInit {
   selectOptions: Promise<any[]>;
   filteredOptions: Promise<any[]>;
+  filteredOptionsLength: number;
 
   selectOptionsResolve: any;
+
   setInstance(instance: any) {
     super.setInstance(instance);
     this.instance.triggerUpdate();
@@ -53,13 +58,18 @@ export class MaterialSelectComponent extends MaterialComponent implements OnInit
     this.selectOptions = new Promise((resolve) => {
       this.selectOptionsResolve = resolve;
     });
+    this.selectOptions.then((options) => {
+      this.filteredOptionsLength = options.length;
+    })
 
     this.filteredOptions = this.selectOptions;
   }
 
   onFilter(value) {
     this.filteredOptions = this.selectOptions.then((options) => {
-      return options.filter((option) => option.label.indexOf(value) !== -1)
+      const filtered =  options.filter((option) => option.label.indexOf(value) !== -1);
+      this.filteredOptionsLength = filtered.length;
+      return filtered;
     })
   }
 }
