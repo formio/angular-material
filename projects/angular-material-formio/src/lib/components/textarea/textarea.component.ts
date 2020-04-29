@@ -19,7 +19,6 @@ import isNil from 'lodash/isNil';
         </mat-label>
         <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
         <textarea matInput
-                  [required]="instance.component.validate?.required"
                   [placeholder]="instance.component.placeholder"
                   [formControl]="control"
                   [rows]="(instance.component.rows || 3)"

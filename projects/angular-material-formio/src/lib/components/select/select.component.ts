@@ -16,7 +16,6 @@ import SelectComponent from 'formiojs/components/select/Select.js';
           {{ instance.component.prefix }}&nbsp;
         </span>
         <mat-select
-                [required]="instance.component.validate?.required"
                 [multiple]="instance.component.multiple"
                 [formControl]="control"
                 [placeholder]="instance.component.placeholder"

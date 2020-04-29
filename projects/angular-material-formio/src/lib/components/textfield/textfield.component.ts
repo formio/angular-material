@@ -18,7 +18,6 @@ export const TEXTFIELD_TEMPLATE = `
       </span>
       <input matInput
             type="{{ inputType }}"
-            [required]="instance.component.validate?.required"
             [formControl]="control"
             [placeholder]="instance.component.placeholder"
             (input)="onChange()" #input
@@ -38,6 +37,7 @@ export const TEXTFIELD_TEMPLATE = `
     </mat-form-field>
   </ng-template>
 `;
+
 @Component({
   selector: 'mat-formio-textfield',
   template: TEXTFIELD_TEMPLATE
