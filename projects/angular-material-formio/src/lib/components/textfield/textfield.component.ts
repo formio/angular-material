@@ -7,10 +7,11 @@ export const TEXTFIELD_TEMPLATE = `
     <span *ngIf="instance.component.prefix && instance.type !== 'currency'" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
     <input matInput
            type="{{ inputType }}"
-           [required]="instance.component.validate?.required"
            [formControl]="control"
            [placeholder]="instance.component.placeholder"
-           (input)="onChange()" #input>
+           (input)="onChange()"
+            #input
+           >
     <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
     <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
     <mat-hint *ngIf="instance.component.showWordCount">

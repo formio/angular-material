@@ -11,11 +11,11 @@ import isNil from 'lodash/isNil';
       <mat-label fxFill>{{ instance.component.label }}</mat-label>
       <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
       <textarea matInput
-          [required]="instance.component.validate?.required"
           [placeholder]="instance.component.placeholder"
           [formControl]="control"
           [rows]="(instance.component.rows || 3)"
-          (input)="onChange()" #textarea>
+          (input)="onChange()" #textarea
+      >
       </textarea>
       <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
       <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>

@@ -8,7 +8,6 @@ import SelectComponent from 'formiojs/components/select/Select.js';
       <mat-label>{{ instance.component.label }}</mat-label>
       <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
       <mat-select
-        [required]="instance.component.validate?.required"
         [multiple]="instance.component.multiple"
         [formControl]="control"
         [placeholder]="instance.component.placeholder"

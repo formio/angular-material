@@ -16,7 +16,13 @@ import RadioComponent from 'formiojs/components/radio/Radio.js';
         fxFlexOffset="10px"
         fxLayout="{{ getLayout() }}"
         fxLayoutGap="10px">
-        <mat-radio-button *ngFor="let option of instance.component.values" value="{{ option.value }}" [checked]="isRadioChecked(option)">{{ option.label }}</mat-radio-button>
+        <mat-radio-button *ngFor="let option of instance.component.values"
+                          value="{{ option.value }}"
+                          [checked]="isRadioChecked(option)"
+        >
+          {{ option.label }}
+        </mat-radio-button>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </mat-radio-group>
     </div>
   `
