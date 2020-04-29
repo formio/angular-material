@@ -104,6 +104,10 @@ export class MaterialDateComponent extends MaterialComponent {
 
   setValue(value) {
     if (this.dateFilter(value) && this.checkMinMax(value)) {
+      if (value) {
+        const format = `YYYY-MM-DD${this.instance.component.enableTime ? 'THH:mm' : ''}`;
+        value = momentDate(value).format(format)
+       }
       super.setValue(value);
     }
   }
