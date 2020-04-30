@@ -5,7 +5,7 @@ import { MaterialComponent } from '../MaterialComponent';
 export const TEXTFIELD_TEMPLATE = `
   <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
   <ng-template #componentTemplate let-hasLabel>
-    <mat-form-field [appearance]="getFormFieldAppearance()">
+    <mat-form-field [appearance]="getFormFieldAppearance()" fxFill>
 
       <mat-label *ngIf="hasLabel">
           <span [instance]="instance" matFormioLabel></span>
