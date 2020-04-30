@@ -57,7 +57,7 @@ export class MaterialDateComponent extends MaterialComponent {
   public selectedDate: any;
   public selectedTime: any = '00:00';
 
-  @ViewChild('calendar', {static: false}) calendar;
+  @ViewChild('calendar') calendar;
 
   onChangeDate(event) {
     this.selectedDate = momentDate(event).format('YYYY-MM-DD');
