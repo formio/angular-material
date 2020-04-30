@@ -23,12 +23,22 @@ import { get } from 'lodash';
       margin-bottom: 0.5rem;
       border: 1px solid transparent;
       border-radius: .25rem;
-    }`
+    }
+    ::ng-deep mat-card {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    `
   ],
   template: `
     <mat-spinner *ngIf="loader.loading"></mat-spinner>
     <div *ngIf="!this.options?.disableAlerts">
-      <div *ngFor="let alert of alerts.alerts" class="alert alert-{{ alert.type }}" role="alert">{{ alert.message }}</div>
+      <div *ngFor="let alert of alerts.alerts"
+           class="alert alert-{{ alert.type }}"
+           role="alert"
+      >
+        {{ alert.message }}
+      </div>
     </div>
     <div fxLayout="column" fxLayoutGap="1em">
       <ng-template #formio></ng-template>

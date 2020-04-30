@@ -60,8 +60,11 @@ import { MaterialWellComponent } from './components/well/well.component';
 import { MaterialWizardComponent } from './components/formio.wizard';
 import { MaterialTimeComponent } from './components/time/time.component';
 import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
-import {MaterialCalendarComponent} from "./components/calendar/calendar.component";
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MaterialCalendarComponent} from './components/calendar/calendar.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormioFormFieldComponent } from './components/formio-form-field/formio-form-field.component';
+import { LabelComponent } from './components/label/label.component';
+
 export {
   FormioComponent,
   MaterialButtonComponent,
@@ -136,7 +139,9 @@ export {
     MaterialComponent,
     MaterialNestedComponent,
     MaterialTimeComponent,
-    MaterialCalendarComponent
+    MaterialCalendarComponent,
+    FormioFormFieldComponent,
+    LabelComponent
   ],
   imports: [
     CommonModule,

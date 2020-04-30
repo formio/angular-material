@@ -80,40 +80,62 @@ const DEFAULT_ROW_TEMPLATES = [
   selector: 'mat-formio-editgrid',
   styles: [':host .delete-button { margin-left: auto; order: 2; }'],
   template: `
-    <span fxLayout="column" fxLayoutGap="1em" fxFill>
-       <h3 *ngIf="instance?.component?.label && !instance?.component?.hideLabel">{{ instance.component.label }}</h3>
-      <mat-accordion>
-        <mat-expansion-panel *ngIf="header" disabled="true">
-          <mat-expansion-panel-header>
-            <span #header fxFill></span>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;" [expanded]="row.isOpen" (closed)="onExpanderClose()">
-          <mat-expansion-panel-header (click)="editRow(row, i)">
-            <span *ngIf="!row.isNew" #rows fxFill></span>
-          </mat-expansion-panel-header>
-          <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
-          <span fxLayout="row" fxLayoutGap="1em">
-            <button mat-raised-button color="primary" [disabled]="!valid" (click)="saveRow(row, i)">Save</button>
-            <button mat-raised-button color="secondary" (click)="cancelRow(i)">Cancel</button>
-            <button mat-raised-button color="warn" (click)="instance.removeRow(i)" class="delete-button">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </span>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="footer" disabled="true">
-          <mat-expansion-panel-header>
-            <span #footer></span>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <span fxFill="none" *ngIf="instance.hasAddButton()">
-        <button mat-raised-button color="primary" (click)="addAnother()">
-          <mat-icon>add</mat-icon> Add Another
-        </button>
+    <mat-formio-form-field [instance]="instance"
+                           [componentTemplate]="componentTemplate"
+                           [labelTemplate]="labelTemplate"
+    ></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+
+      <span fxLayout="column" fxLayoutGap="1em" fxFill>
+        <ng-container *ngIf="hasLabel">
+            <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+        </ng-container>
+        <mat-accordion>
+          <mat-expansion-panel *ngIf="header" disabled="true">
+            <mat-expansion-panel-header>
+              <span #header fxFill></span>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;"
+                               [expanded]="row.isOpen"
+                               (closed)="onExpanderClose()"
+          >
+            <mat-expansion-panel-header (click)="editRow(row, i)">
+              <span *ngIf="!row.isNew" #rows fxFill></span>
+            </mat-expansion-panel-header>
+
+            <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
+
+            <span fxLayout="row" fxLayoutGap="1em">
+              <button mat-raised-button color="primary" [disabled]="!valid" (click)="saveRow(row, i)">Save</button>
+              <button mat-raised-button color="secondary" (click)="cancelRow(i)">Cancel</button>
+              <button mat-raised-button color="warn" (click)="instance.removeRow(i)" class="delete-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </span>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="footer" disabled="true">
+            <mat-expansion-panel-header>
+              <span #footer></span>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <span fxFill="none" *ngIf="instance.hasAddButton()">
+          <button mat-raised-button color="primary" (click)="addAnother()">
+            <mat-icon>add</mat-icon> Add Another
+          </button>
+        </span>
       </span>
-      <mat-hint *ngIf="instance?.component?.description">{{ instance.component.description }}</mat-hint>
-    </span>
+    </ng-template>
+
+    <ng-template #labelTemplate>
+      <mat-card-title>
+        <span [instance]="instance" matFormioLabel></span>
+      </mat-card-title>
+    </ng-template>
   `
 })
 export class MaterialEditGridComponent extends MaterialNestedComponent implements AfterViewInit {

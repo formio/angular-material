@@ -10,44 +10,48 @@ import {FormControl} from '@angular/forms';
     '(document:click)': 'clickOutside($event)',
   },
   template: `
-      <mat-label fxFill>{{ instance.component.label }}</mat-label>
+    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-label *ngIf="hasLabel" fxFill>
+        <span [instance]="instance" matFormioLabel></span>
+      </mat-label>
       <form class="example-form">
         <mat-datepicker-toggle [disabled]="isDisabled()" (click)="toggleCalendar($event)"></mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
-            *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
-            matInput
-            type="datetime-local"
-            [placeholder]="instance.component.placeholder"
-            [formControl]="control"
-            (input)="onChange()"
-            readonly
+                  *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
+                  matInput
+                  type="datetime-local"
+                  [placeholder]="instance.component.placeholder"
+                  [formControl]="control"
+                  (input)="onChange()"
+                  readonly
           >
           <input
-            *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
-            matInput
-            [placeholder]="instance.component.placeholder"
-            [formControl]="control"
-            (input)="onChange()"
-            readonly
+                  *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
+                  matInput
+                  [placeholder]="instance.component.placeholder"
+                  [formControl]="control"
+                  (input)="onChange()"
+                  readonly
           >
         </mat-form-field>
-          <mat-formio-calendar
-            #calendar
-            [minDate]="instance.component.minDate || ''"
-            [maxDate]="instance.component.maxDate || ''"
-            [dateFilter]="dateFilter"
-            [hidden]="!isPickerOpened"
-            (dateSelectEvent)="onChangeDate($event)"
-            (timeSelectEvent)="onChangeTime($event)"
-            [enableDate]="instance.component.enableDate"
-            [enableTime]="instance.component.enableTime"
-            [hourStep]="instance.component.timePicker.hourStep"
-            [minuteStep]="instance.component.timePicker.minuteStep"
-          ></mat-formio-calendar>
-          <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+        <mat-formio-calendar
+                #calendar
+                [minDate]="instance.component.minDate || ''"
+                [maxDate]="instance.component.maxDate || ''"
+                [dateFilter]="dateFilter"
+                [hidden]="!isPickerOpened"
+                (dateSelectEvent)="onChangeDate($event)"
+                (timeSelectEvent)="onChangeTime($event)"
+                [enableDate]="instance.component.enableDate"
+                [enableTime]="instance.component.enableTime"
+                [hourStep]="instance.component.timePicker.hourStep"
+                [minuteStep]="instance.component.timePicker.minuteStep"
+        ></mat-formio-calendar>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>
-      <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
+    </ng-template>
   `
 })
 

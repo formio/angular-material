@@ -7,69 +7,80 @@ import {MatTable} from '@angular/material/table';
 @Component({
   selector: 'mat-formio-datagrid',
   template: `
-    <mat-card fxFill>
-      <mat-card-title
-        *ngIf="instance?.component?.label && instance.component.labelPosition !== 'bottom' && !instance?.component?.hideLabel"
-      >
-        {{ instance.component.label }}
-      </mat-card-title>
-      <mat-card-content>
-        <mat-card-actions *ngIf="instance.hasAddButton() && (instance.component.addAnotherPosition === 'both' || instance.component.addAnotherPosition === 'top')">
+    <mat-formio-form-field [instance]="instance"
+                           [componentTemplate]="componentTemplate"
+                           [labelTemplate]="labelTemplate"
+    ></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-card fxFill>
+        <ng-container *ngIf="hasLabel">
+          <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+        </ng-container>
+        <mat-card-content>
+          <mat-card-actions
+                  *ngIf="instance.hasAddButton() && (instance.component.addAnotherPosition === 'both' || instance.component.addAnotherPosition === 'top')">
+            <button mat-raised-button color="primary" (click)="addAnother()">
+              <mat-icon>add</mat-icon>
+              {{instance.component.addAnother || 'Add Another'}}
+            </button>
+          </mat-card-actions>
+          <table
+                  mat-table
+                  [dataSource]="dataSource"
+                  class="mat-elevation-z8"
+                  fxFill
+                  cdkDropList
+                  [cdkDropListData]="dataSource"
+                  (cdkDropListDropped)="dropTable($event)">
+            >
+            <ng-container *ngFor="let column of formColumns" [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>{{ getColumnLabel(columns[column]) }}</th>
+              <td mat-cell *matCellDef="let i = index;" [attr.rowIndex]="i" [attr.component]="column">
+                <ng-template #components></ng-template>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="__removeRow">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let i = index;">
+                <button mat-button *ngIf="instance.hasRemoveButtons()">
+                  <mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="position" *ngIf="instance.component.reorder">
+              <th mat-header-cell *matHeaderCellDef> No.</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon cdkDragHandle>reorder</mat-icon>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <div *ngIf="instance?.component?.reorder">
+              <tr class="datagrid-row" mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag
+                  [cdkDragData]="row"></tr>
+            </div>
+            <div *ngIf="!instance?.component?.reorder">
+              <tr class="datagrid-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </div>
+          </table>
+        </mat-card-content>
+        <mat-card-actions *ngIf="instance.hasAddButton() && instance.component.addAnotherPosition !== 'top'">
           <button mat-raised-button color="primary" (click)="addAnother()">
             <mat-icon>add</mat-icon>
             {{instance.component.addAnother || 'Add Another'}}
           </button>
         </mat-card-actions>
-        <table
-          mat-table
-          [dataSource]="dataSource"
-          class="mat-elevation-z8"
-          fxFill
-          cdkDropList
-          [cdkDropListData]="dataSource"
-          (cdkDropListDropped)="dropTable($event)">
-        >
-          <ng-container *ngFor="let column of formColumns" [matColumnDef]="column">
-            <th mat-header-cell *matHeaderCellDef>{{ getColumnLabel(columns[column]) }}</th>
-            <td mat-cell *matCellDef="let i = index;" [attr.rowIndex]="i" [attr.component]="column">
-              <ng-template #components></ng-template>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="__removeRow">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let i = index;">
-              <button mat-button *ngIf="instance.hasRemoveButtons()"><mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon></button>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="position" *ngIf="instance.component.reorder">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element">
-              <mat-icon cdkDragHandle>reorder</mat-icon>
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <div *ngIf="instance?.component?.reorder">
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
-          </div>
-          <div *ngIf="!instance?.component?.reorder">
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </div>
-        </table>
-      </mat-card-content>
-      <mat-card-actions *ngIf="instance.hasAddButton() && instance.component.addAnotherPosition !== 'top'">
-        <button mat-raised-button color="primary" (click)="addAnother()">
-          <mat-icon>add</mat-icon>
-          {{instance.component.addAnother || 'Add Another'}}
-        </button>
-      </mat-card-actions>
-      <mat-card-title
-        *ngIf="instance?.component?.label && instance?.component?.labelPosition === 'bottom' && !instance?.component?.hideLabel"
-      >
-        {{ instance.component.label }}
+      </mat-card>
+    </ng-template>
+
+    <ng-template #labelTemplate>
+      <mat-card-title>
+        <span [instance]="instance" matFormioLabel></span>
       </mat-card-title>
-      <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
-    </mat-card>
-  `
+    </ng-template>
+  `,
+  styles: [
+    '.datagrid-row { height: auto; }'
+  ]
 })
 export class MaterialDataGridComponent extends MaterialNestedComponent {
   displayedColumns: string[];

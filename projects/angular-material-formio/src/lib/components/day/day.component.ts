@@ -9,39 +9,46 @@ DayComponent.prototype.getFieldValue = function(name) {
 
 @Component({
   selector: 'mat-formio-day',
-  template: `<mat-form-field *ngIf="instance.dayFirst && instance.showDay">
-    <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
-    <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
-      <mat-option *ngFor="let day of instance.days" [value]="day.value">
-        {{day.label}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="instance.showMonth">
-    <mat-label *ngIf="!instance.component.hideInputLabels">Month</mat-label>
-    <mat-select [formControl]="monthControl" (selectionChange)="onChange()" [required]="instance.monthRequired">
-      <mat-option *ngFor="let month of instance.months" [value]="month.value">
-        {{month.label}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="!instance.dayFirst && instance.showDay">
-    <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
-    <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
-      <mat-option *ngFor="let day of instance.days" [value]="day.value">
-        {{day.label}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="instance.showYear">
-    <mat-label *ngIf="!instance.component.hideInputLabels">Year</mat-label>
-    <mat-select [formControl]="yearControl" (selectionChange)="onChange()" [required]="instance.yearRequired">
-      <mat-option *ngFor="let year of instance.years" [value]="year.value">
-        {{year.label}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+  template: `
+    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-label *ngIf="hasLabel">
+        <span [instance]="instance" matFormioLabel></span>
+      </mat-label>
+      <mat-form-field *ngIf="instance.dayFirst && instance.showDay">
+        <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
+        <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
+          <mat-option *ngFor="let day of instance.days" [value]="day.value">
+            {{day.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="instance.showMonth">
+        <mat-label *ngIf="!instance.component.hideInputLabels">Month</mat-label>
+        <mat-select [formControl]="monthControl" (selectionChange)="onChange()" [required]="instance.monthRequired">
+          <mat-option *ngFor="let month of instance.months" [value]="month.value">
+            {{month.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="!instance.dayFirst && instance.showDay">
+        <mat-label *ngIf="!instance.component.hideInputLabels">Day</mat-label>
+        <mat-select [formControl]="dayControl" (selectionChange)="onChange()" [required]="instance.dayRequired">
+          <mat-option *ngFor="let day of instance.days" [value]="day.value">
+            {{day.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="instance.showYear">
+        <mat-label *ngIf="!instance.component.hideInputLabels">Year</mat-label>
+        <mat-select [formControl]="yearControl" (selectionChange)="onChange()" [required]="instance.yearRequired">
+          <mat-option *ngFor="let year of instance.years" [value]="year.value">
+            {{year.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+    </ng-template>
   `
 })
 export class MaterialDayComponent extends MaterialComponent {

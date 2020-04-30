@@ -6,20 +6,35 @@ import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'mat-formio-tags',
-  template: `<mat-form-field class="example-chip-list" fxFill>
-    <mat-chip-list #chipList [attr.aria-label]="instance.component.label">
-      <mat-chip *ngFor="let tag of tags; index as i;" [selectable]="true" [removable]="true" (removed)="remove(i)">
-        {{tag}}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <input placeholder="{{ instance.component.label }}"
-             [formControl]="control"
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="true"
-             (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
-  </mat-form-field>`
+  template: `
+    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-form-field class="example-chip-list" fxFill>
+
+        <mat-label *ngIf="hasLabel">
+          <span [instance]="instance" matFormioLabel></span>
+        </mat-label>
+
+        <mat-chip-list #chipList [attr.aria-label]="instance.component.label">
+          <mat-chip *ngFor="let tag of tags; index as i;"
+                    [selectable]="true"
+                    [removable]="true"
+                    (removed)="remove(i)"
+          >
+            {{tag}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+
+          <input [formControl]="control"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="add($event)"
+          >
+        </mat-chip-list>
+      </mat-form-field>
+    </ng-template>
+  `
 })
 export class MaterialTagsComponent extends MaterialComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];

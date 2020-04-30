@@ -7,7 +7,12 @@ import { MaterialNestedComponent } from '../MaterialNestedComponent';
     <fieldset>
       <legend [attr.ref]="'header'">
         {{ instance.component.legend }}
-        <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
+        <mat-icon *ngIf="instance.component.tooltip"
+                  matSuffix
+                  matTooltip="{{ instance.component.tooltip }}"
+        >
+          info
+        </mat-icon>
       </legend>
       <div class="fieldset-body" [attr.ref]="instance.component.key" fxLayout="column" fxLayoutGap="1em">
         <ng-template #components></ng-template>

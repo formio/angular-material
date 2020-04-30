@@ -10,10 +10,10 @@ import { MaterialComponent } from '../MaterialComponent';
     }`
   ],
   template: `
-          <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
-            <div [ngStyle]="getPopupStyles()">
-              <mat-card style="padding: 0;">
-                <mat-calendar
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
+      <div [ngStyle]="getPopupStyles()">
+        <mat-card style="padding: 0;">
+          <mat-calendar
                   [dateFilter]="dateFilter"
                   [maxDate]="maxDate"
                   [minDate]="minDate"
@@ -21,19 +21,19 @@ import { MaterialComponent } from '../MaterialComponent';
                   (selectedChange)="onDate($event)"
                   class="calendar"
                   *ngIf="enableDate !== false"
-                >
-                </mat-calendar>
-                <mat-formio-time
+          >
+          </mat-calendar>
+          <mat-formio-time
                   [hourStep]="hourStep"
                   [minuteStep]="minuteStep"
                   (selectedEvent)="onTime($event)"
                   class="ml-3 formio-time"
                   *ngIf="enableTime"
-                >
-                </mat-formio-time>
-              </mat-card>
-            </div>
-          </div>
+          >
+          </mat-formio-time>
+        </mat-card>
+      </div>
+    </div>
   `
 })
 

@@ -1,0 +1,37 @@
+.mat-formio-component-description {
+  display: block;
+  grid-area: description;
+}
+
+.mat-formio-component {
+  grid-area: component;
+}
+
+.mat-formio-label {
+  grid-area: label;
+}
+
+.mat-formio-label.mat-formio-label-align-right {
+  margin-left: auto;
+}
+
+.mat-formio-label.mat-formio-label-align-left {
+  margin-right: auto;
+}
+
+.mat-formio-component-wrapper.mat-formio-label-left,
+.mat-formio-component-wrapper.mat-formio-label-right {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 1em;
+}
+
+.mat-formio-component-wrapper.mat-formio-label-right {
+  grid-template-areas: 'component label'
+                       'description label';
+}
+
+.mat-formio-component-wrapper.mat-formio-label-left {
+  grid-template-areas: 'label component'
+                       'label description';
+}

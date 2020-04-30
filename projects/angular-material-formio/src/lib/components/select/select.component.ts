@@ -4,27 +4,39 @@ import SelectComponent from 'formiojs/components/select/Select.js';
 @Component({
   selector: 'mat-formio-select',
   template: `
-    <mat-form-field fxFill>
-      <mat-label>{{ instance.component.label }}</mat-label>
-      <span *ngIf="instance.component.prefix" matPrefix>{{ instance.component.prefix }}&nbsp;</span>
-      <mat-select
-        [required]="instance.component.validate?.required"
-        [multiple]="instance.component.multiple"
-        [formControl]="control"
-        [placeholder]="instance.component.placeholder"
-        (selectionChange)="onChange()">
-        <div class="mat-option">
-          <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
-        </div>
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
-          <span [innerHTML]="option.label"></span>
-        </mat-option>
-      </mat-select>
-      <span *ngIf="instance.component.suffix" matSuffix>{{ instance.component.suffix }}</span>
-      <mat-icon *ngIf="instance.component.tooltip" matSuffix matTooltip="{{ instance.component.tooltip }}">info</mat-icon>
-      <mat-hint *ngIf="instance.component.description">{{ instance.component.description }}</mat-hint>
-      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
-    </mat-form-field>
+    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-form-field fxFill>
+
+        <mat-label *ngIf="hasLabel">
+          <span [instance]="instance" matFormioLabel></span>
+        </mat-label>
+
+        <span *ngIf="instance.component.prefix" matPrefix>
+          {{ instance.component.prefix }}&nbsp;
+        </span>
+        <mat-select
+                [required]="instance.component.validate?.required"
+                [multiple]="instance.component.multiple"
+                [formControl]="control"
+                [placeholder]="instance.component.placeholder"
+                (selectionChange)="onChange()"
+        >
+          <div class="mat-option">
+            <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
+          </div>
+
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
+            <span [innerHTML]="option.label"></span>
+          </mat-option>
+        </mat-select>
+
+        <span *ngIf="instance.component.suffix" matSuffix>
+          {{ instance.component.suffix }}
+        </span>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+      </mat-form-field>
+    </ng-template>
   `
 })
 export class MaterialSelectComponent extends MaterialComponent implements OnInit {
