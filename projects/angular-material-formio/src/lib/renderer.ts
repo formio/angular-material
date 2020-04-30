@@ -1,9 +1,9 @@
-const Components = require('formiojs/components/Components').default;
+import Components from 'formiojs/components/Components';
 import './components/Webform';
 import { getComponents } from './components';
-const Formio = require('formiojs/Formio').default;
-const Form = require('formiojs/Form').default;
-const Utils = require('formiojs/utils').default;
+import Formio from 'formiojs/Formio';
+import Form from 'formiojs/Form';
+import Utils from 'formiojs/utils';
 
 function initRenderer() {
     Components.setComponents(getComponents());
