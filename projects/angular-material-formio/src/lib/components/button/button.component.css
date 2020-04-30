@@ -1,0 +1,48 @@
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+:host .mat-icon-spin {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.mat-formio-theme-success {
+  background-color: rgb(99, 214, 68) !important;
+}
+
+.mat-formio-theme-info {
+  background-color: rgb(73, 217, 244) !important;
+}
+
+.mat-formio-button-sm {
+  font-size: 14px;
+  padding: 8px 12px;
+}
+
+.mat-formio-button-xs {
+  font-size: 14px;
+  padding: 4px 6px;
+}
+
+.mat-formio-button-md {
+  font-size: 15px;
+  padding: 8px 12px;
+}
+
+.mat-formio-button-lg {
+  font-size: 19px;
+  padding: 16px 20px;
+}
+
+.mat-formio-button-block {
+  display: block;
+  width: 100%;
+}

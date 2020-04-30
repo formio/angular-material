@@ -1,31 +1,12 @@
 import { Component } from '@angular/core';
 import ButtonComponent from 'formiojs/components/button/Button.js';
 import { MaterialComponent } from '../MaterialComponent';
+import { AngularButtonsThemes, ButtonsThemes } from '../../const/ButtonsThemes';
+
 @Component({
   selector: 'mat-formio-button',
-  template: `
-    <button *ngIf="instance"
-      type="{{ instance.component.action }}"
-      mat-raised-button [color]="getColor()"
-      [disabled]="disabled"
-      (click)="instance.onClick($event)"
-    >
-      <mat-icon *ngIf="instance.component.leftIcon">{{ instance.component.leftIcon }}</mat-icon>
-      <mat-icon *ngIf="done">done</mat-icon>
-      <mat-icon *ngIf="error">close</mat-icon>
-      <mat-icon class="mat-icon-spin" *ngIf="loading">autorenew</mat-icon>
-      {{ instance.component.label }}
-      <mat-icon *ngIf="instance.component.rightIcon">{{ instance.component.rightIcon }}</mat-icon>
-    </button>
-  `,
-  styles: ['@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } } ' +
-    ':host .mat-icon-spin { ' +
-      'animation-name: spin; ' +
-      'animation-duration: 1000ms; ' +
-      'animation-iteration-count: infinite; ' +
-      'animation-timing-function: linear; ' +
-    '}'
-  ]
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.css']
 })
 export class MaterialButtonComponent extends MaterialComponent {
   public loading = false;
@@ -34,11 +15,38 @@ export class MaterialButtonComponent extends MaterialComponent {
   public disabled = false;
   public clicked = false;
 
-  getColor() {
+  get color() {
     if (this.error) {
-      return 'warn';
+      return AngularButtonsThemes.WARN;
     }
-    return this.instance.component.theme || 'primary';
+    const theme = this.angularButtonTheme;
+    return theme || AngularButtonsThemes.PRIMARY;
+  }
+
+  get angularButtonTheme() {
+    switch (this.instance.component.theme) {
+      case ButtonsThemes.PRIMARY:
+        return AngularButtonsThemes.PRIMARY;
+
+      case ButtonsThemes.WARNING:
+        return AngularButtonsThemes.ACCENT;
+
+      case ButtonsThemes.DANGER:
+        return AngularButtonsThemes.WARN;
+
+      case ButtonsThemes.SECONDARY:
+        return AngularButtonsThemes.BASIC;
+
+      default:
+        return '';
+    }
+  }
+
+  get buttonClass() {
+    let className = this.instance.component.block ? 'mat-formio-button-block' : '';
+    className += this.instance.component.size ? ` mat-formio-button-${this.instance.component.size}` : '';
+    className += !this.angularButtonTheme ? ` mat-formio-theme-${this.instance.component.theme}` : '';
+    return className;
   }
 
   onClick(event) {
@@ -49,11 +57,22 @@ export class MaterialButtonComponent extends MaterialComponent {
   getValue() {
     return this.clicked;
   }
+
   setState(loading, error, done) {
     this.loading = loading;
     this.done = done;
     this.error = error;
   }
+
+  getIconFontSet(icon: string) {
+    const fontSet = icon.split(' ')[0];
+    return fontSet;
+  }
+
+  getIconName(icon: string) {
+    return icon.replace(this.getIconFontSet(icon), '');
+  }
+
   setInstance(instance) {
     const retVal = super.setInstance(instance);
     this.disabled = instance.shouldDisabled;
