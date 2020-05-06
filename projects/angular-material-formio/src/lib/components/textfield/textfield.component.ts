@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import TextFieldComponent from 'formiojs/components/textfield/TextField.js';
 import { MaterialComponent } from '../MaterialComponent';
 
@@ -38,10 +38,10 @@ export const TEXTFIELD_TEMPLATE = `
   selector: 'mat-formio-textfield',
   template: TEXTFIELD_TEMPLATE
 })
-export class MaterialTextfieldComponent extends MaterialComponent implements OnInit {
+export class MaterialTextfieldComponent extends MaterialComponent implements AfterContentInit {
   public inputType = 'text';
 
-  ngOnInit() {
+  ngAfterContentInit() {
     if (this.instance && this.control && this.instance.component.disabled) {
       this.control.disable();
     }
