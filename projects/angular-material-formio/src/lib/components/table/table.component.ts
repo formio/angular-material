@@ -6,36 +6,45 @@ import TableComponent from 'formiojs/components/table/Table.js';
   selector: 'mat-formio-table',
   styleUrls: [ './table.component.css' ],
   template: `
-    <table class="mat-table" style="width: 100%;" [ngClass]="{'is-bordered' : instance.component.bordered}">
-      <thead>
-      <tr class="mat-header-row">
-        <th *ngFor="let header of instance.component.header"
-            class="mat-header-cell"
+    <mat-formio-form-field
+            [instance]="instance"
+            [componentTemplate]="componentTemplate"
+    ></mat-formio-form-field>
+    <ng-template #componentTemplate let-hasLabel>
+      <mat-label *ngIf="hasLabel">
+        <span [instance]="instance" matFormioLabel></span>
+      </mat-label>
+      <table class="mat-table" style="width: 100%;" [ngClass]="{'is-bordered' : instance.component.bordered}">
+        <thead>
+        <tr class="mat-header-row">
+          <th *ngFor="let header of instance.component.header"
+              class="mat-header-cell"
+          >
+            {{ instance.t(header) }}
+          </th>
+        </tr>
+        </thead>
+  
+        <tbody>
+        <tr *ngFor="let row of instance.table; let i = index"
+            role="row"
+            class="mat-row"
+            [ngClass]="{
+                'is-hover': instance.component.hover,
+                'is-striped': instance.component.striped && i % 2 === 0
+              }"
         >
-          {{ instance.t(header) }}
-        </th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let row of instance.table; let i = index"
-          role="row"
-          class="mat-row"
-          [ngClass]="{
-              'is-hover': instance.component.hover,
-              'is-striped': instance.component.striped && i % 2 === 0
-            }"
-      >
-        <td *ngFor="let col of row"
-            role="gridcell"
-            class="mat-cell"
-            [ngClass]="getTableColClasses()"
-        >
-          <ng-template #components></ng-template>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          <td *ngFor="let col of row"
+              role="gridcell"
+              class="mat-cell"
+              [ngClass]="getTableColClasses()"
+          >
+            <ng-template #components></ng-template>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-template>
   `
 })
 export class MaterialTableComponent extends MaterialNestedComponent {
