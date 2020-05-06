@@ -71,7 +71,7 @@ export class MaterialTextfieldComponent extends MaterialComponent implements Aft
   getFormFieldAppearance() {
     const appearances = ['legacy', 'standard', 'fill', 'outline'];
     const appearance = this.instance.component.appearance ? this.instance.component.appearance.toLowerCase() : '';
-    return appearances.includes(appearance) ? appearance : 'legacy';
+    return appearances.includes(appearance) ? appearance : undefined;
   }
 }
 TextFieldComponent.MaterialComponent = MaterialTextfieldComponent;
