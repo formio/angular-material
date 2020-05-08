@@ -64,6 +64,7 @@ import {MaterialCalendarComponent} from './components/calendar/calendar.componen
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormioFormFieldComponent } from './components/formio-form-field/formio-form-field.component';
 import { LabelComponent } from './components/label/label.component';
+import { MaskDirective } from './directives/mask.directive';
 
 export {
   FormioComponent,
@@ -141,7 +142,8 @@ export {
     MaterialTimeComponent,
     MaterialCalendarComponent,
     FormioFormFieldComponent,
-    LabelComponent
+    LabelComponent,
+    MaskDirective
   ],
   imports: [
     CommonModule,
