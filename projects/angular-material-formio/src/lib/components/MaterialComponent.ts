@@ -93,6 +93,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
     }
+
+    if (this.instance) {
+      this.setDisabled(this.instance.disabled);
+    }
   }
 }
 

@@ -38,6 +38,10 @@ export class MaterialTextareaComponent extends MaterialComponent implements Afte
   ngAfterViewInit() {
     // Attach the element so the wysiwyg will work.
     this.instance.attachElement(this.textarea.nativeElement);
+
+    if (this.instance) {
+      this.setDisabled(this.instance.disabled);
+    }
   }
 
   getValue() {
