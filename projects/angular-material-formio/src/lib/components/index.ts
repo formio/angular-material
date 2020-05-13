@@ -1,3 +1,6 @@
+const Components = require('formiojs/components/Components').default;
+import Component from 'formiojs/components/_classes/component/Component.js';
+
 import './Base';
 import { TextFieldComponent } from './textfield/textfield.component';
 import { PasswordComponent } from './password/password.component';
@@ -99,4 +102,35 @@ export function getComponents() {
   }
 
   return components;
+}
+
+export function registerComponent(name: string, CompClass: any) {
+
+  class DummyComponent extends Component {};
+  const formIOComp = (DummyComponent as any);
+
+  formIOComp.MaterialComponent = CompClass;
+  formIOComp.prototype.render = (function () {
+    if (this.materialComponent) {
+      return this.materialComponent;
+    }
+    const viewContainer = this.parent ? this.parent.viewContainer(this) : this.viewContainer(this);
+    if (!viewContainer) {
+      return;
+    }
+    const factory = this.options.viewResolver.resolveComponentFactory(formIOComp.MaterialComponent);
+    const componentRef = viewContainer.createComponent(factory);
+    (componentRef.instance as any).setInstance(this);
+  });
+
+  const setValue = formIOComp.prototype.setValue;
+  formIOComp.prototype.setValue = (function (...args) {
+    if (this.materialComponent) {
+      this.materialComponent.setValue(args[0]);
+    }
+    return setValue.call(this, ...args);
+  });
+
+  Components.addComponent(name, formIOComp);
+
 }
