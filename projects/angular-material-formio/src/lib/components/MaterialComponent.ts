@@ -8,7 +8,7 @@ import { FormioControl } from '../FormioControl';
 })
 export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
-  @ViewChild('input', {static: true}) input: ElementRef;
+  @ViewChild('input', {static: false}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
   constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 
@@ -43,6 +43,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.input && this.input.nativeElement.mask) {
       this.input.nativeElement.mask.textMaskInputElement.update(value);
       this.control.setValue(this.input.nativeElement.value);
+      value = this.getValue();
     }
     this.instance.updateValue(value, {modified: true});
   }
