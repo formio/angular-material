@@ -15,11 +15,14 @@ import {FormControl} from '@angular/forms';
       <mat-label *ngIf="hasLabel" fxFill>
         <span [instance]="instance" matFormioLabel></span>
       </mat-label>
+
       <form class="example-form">
-        <mat-datepicker-toggle [disabled]="isDisabled()" (click)="toggleCalendar($event)"></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="isDisabled()" (click)="toggleCalendar($event)">
+          <mat-icon matDatepickerToggleIcon *ngIf="enableTime && !enableDate">schedule</mat-icon>
+        </mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
-                  *ngIf="instance.component.enableTime && instance.component.enableDate !== false"
+                  *ngIf="enableTime && enableDate"
                   matInput
                   type="datetime-local"
                   [placeholder]="instance.component.placeholder"
@@ -28,7 +31,16 @@ import {FormControl} from '@angular/forms';
                   readonly
           >
           <input
-                  *ngIf="!instance.component.enableTime && instance.component.enableDate !== false"
+                  *ngIf="enableTime && !enableDate"
+                  matInput
+                  [placeholder]="instance.component.placeholder"
+                  [formControl]="control"
+                  [matMask]="formatTime"
+                  (input)="onChange()"
+                  readonly
+          >
+          <input
+                  *ngIf="!enableTime && enableDate"
                   matInput
                   [placeholder]="instance.component.placeholder"
                   [formControl]="control"
@@ -36,6 +48,7 @@ import {FormControl} from '@angular/forms';
                   readonly
           >
         </mat-form-field>
+
         <mat-formio-calendar
                 #calendar
                 [minDate]="instance.component.datePicker.minDate || ''"
@@ -44,8 +57,8 @@ import {FormControl} from '@angular/forms';
                 [hidden]="!isPickerOpened"
                 (dateSelectEvent)="onChangeDate($event)"
                 (timeSelectEvent)="onChangeTime($event)"
-                [enableDate]="instance.component.enableDate"
-                [enableTime]="instance.component.enableTime"
+                [enableDate]="enableDate"
+                [enableTime]="enableTime"
                 [hourStep]="instance.component.timePicker.hourStep"
                 [minuteStep]="instance.component.timePicker.minuteStep"
         ></mat-formio-calendar>
@@ -63,6 +76,14 @@ export class MaterialDateComponent extends MaterialComponent {
 
   @ViewChild('calendar', {static: false}) calendar;
 
+  get enableDate() {
+    return this.instance && this.instance.component.enableDate !== false;
+  }
+
+  get enableTime() {
+    return this.instance && this.instance.component.enableTime === true;
+  }
+
   onChangeDate(event) {
     this.selectedDate = momentDate(event).format('YYYY-MM-DD');
     this.control.setValue(this.selectedDate);
@@ -71,14 +92,26 @@ export class MaterialDateComponent extends MaterialComponent {
 
   onChangeTime(time) {
     this.selectedTime = time;
-    if (this.selectedDate) {
+    if (this.selectedDate || (this.enableTime && !this.enableDate)) {
       this.setDateTime();
     }
   }
 
+  getDateTimeValue() {
+    if (this.enableTime && this.enableDate) {
+      return `${this.selectedDate}T${this.selectedTime}`;
+    }
+    if (!this.enableTime && this.enableDate) {
+      return this.selectedDate;
+    }
+    if (this.enableTime && !this.enableDate) {
+      const today = momentDate(new Date()).format('YYYY-MM-DD');
+      return `${today}T${this.selectedTime}`;
+    }
+  }
+
   setDateTime() {
-    this.instance.component.enableTime ? this.control.setValue(`${this.selectedDate}T${this.selectedTime}`) :
-      this.control.setValue(this.selectedDate);
+    this.control.setValue(this.getDateTimeValue());
     this.onChange();
   }
 
@@ -106,21 +139,21 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   isDisabled() {
-    return this.instance.component.readonly || this.instance.component.disabled || this.instance.root.options.readOnly
+    const { readonly, disabled } = this.instance.component;
+    return readonly || disabled || this.instance.root.options.readOnly
   }
 
-  getDate() {
-    return momentDate(this.control).format('YYYY-MM-DD');
-  }
-
-  getTime() {
-    return momentDate(this.control).format('HH.mm');
+  public formatTime = (value) => {
+    if (!value) {
+      return this.instance.emptyValue;
+    }
+    return momentDate(value).format(this.instance.component.format);
   }
 
   setValue(value) {
     if (this.dateFilter(value) && this.checkMinMax(value)) {
       if (value) {
-        const format = `YYYY-MM-DD${this.instance.component.enableTime ? 'THH:mm' : ''}`;
+        const format = `YYYY-MM-DD${this.enableTime ? 'THH:mm' : ''}`;
         value = momentDate(value).format(format)
        }
       super.setValue(value);
