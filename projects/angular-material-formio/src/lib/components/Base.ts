@@ -21,11 +21,11 @@ Object.defineProperty(FormioComponent.prototype, 'visible', {
   set(visible) {
     if (this._visible !== visible) {
       this._visible = visible;
-      if (this.materialComponent) {
-        this.materialComponent.setVisible(visible);
-      }
       this.clearOnHide();
       this.redraw();
+    }
+    if (this.materialComponent) {
+      this.materialComponent.setVisible(visible);
     }
   }
 });

@@ -74,7 +74,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
         this.element.nativeElement.removeAttribute('hidden');
         this.element.nativeElement.style.visibility = 'visible';
         this.element.nativeElement.style.position = 'relative';
-      } else if (this.instance.parent.visible) {
+      } else {
         this.element.nativeElement.setAttribute('hidden', true);
         this.element.nativeElement.style.visibility = 'hidden';
         this.element.nativeElement.style.position = 'absolute';
