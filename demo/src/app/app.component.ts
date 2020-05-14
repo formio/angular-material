@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   form: any = {
     components: [
+      {type: 'my-custom-component'},
       {
         type: 'textfield',
         label: 'First Name',
