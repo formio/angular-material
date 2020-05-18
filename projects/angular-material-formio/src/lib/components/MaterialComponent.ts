@@ -8,7 +8,7 @@ import { FormioControl } from '../FormioControl';
 })
 export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
-  @ViewChild('input', {static: true}) input: ElementRef;
+  @ViewChild('input', {static: false}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
   constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 
@@ -56,6 +56,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.input && this.input.nativeElement.mask) {
       this.input.nativeElement.mask.textMaskInputElement.update(value);
       this.control.setValue(this.input.nativeElement.value);
+      value = this.getValue();
     }
     this.instance.updateValue(value, {modified: true});
   }
@@ -86,7 +87,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
         this.element.nativeElement.removeAttribute('hidden');
         this.element.nativeElement.style.visibility = 'visible';
         this.element.nativeElement.style.position = 'relative';
-      } else if (this.instance.parent.visible) {
+      } else {
         this.element.nativeElement.setAttribute('hidden', true);
         this.element.nativeElement.style.visibility = 'hidden';
         this.element.nativeElement.style.position = 'absolute';
@@ -105,6 +106,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.input) {
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
+    }
+
+    if (this.instance) {
+      this.setDisabled(this.instance.disabled);
     }
   }
 }

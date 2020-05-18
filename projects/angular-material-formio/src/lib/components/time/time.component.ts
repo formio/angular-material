@@ -6,11 +6,6 @@ import * as moment_ from 'moment';
 @Component({
   selector: 'mat-formio-time',
   template: `
-    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
-    <ng-template #componentTemplate let-hasLabel>
-      <mat-label *ngIf="hasLabel">
-        <span [instance]="instance" matFormioLabel></span>
-      </mat-label>
       <div style="display: block">
         <div style="margin-left: 1rem;" fxLayout="row" fxFlex="205px" fxLayoutGap="5%">
           <input
@@ -31,7 +26,7 @@ import * as moment_ from 'moment';
                   fxFlex="30%"
                   (input)="onChange()"
           >
-          <button [disabled]="instance?.component?.disabled"
+          <button [disabled]="instance?.disabled"
                   fxFlex="15%"
                   (click)="changePeriod()"
           >
@@ -40,7 +35,6 @@ import * as moment_ from 'moment';
         </div>
         <mat-error *ngIf="instance?.error">{{ instance.error.message }}</mat-error>
       </div>
-    </ng-template>
   `
 })
 
