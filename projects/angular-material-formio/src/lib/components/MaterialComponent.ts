@@ -13,6 +13,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 
   setInstance(instance: any) {
+    this.instanceAllowDataInput(instance);
     this.control.setInstance(instance);
     instance.materialComponent = this;
     this.instance = instance;
@@ -28,6 +29,18 @@ export class MaterialComponent implements AfterViewInit, OnInit {
         this.control.markAsTouched();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
+    }
+  }
+
+  // Solves the problem with not setting submission data to some components
+  instanceAllowDataInput(instance) {
+    if (
+      instance.component
+      && instance.components
+      && instance.components.length
+      && !instance.isInputComponent
+    ) {
+      instance.component.input = true;
     }
   }
 
