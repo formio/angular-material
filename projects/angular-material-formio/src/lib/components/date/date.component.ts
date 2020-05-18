@@ -26,7 +26,7 @@ import {FormControl} from '@angular/forms';
                   matInput
                   type="datetime-local"
                   [placeholder]="instance.component.placeholder"
-                  [formControl]="control"
+                  [formControl]="displayControl"
                   (input)="onChange()"
                   readonly
           >
@@ -34,7 +34,7 @@ import {FormControl} from '@angular/forms';
                   *ngIf="enableTime && !enableDate"
                   matInput
                   [placeholder]="instance.component.placeholder"
-                  [formControl]="control"
+                  [formControl]="displayControl"
                   [matMask]="formatTime"
                   (input)="onChange()"
                   readonly
@@ -43,7 +43,7 @@ import {FormControl} from '@angular/forms';
                   *ngIf="!enableTime && enableDate"
                   matInput
                   [placeholder]="instance.component.placeholder"
-                  [formControl]="control"
+                  [formControl]="displayControl"
                   (input)="onChange()"
                   readonly
           >
@@ -70,6 +70,7 @@ import {FormControl} from '@angular/forms';
 
 export class MaterialDateComponent extends MaterialComponent {
   public timeControl: FormControl = new FormControl();
+  public displayControl: FormControl = new FormControl();
   public isPickerOpened: boolean;
   public selectedDate: any;
   public selectedTime: any = '00:00';
@@ -84,8 +85,20 @@ export class MaterialDateComponent extends MaterialComponent {
     return this.instance && this.instance.component.enableTime === true;
   }
 
+  setDisplayControlValue(value = null) {
+    const format = `YYYY-MM-DD${this.enableTime ? 'THH:mm' : ''}`;
+    value = value || this.getDateTimeValue();
+
+    if (value) {
+      this.displayControl.setValue(momentDate(value).format(format));
+    }
+    else {
+      this.displayControl.setValue('');
+    }
+  }
+
   onChangeDate(event) {
-    this.selectedDate = momentDate(event).format('YYYY-MM-DD');
+    this.selectedDate = momentDate(event).utc().format();
     this.control.setValue(this.selectedDate);
     this.setDateTime();
   }
@@ -98,16 +111,35 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   getDateTimeValue() {
+    let newDate = '';
+    let isSelectedTime = false;
+
+    if (this.calendar && this.calendar.selectedTime) {
+      const { selectedTime } = this.calendar;
+      isSelectedTime = true;
+
+      if (this.selectedTime !== selectedTime) {
+        this.selectedTime = selectedTime;
+      }
+    }
+
     if (this.enableTime && this.enableDate) {
-      return `${this.selectedDate}T${this.selectedTime}`;
+      const [hours, minutes] = this.selectedTime.split(':');
+      newDate = isSelectedTime
+          ? momentDate(this.selectedDate).hours(hours).minutes(minutes).utc().format()
+          : this.selectedDate;
     }
+
     if (!this.enableTime && this.enableDate) {
-      return this.selectedDate;
+      newDate = this.selectedDate;
     }
+
     if (this.enableTime && !this.enableDate) {
-      const today = momentDate(new Date()).format('YYYY-MM-DD');
-      return `${today}T${this.selectedTime}`;
+      const [hours, minutes] = this.selectedTime.split(':');
+      const today = momentDate(new Date());
+      newDate = today.hours(hours).minutes(minutes).seconds(0).utc().format();
     }
+    return newDate;
   }
 
   setDateTime() {
@@ -118,6 +150,7 @@ export class MaterialDateComponent extends MaterialComponent {
   setInstance(instance: any) {
     super.setInstance(instance);
     this.isDisabled() ? this.control.disable() : this.control.enable();
+    this.isDisabled() ? this.displayControl.disable() : this.displayControl.enable();
 
     if (this.instance) {
       if (this.instance.component && this.instance.component.datePicker) {
@@ -133,6 +166,19 @@ export class MaterialDateComponent extends MaterialComponent {
 
   toggleCalendar(event) {
     if (!this.isDisabled()) {
+      if (!this.isPickerOpened) {
+        const date = this.getValue();
+        if (date &&this.checkMinMax(date)) {
+          if (this.enableDate && this.calendar && !this.calendar.selectedDate) {
+            this.calendar.setExistedDate(momentDate(date).toDate())
+          }
+
+          if (this.enableTime && this.calendar && !this.calendar.selectedTime) {
+            const time = momentDate(date)
+            this.calendar.setExistedTime(time.format('HH:mm'), time.format('h:mm:A'))
+          }
+        }
+      }
       this.isPickerOpened = !this.isPickerOpened;
       event.stopPropagation();
     }
@@ -152,16 +198,14 @@ export class MaterialDateComponent extends MaterialComponent {
 
   setValue(value) {
     if (this.dateFilter(value) && this.checkMinMax(value)) {
-      if (value) {
-        const format = `YYYY-MM-DD${this.enableTime ? 'THH:mm' : ''}`;
-        value = momentDate(value).format(format)
-       }
+      this.setDisplayControlValue(value);
       super.setValue(value);
     }
   }
 
   onChange() {
     const value = this.dateFilter(this.getValue()) && this.checkMinMax(this.getValue()) ? this.getValue() : '';
+    this.setDisplayControlValue(value);
     this.instance.updateValue(value, {modified: true});
   }
 
@@ -185,8 +229,11 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   disableWeekends(d: Date) {
-    const day = d.getDay();
-    return day !== 0 && day !== 6;
+    if (d && d.getDay) {
+      const day = d.getDay();
+      return day !== 0 && day !== 6;
+    }
+    return true;
   }
 
   disableDates(dates: Array<string>, d: Date) {
@@ -195,9 +242,9 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   dateFilter = (d: Date | null): boolean => {
-    const isValid = this.instance.component.disableWeekends ? this.disableWeekends(d) : true;
-    return this.instance.component.disabledDates && isValid ?
-      this.disableDates(this.instance.component.disabledDates, d) : isValid;
+    const isValid = this.instance.component.datePicker.disableWeekends ? this.disableWeekends(d) : true;
+    return this.instance.component.widget.disabledDates && isValid ?
+      this.disableDates(this.instance.component.widget.disabledDates.split(','), d) : isValid;
   }
 
   clickOutside(event) {
