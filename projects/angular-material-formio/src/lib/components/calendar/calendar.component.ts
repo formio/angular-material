@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, NgModule, Output} from '@angular/core';
+import {Component, EventEmitter, Input, NgModule, Output, ViewChild} from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 @Component({
   selector: 'mat-formio-calendar',
@@ -7,7 +7,11 @@ import { MaterialComponent } from '../MaterialComponent';
       padding: 16px;
       background-color: white;
       box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-    }`
+    }
+    .formio-time {
+      display: flex;
+    }
+    `
   ],
   template: `
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%">
@@ -24,6 +28,7 @@ import { MaterialComponent } from '../MaterialComponent';
           >
           </mat-calendar>
           <mat-formio-time
+                  #time
                   [hourStep]="hourStep"
                   [minuteStep]="minuteStep"
                   (selectedEvent)="onTime($event)"
@@ -40,6 +45,9 @@ import { MaterialComponent } from '../MaterialComponent';
 export class MaterialCalendarComponent extends MaterialComponent {
   public selectedDate: any;
   public selectedTime: any;
+  public selectedTimeComponent: any;
+
+  @ViewChild('time', {static: false}) time;
 
   @Input() enableDate: boolean;
   @Input() enableTime: boolean;
@@ -53,6 +61,15 @@ export class MaterialCalendarComponent extends MaterialComponent {
 
   setInstance(instance: any) {
     super.setInstance(instance);
+  }
+
+  setExistedDate(value) {
+    this.selectedDate = value;
+  }
+
+  setExistedTime(value, forTime) {
+    this.selectedTime = value;
+    this.time.setValue(forTime);
   }
 
   onDate(event){
