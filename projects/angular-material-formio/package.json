@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.24.0",
+  "version": "1.25.0",
   "peerDependencies": {
     "@angular/cdk": "^8.0.0",
     "@angular/common": "^8.0.0",
@@ -10,8 +10,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.7.10",
-    "formiojs": "^4.9.27-rc.3"
+    "angular-formio": "^4.8.0-rc.1",
+    "formiojs": "^4.10.0-rc.2"
   },
   "main": "src/public-api.ts"
 }
