@@ -45,13 +45,10 @@ export class MaterialSelectBoxesComponent extends MaterialRadioComponent {
   }
 
   setValue(value) {
-    if (typeof value !== 'object') {
-      this.instance.setCustomValidity(`Incorrect value format, please,
-       make sure that defaultValue is an Object`);
-    }
-    for (const prop in value) {
-      if (value.hasOwnProperty(prop)) {
-        this.value[prop] = value[prop];
+    const normalizedValue = this.instance.normalizeValue(value);
+    for (const prop in normalizedValue) {
+      if (normalizedValue.hasOwnProperty(prop)) {
+        this.value[prop] = normalizedValue[prop];
       }
     }
   }
