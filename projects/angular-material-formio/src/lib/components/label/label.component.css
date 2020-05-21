@@ -2,3 +2,9 @@
   pointer-events: all;
   display: block;
 }
+
+.required-star {
+  color: red;
+  font-size: 0.7rem;
+  vertical-align: top;
+}
