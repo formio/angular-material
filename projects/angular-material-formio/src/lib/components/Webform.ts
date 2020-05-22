@@ -10,8 +10,11 @@ Webform.prototype.clear = function() {
 };
 Webform.prototype.render = function() {
   if (this.viewContainer && this.viewContainer()) {
+    const flags = this.options
+      ? {validateOnInit: this.options.validateOnInit}
+      : null;
     this.clear();
     this.renderComponents();
-    this.setValue(this._submission);
+    this.setValue(this._submission, flags);
   }
 };
