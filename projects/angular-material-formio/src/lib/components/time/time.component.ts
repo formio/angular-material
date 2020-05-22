@@ -32,7 +32,7 @@ import * as moment_ from 'moment';
                   fxFlex="30%"
                   (input)="onChange()"
           >
-          <button [disabled]="instance?.disabled"
+          <button [disabled]="instance?.component?.disabled"
                   fxFlex="15%"
                   (click)="changePeriod()"
           >

@@ -42,8 +42,8 @@ export class MaterialTextfieldComponent extends MaterialComponent implements Aft
   public inputType = 'text';
 
   ngAfterContentInit() {
-    if (this.instance && this.control) {
-      this.setDisabled(this.instance.disabled);
+    if (this.instance && this.control && this.instance.component.disabled) {
+      this.control.disable();
     }
   }
 

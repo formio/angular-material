@@ -109,10 +109,6 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
     }
-
-    if (this.instance) {
-      this.setDisabled(this.instance.disabled);
-    }
   }
 
   ngAfterViewChecked() {
