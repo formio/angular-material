@@ -58,11 +58,15 @@ export class FormioComponent extends FormioBaseComponent {
   }
 
   getRendererOptions(): any {
-    return {...super.getRendererOptions(), validateOnInit: get(this.options, 'validateOnInit', true) }
+    const rendererOptions = super.getRendererOptions();
+    return {...rendererOptions, validateOnInit: get(rendererOptions, 'validateOnInit', true) }
   }
 
   createRenderer() {
     const options = this.getRendererOptions();
+    const flags = {
+      validateOnInit: options.validateOnInit
+    };
     options.viewResolver = this.resolver;
     const form = new Form();
     form._form = this.form;
@@ -70,7 +74,7 @@ export class FormioComponent extends FormioBaseComponent {
     form.options.events = form.events;
     form.instance = form.create(this.form.display);
     form.instance.viewContainer = () => this.formioViewContainer;
-    this.ngZone.run(() => form.instance.setForm(this.form)
+    this.ngZone.run(() => form.instance.setForm(this.form, flags)
       .then(() => form.readyResolve(form.instance))
       .catch(() => form.readyReject())
     );
