@@ -1,7 +1,6 @@
 const Components = require('formiojs/components/Components').default;
 import Component from 'formiojs/components/_classes/component/Component.js';
 
-import './Base';
 import { TextFieldComponent } from './textfield/textfield.component';
 import { PasswordComponent } from './password/password.component';
 import { EmailComponent } from './email/email.component';
