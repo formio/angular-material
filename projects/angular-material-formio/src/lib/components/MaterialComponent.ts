@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
-import FormioComponent from 'formiojs/components/_classes/component/Component.js';
+import FormioComponent from './Base';
 import { FormioControl } from '../FormioControl';
 
 @Component({
