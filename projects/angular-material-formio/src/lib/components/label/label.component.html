@@ -1,5 +1,5 @@
 <ng-container *ngIf="instance">
-  {{ instance.component.label }}
+  {{ instance.component.label }}<span class="required-star" *ngIf="instance.component.validate.required">*</span>
   <mat-icon *ngIf="instance.component.tooltip" style="font-size: 1rem;"
             matTooltip="{{ instance.component.tooltip }}" matSuffix
   >
