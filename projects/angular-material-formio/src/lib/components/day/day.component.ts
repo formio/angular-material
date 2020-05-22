@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MaterialComponent } from '../MaterialComponent';
 import DayComponent from 'formiojs/components/day/Day.js';
@@ -51,7 +51,7 @@ DayComponent.prototype.getFieldValue = function(name) {
     </ng-template>
   `
 })
-export class MaterialDayComponent extends MaterialComponent implements AfterViewInit {
+export class MaterialDayComponent extends MaterialComponent {
   public dayControl: FormControl = new FormControl();
   public monthControl: FormControl = new FormControl();
   public yearControl: FormControl = new FormControl();
@@ -94,14 +94,6 @@ export class MaterialDayComponent extends MaterialComponent implements AfterView
       this.yearControl.setValue(parseInt(momentDate(value).format('YYYY')));
     }
     this.instance.setValueAt(0, value);
-  }
-
-  ngAfterViewInit() {
-    super.ngAfterViewInit()
-
-    if (this.instance) {
-      this.setDisabled(this.instance.shouldDisabled)
-    }
   }
 }
 DayComponent.MaterialComponent = MaterialDayComponent;
