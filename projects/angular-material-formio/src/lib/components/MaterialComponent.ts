@@ -33,14 +33,14 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   renderComponents() {}
 
-  onChange() {
+  onChange(keepInputRaw?) {
     let value = this.getValue();
 
     if (value === undefined || value === null) {
       value = this.instance.emptyValue;
     }
 
-    if (this.input && this.input.nativeElement.mask) {
+    if (this.input && this.input.nativeElement.mask && value && !keepInputRaw) {
       this.input.nativeElement.mask.textMaskInputElement.update(value);
       this.control.setValue(this.input.nativeElement.value);
       value = this.getValue();
