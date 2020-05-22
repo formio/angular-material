@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
 import FormioComponent from 'formiojs/components/_classes/component/Component.js';
 import { FormioControl } from '../FormioControl';
 
@@ -6,7 +6,7 @@ import { FormioControl } from '../FormioControl';
   selector: 'mat-formio-comp',
   template: '<mat-card>Unknown Component: {{ instance.component.type }}</mat-card>'
 })
-export class MaterialComponent implements AfterViewInit, OnInit {
+export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecked {
   @Input() instance: any;
   @ViewChild('input', {static: false}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
@@ -24,14 +24,25 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     if (this.instance) {
-      if (this.instance.parent.options.validateOnInit) {
-        this.control.markAsTouched();
+      if (this.shouldValidateOnInit()) {
+        this.instance.setPristine(false);
+        this.ref.detach();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
+    this.onChange();
   }
 
   renderComponents() {}
+
+  shouldValidateOnInit() {
+    if (!this.instance) {
+      return;
+    }
+
+    return this.instance.options.validateOnInit
+      || this.instance.parent.options.validateOnInit;
+  }
 
   onChange(keepInputRaw?) {
     let value = this.getValue();
@@ -58,6 +69,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   beforeSubmit() {
     this.control.markAsTouched();
+  }
+
+  hasError() {
+    return this.instance && this.instance.error;
   }
 
   setDisabled(disabled) {
@@ -98,6 +113,24 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.instance) {
       this.setDisabled(this.instance.disabled);
     }
+  }
+
+  ngAfterViewChecked() {
+    if (!this.shouldValidateOnInit()) {
+      return;
+    } else if (!this.hasError()) {
+      this.ref.detectChanges();
+      return;
+    }
+
+    const {defaultValue, key} = this.instance.component;
+    const {submission} = this.instance.parent;
+
+    if (defaultValue || (submission.data && submission.data[key])) {
+      this.control.markAsTouched();
+    }
+
+    this.ref.detectChanges();
   }
 }
 
