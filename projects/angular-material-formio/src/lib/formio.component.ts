@@ -1,6 +1,5 @@
 import { Component, Optional, ChangeDetectorRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, NgZone } from '@angular/core';
 import { FormioBaseComponent } from 'angular-formio/FormioBaseComponent';
-import { FormioLoader } from 'angular-formio/components/loader/formio.loader';
 import { FormioAppConfig } from 'angular-formio/formio.config';
 import { Form } from './renderer';
 import { get } from 'lodash';
@@ -31,7 +30,7 @@ import { get } from 'lodash';
     `
   ],
   template: `
-    <mat-spinner *ngIf="loader.loading"></mat-spinner>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
     <div *ngIf="!this.options?.disableAlerts">
       <div *ngFor="let alert of alerts.alerts"
            class="alert alert-{{ alert.type }}"
@@ -51,10 +50,9 @@ export class FormioComponent extends FormioBaseComponent {
     private resolver: ComponentFactoryResolver,
     private cd: ChangeDetectorRef,
     public ngZone: NgZone,
-    public loader: FormioLoader,
     @Optional() public config: FormioAppConfig
   ) {
-    super(ngZone, loader, config);
+    super(ngZone, config);
   }
 
   getRendererOptions(): any {

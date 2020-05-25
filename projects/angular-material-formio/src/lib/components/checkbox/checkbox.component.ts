@@ -7,7 +7,9 @@ import _ from 'lodash';
   selector: 'mat-formio-checkbox',
   template: `
     <mat-checkbox (change)="onChange()" [ngClass]="{'validation-error' : !!instance.error}"
-                  [formControl]="control">{{ instance.component.label }}
+                  [formControl]="control"
+    >
+      <span matFormioLabel [instance]="instance"></span>
       <mat-icon *ngIf="instance.component.tooltip" matSuffix
                 matTooltip="{{ instance.component.tooltip }}" style="font-size: 1rem;">info
       </mat-icon>

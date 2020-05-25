@@ -1,22 +1,12 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import HtmlComponent from 'formiojs/components/html/HTML.js';
-import { LabelPositions } from "../../const/LabelPositions";
 
 @Component({
   selector: 'mat-formio-html',
-  template: `
-    <mat-formio-form-field [instance]="instance"
-                           [componentTemplate]="componentTemplate"
-                           [renderTopLabel]="true"
-    ></mat-formio-form-field>
-    <ng-template #componentTemplate let-hasLabel>
-      <div #htmlBody></div>
-    </ng-template>
-  `
+  template: `<div #htmlBody></div>`
 })
 export class MaterialHtmlComponent extends MaterialComponent implements AfterViewInit {
-  labelPositions = LabelPositions;
   @ViewChild('htmlBody', {static: false}) htmlBody: ElementRef;
 
   ngAfterViewInit() {
