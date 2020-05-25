@@ -26,7 +26,6 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
     if (this.instance) {
       if (this.shouldValidateOnInit()) {
         this.instance.setPristine(false);
-        this.ref.detach();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
@@ -116,10 +115,7 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
   }
 
   ngAfterViewChecked() {
-    if (!this.shouldValidateOnInit()) {
-      return;
-    } else if (!this.hasError()) {
-      this.ref.detectChanges();
+    if (!this.shouldValidateOnInit() && !this.hasError()) {
       return;
     }
 
@@ -129,8 +125,6 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
     if (defaultValue || (submission.data && submission.data[key])) {
       this.control.markAsTouched();
     }
-
-    this.ref.detectChanges();
   }
 }
 
