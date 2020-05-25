@@ -74,6 +74,10 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
     return this.instance && this.instance.error;
   }
 
+  hasSubmission() {
+    return this.instance.submission || this.instance.parent.submission;
+  }
+
   setDisabled(disabled) {
     if (disabled) {
       this.control.disable();
@@ -115,7 +119,7 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
   }
 
   ngAfterViewChecked() {
-    if (!this.shouldValidateOnInit() && !this.hasError()) {
+    if ((!this.shouldValidateOnInit() && !this.hasError()) || !this.hasSubmission()) {
       return;
     }
 
@@ -124,6 +128,7 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
 
     if (defaultValue || (submission.data && submission.data[key])) {
       this.control.markAsTouched();
+      this.ref.detectChanges();
     }
   }
 }
