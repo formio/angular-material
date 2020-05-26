@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
 import FormioComponent from './Base';
 import { FormioControl } from '../FormioControl';
 
@@ -6,7 +6,7 @@ import { FormioControl } from '../FormioControl';
   selector: 'mat-formio-comp',
   template: '<mat-card>Unknown Component: {{ instance.component.type }}</mat-card>'
 })
-export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecked {
+export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
   @ViewChild('input', {static: false}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
@@ -24,27 +24,16 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
 
   ngOnInit() {
     if (this.instance) {
-      if (this.shouldValidateOnInit()) {
-        this.instance.setPristine(false);
-        this.ref.detach();
+      if (this.instance.parent.options.validateOnInit) {
+        this.control.markAsTouched();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
-    this.onChange();
   }
 
   renderComponents() {}
 
-  shouldValidateOnInit() {
-    if (!this.instance) {
-      return;
-    }
-
-    return this.instance.options.validateOnInit
-      || this.instance.parent.options.validateOnInit;
-  }
-
-  onChange(keepInputRaw?) {
+  onChange(keepInputRaw?: boolean) {
     let value = this.getValue();
 
     if (value === undefined || value === null) {
@@ -69,10 +58,6 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
 
   beforeSubmit() {
     this.control.markAsTouched();
-  }
-
-  hasError() {
-    return this.instance && this.instance.error;
   }
 
   setDisabled(disabled) {
@@ -109,24 +94,6 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
     }
-  }
-
-  ngAfterViewChecked() {
-    if (!this.shouldValidateOnInit()) {
-      return;
-    } else if (!this.hasError()) {
-      this.ref.detectChanges();
-      return;
-    }
-
-    const {defaultValue, key} = this.instance.component;
-    const {submission} = this.instance.parent;
-
-    if (defaultValue || (submission.data && submission.data[key])) {
-      this.control.markAsTouched();
-    }
-
-    this.ref.detectChanges();
   }
 }
 
