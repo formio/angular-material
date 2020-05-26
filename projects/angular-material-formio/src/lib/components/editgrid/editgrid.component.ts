@@ -12,6 +12,13 @@ import { FormioComponent } from '../../formio.component';
 import Components from 'formiojs/components/Components';
 import isString from 'lodash/isString';
 
+enum EditRowState {
+  NEW = 'new',
+  EDITING ='editing',
+  SAVED = 'saved',
+  REMOVED = 'removed'
+};
+
 /* tslint:disable no-bitwise only-arrow-functions */
 const hashCode = function(str) {
   let hash = 0;
@@ -98,11 +105,10 @@ const DEFAULT_ROW_TEMPLATES = [
           </mat-expansion-panel>
 
           <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;"
-                               [expanded]="row.isOpen"
-                               (closed)="onExpanderClose()"
+                               [expanded]="instance.isOpen(row)"
           >
             <mat-expansion-panel-header (click)="editRow(row, i)">
-              <span *ngIf="!row.isNew" #rows fxFill></span>
+              <span *ngIf="row.state !== RowStates.NEW" #rows fxFill></span>
             </mat-expansion-panel-header>
 
             <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
@@ -149,6 +155,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   public columns: any = {};
   public colWidth = 0;
   public valid = true;
+  public RowStates = EditRowState;
 
   getRowTemplate(content) {
     return `<mat-list style="display: flex;">
@@ -158,13 +165,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
         {% } %}
       {% }) %}
     </mat-list>`;
-  }
-
-  onExpanderClose() {
-    if (this.forms && !this.valid) {
-      this.instance.removeRow(this.forms.length - 1);
-    }
-  }
+}
 
   validate(index) {
     if (!this.forms) {
@@ -234,11 +235,13 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
 
   addAnother() {
     const row = this.instance.addRow();
-    row.isNew = true;
   }
 
   editRow(row, index) {
-    if (row.isNew) {
+    const { state } = row;
+    const { NEW, REMOVED } = this.RowStates;
+
+    if (state === NEW || state === REMOVED) {
       return;
     }
     this.instance.editRow(index);
@@ -257,9 +260,9 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
   updateRowTemplate(rowElement: ElementRef, index, comps) {
     const self = this;
     const editRow: any = {...this.instance.editRows[index]};
-    if (!editRow.isNew) {
+    if (editRow.state !== this.RowStates.NEW) {
       this.renderTemplate(rowElement, this.instance.renderString(this.instance.component.templates.row, {
-        row: this.instance.dataValue[index],
+        row: this.instance.dataValue[index] || {},
         data: this.instance.data,
         rowIndex: index,
         colWidth: this.colWidth,
@@ -281,7 +284,6 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
    * @param index - The index for this row.
    */
   saveRow(row, index) {
-    row.isNew = false;
     const forms = this.forms.toArray();
     if (forms[index]) {
       const formioComponent = forms[index];
