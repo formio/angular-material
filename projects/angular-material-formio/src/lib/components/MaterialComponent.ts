@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
 import FormioComponent from './Base';
 import { FormioControl } from '../FormioControl';
 
@@ -6,7 +6,7 @@ import { FormioControl } from '../FormioControl';
   selector: 'mat-formio-comp',
   template: '<mat-card>Unknown Component: {{ instance.component.type }}</mat-card>'
 })
-export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecked {
+export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
   @ViewChild('input', {static: false}) input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
@@ -29,21 +29,11 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
-    this.onChange();
   }
 
   renderComponents() {}
 
-  shouldValidateOnInit() {
-    if (!this.instance) {
-      return;
-    }
-
-    return this.instance.options.validateOnInit
-      || this.instance.parent.options.validateOnInit;
-  }
-
-  onChange(keepInputRaw?) {
+  onChange(keepInputRaw?: boolean) {
     let value = this.getValue();
 
     if (value === undefined || value === null) {
@@ -74,8 +64,13 @@ export class MaterialComponent implements AfterViewInit, OnInit, AfterViewChecke
     return this.instance && this.instance.error;
   }
 
-  hasSubmission() {
-    return this.instance.submission || this.instance.parent.submission;
+  shouldValidateOnInit() {
+    if (!this.instance) {
+      return;
+    }
+
+    return this.instance.options.validateOnInit
+      || this.instance.parent.options.validateOnInit;
   }
 
   setDisabled(disabled) {
