@@ -1,5 +1,6 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
 import FormioComponent from './Base';
+import Validator from 'formiojs/validator/Validator.js';
 import { FormioControl } from '../FormioControl';
 
 @Component({
@@ -25,9 +26,33 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     if (this.instance) {
       if (this.shouldValidateOnInit()) {
-        this.instance.setPristine(false);
+        this.validateOnInit();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
+    }
+  }
+
+  validateOnInit() {
+    const {defaultValue, key} = this.instance.component;
+    const {submission} = this.instance.parent;
+    const submissionValue = submission && submission.data && submission.data[key];
+    const validationValue = submissionValue ? {[key]: submissionValue} : {[key]: defaultValue};
+
+    this.instance.dataValue = submissionValue || defaultValue;
+
+    const validationResult = Validator.checkComponent(
+      this.instance,
+      validationValue,
+      validationValue
+    );
+
+    if (validationResult.length) {
+      this.instance.error = validationResult[0];
+      this.control.setErrors({ isValid: false });
+      if (submissionValue || defaultValue) {
+        this.control.markAsTouched();
+      }
+      this.ref.detectChanges();
     }
   }
 
@@ -106,21 +131,6 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.input) {
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
-    }
-  }
-
-  ngAfterViewChecked() {
-    if (!this.shouldValidateOnInit() && !this.hasError()) {
-      return;
-    }
-
-    const {defaultValue, key} = this.instance.component;
-    const {submission} = this.instance.parent;
-    const hasSubmission = submission && submission.data && submission.data[key];
-
-    if (defaultValue || hasSubmission) {
-      this.control.markAsTouched();
-      this.ref.detectChanges();
     }
   }
 }
