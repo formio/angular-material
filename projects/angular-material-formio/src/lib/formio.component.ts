@@ -56,7 +56,8 @@ export class FormioComponent extends FormioBaseComponent {
   }
 
   getRendererOptions(): any {
-    return {...super.getRendererOptions(), validateOnInit: get(this.options, 'validateOnInit', true) }
+    const rendererOptions = super.getRendererOptions();
+    return {...rendererOptions, validateOnInit: get(rendererOptions, 'validateOnInit', true) }
   }
 
   createRenderer() {
