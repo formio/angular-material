@@ -1,7 +1,9 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked, AfterContentInit} from '@angular/core';
 import FormioComponent from './Base';
 import Validator from 'formiojs/validator/Validator.js';
 import { FormioControl } from '../FormioControl';
+import get from 'lodash/get';
+import isNil from 'lodash/isNil';
 
 @Component({
   selector: 'mat-formio-comp',
@@ -26,6 +28,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     if (this.instance) {
       if (this.shouldValidateOnInit()) {
+        this.storeSubmission();
         this.validateOnInit();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
@@ -34,11 +37,12 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   validateOnInit() {
     const {defaultValue, key} = this.instance.component;
-    const {submission} = this.instance.parent;
-    const submissionValue = submission && submission.data && submission.data[key];
-    const validationValue = submissionValue ? {[key]: submissionValue} : {[key]: defaultValue};
+    const submittedValue = this.getSubmittedValue(this.instance.path);
+    const validationValue = isNil(submittedValue)
+      ? {[key]: defaultValue}
+      : {[key]: submittedValue};
 
-    this.instance.dataValue = submissionValue || defaultValue;
+    this.instance.dataValue = isNil(submittedValue) ? defaultValue : submittedValue;
 
     const validationResult = Validator.checkComponent(
       this.instance,
@@ -49,11 +53,28 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (validationResult.length) {
       this.instance.error = validationResult[0];
       this.control.setErrors({ isValid: false });
-      if (submissionValue || defaultValue) {
+      if (!isNil(submittedValue) || defaultValue) {
         this.control.markAsTouched();
       }
       this.ref.detectChanges();
     }
+  }
+
+  storeSubmission() {
+    if (this.instance.parent.submission && this.instance.parent.submission.data) {
+      sessionStorage.setItem('submission', JSON.stringify(this.instance.parent.submission.data));
+      window.addEventListener('unload', () => sessionStorage.removeItem('submission'));
+    }
+  }
+
+  getSubmittedValue(path) {
+    const submission = JSON.parse(sessionStorage.getItem('submission'));
+
+    if (!submission) {
+      return;
+    }
+
+    return get(submission, path);
   }
 
   renderComponents() {}
@@ -86,7 +107,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   hasError() {
-    return this.instance && this.instance.error;
+    return !!this.instance && !!this.instance.error;
   }
 
   shouldValidateOnInit() {
