@@ -3,7 +3,6 @@ import FormioComponent from './Base';
 import Validator from 'formiojs/validator/Validator.js';
 import { FormioControl } from '../FormioControl';
 import get from 'lodash/get';
-import isNil from 'lodash/isNil';
 
 @Component({
   selector: 'mat-formio-comp',
@@ -28,7 +27,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     if (this.instance) {
       if (this.shouldValidateOnInit()) {
-        this.storeSubmission();
+        this.storeFormData();
         this.validateOnInit();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
@@ -36,45 +35,44 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   validateOnInit() {
-    const {defaultValue, key} = this.instance.component;
-    const submittedValue = this.getSubmittedValue(this.instance.path);
-    const validationValue = isNil(submittedValue)
-      ? {[key]: defaultValue}
-      : {[key]: submittedValue};
+    const {key} = this.instance.component;
+    const validationValue = this.getFormValue(this.instance.path);
 
-    this.instance.dataValue = isNil(submittedValue) ? defaultValue : submittedValue;
+    this.instance.dataValue = validationValue;
 
     const validationResult = Validator.checkComponent(
       this.instance,
-      validationValue,
-      validationValue
+      {[key]: validationValue},
+      {[key]: validationValue}
     );
 
     if (validationResult.length) {
-      this.instance.error = validationResult[0];
-      this.control.setErrors({ isValid: false });
-      if (!isNil(submittedValue) || defaultValue) {
+      // alternatively, but does not work correct either
+      // this.instance.error = validationResult[0];
+      // this.control.setErrors({ incorrect: true });
+      this.instance.setCustomValidity(validationResult, false);
+      if (!!validationValue) {
         this.control.markAsTouched();
       }
       this.ref.detectChanges();
     }
   }
 
-  storeSubmission() {
+  storeFormData() {
     if (this.instance.parent.submission && this.instance.parent.submission.data) {
-      sessionStorage.setItem('submission', JSON.stringify(this.instance.parent.submission.data));
-      window.addEventListener('unload', () => sessionStorage.removeItem('submission'));
+      sessionStorage.setItem('formData', JSON.stringify(this.instance.parent.submission.data));
+      window.addEventListener('unload', () => sessionStorage.removeItem('formData'));
     }
   }
 
-  getSubmittedValue(path) {
-    const submission = JSON.parse(sessionStorage.getItem('submission'));
+  getFormValue(path) {
+    const formData = JSON.parse(sessionStorage.getItem('formData'));
 
-    if (!submission) {
+    if (!formData) {
       return;
     }
 
-    return get(submission, path);
+    return get(formData, path);
   }
 
   renderComponents() {}
