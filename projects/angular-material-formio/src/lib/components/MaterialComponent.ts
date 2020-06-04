@@ -61,7 +61,6 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   storeFormData() {
     if (this.instance.parent.submission && this.instance.parent.submission.data) {
       sessionStorage.setItem('formData', JSON.stringify(this.instance.parent.submission.data));
-      window.addEventListener('unload', () => sessionStorage.removeItem('formData'));
     }
   }
 
