@@ -42,8 +42,8 @@ import {MatTable} from '@angular/material/table';
             <ng-container matColumnDef="__removeRow">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let i = index;">
-                <button mat-button *ngIf="instance.hasRemoveButtons()">
-                  <mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon>
+                <button mat-button *ngIf="instance.hasRemoveButtons()" (click)="removeRow(i)">
+                  <mat-icon aria-hidden="false" aria-label="Remove row">delete</mat-icon>
                 </button>
               </td>
             </ng-container>
