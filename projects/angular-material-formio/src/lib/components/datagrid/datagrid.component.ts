@@ -127,11 +127,18 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
   }
 
   addAnother() {
+    this.checkRowsNumber();
     this.instance.addRow();
     if (this.dataSource.data.length < this.instance.rows.length) {
       this.dataSource.data.push({});
     }
     this.dataSource.data = [...this.dataSource.data];
+  }
+
+  checkRowsNumber() {
+    while (this.instance.rows.length < this.dataSource.data.length) {
+      this.instance.addRow();
+    }
   }
 
   removeRow(index) {
