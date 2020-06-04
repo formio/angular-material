@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio-demo",
-  "version": "1.21.0",
+  "version": "1.27.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,8 +23,8 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
-    "angular-material-formio": "^1.26.0",
-    "formiojs": "^4.10.0-rc.4",
+    "angular-material-formio": "^1.27.0",
+    "formiojs": "^4.10.0-rc.9",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.5.5",
     "tslib": "^1.11.2",
