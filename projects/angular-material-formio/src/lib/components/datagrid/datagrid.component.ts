@@ -151,11 +151,17 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
     this.instance.setValue(this.control.value || []);
   }
 
-  setValue(value) {
-    while (this.instance.rows.length < value.length) {
+  setValue(value: [] | null) {
+    const gridLength = value ? value.length : 0;
+
+    while (this.instance.rows.length < gridLength) {
       this.addAnother();
       this.instance.dataValue = value;
       this.instance.setValue(value);
+    }
+
+    if (!value && this.instance.component.clearOnHide) {
+      this.dataSource = new MatTableDataSource(this.instance.defaultValue);
     }
     super.setValue(value);
   }
