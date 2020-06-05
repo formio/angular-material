@@ -42,8 +42,8 @@ import {MatTable} from '@angular/material/table';
             <ng-container matColumnDef="__removeRow">
               <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let i = index;">
-                <button mat-button *ngIf="instance.hasRemoveButtons()">
-                  <mat-icon aria-hidden="false" aria-label="Remove row" (click)="removeRow(i)">delete</mat-icon>
+                <button mat-button *ngIf="instance.hasRemoveButtons()" (click)="removeRow(i)">
+                  <mat-icon aria-hidden="false" aria-label="Remove row">delete</mat-icon>
                 </button>
               </td>
             </ng-container>
@@ -127,11 +127,18 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
   }
 
   addAnother() {
+    this.checkRowsNumber();
     this.instance.addRow();
     if (this.dataSource.data.length < this.instance.rows.length) {
       this.dataSource.data.push({});
     }
     this.dataSource.data = [...this.dataSource.data];
+  }
+
+  checkRowsNumber() {
+    while (this.instance.rows.length < this.dataSource.data.length) {
+      this.instance.addRow();
+    }
   }
 
   removeRow(index) {
@@ -151,11 +158,17 @@ export class MaterialDataGridComponent extends MaterialNestedComponent {
     this.instance.setValue(this.control.value || []);
   }
 
-  setValue(value) {
-    while (this.instance.rows.length < value.length) {
+  setValue(value: [] | null) {
+    const gridLength = value ? value.length : 0;
+
+    while (this.instance.rows.length < gridLength) {
       this.addAnother();
       this.instance.dataValue = value;
       this.instance.setValue(value);
+    }
+
+    if (!value && this.instance.component.clearOnHide) {
+      this.dataSource = new MatTableDataSource(this.instance.defaultValue);
     }
     super.setValue(value);
   }
