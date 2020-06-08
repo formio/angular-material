@@ -29,7 +29,7 @@ export const TEXTFIELD_TEMPLATE = `
       </mat-hint>
 
       <br/>
-      <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
+      <mat-error *ngIf="isError()" >{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
   </ng-template>
 `;
@@ -72,6 +72,28 @@ export class MaterialTextfieldComponent extends MaterialComponent implements Aft
     const appearances = ['legacy', 'standard', 'fill', 'outline'];
     const appearance = this.instance.component.appearance ? this.instance.component.appearance.toLowerCase() : '';
     return appearances.includes(appearance) ? appearance : undefined;
+  }
+
+  isError() {
+    if (this.instance.error) {
+      this.control.setErrors(this.instance.component.validate);
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  getErrorMessage() {
+    if (this.instance.error && this.instance.error.messages) {
+      const { messages } = this.instance.error;
+
+      for (const msg of messages) {
+        if (msg.context && this.control.hasError(msg.context.validator)) {
+          return this.instance.error.message
+        }
+      }
+    }
   }
 }
 TextFieldComponent.MaterialComponent = MaterialTextfieldComponent;
