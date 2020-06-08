@@ -13,28 +13,40 @@ import * as moment_ from 'moment';
       </mat-label>
 
       <div style="display: block">
-        <div fxLayout="row" fxFlex="205px" fxLayoutGap="5%">
+        <div fxLayout="row" fxLayoutGap="5%">
           <input
-                  [formControl]="hourControl"
-                  [step]="hourStep"
-                  [min]="0"
-                  [max]="12"
-                  type="number"
-                  fxFlex="30%"
-                  (input)="onChange()"
+            [formControl]="hourControl"
+            [step]="hourStep"
+            [min]="0"
+            [max]="12"
+            type="number"
+            fxFlex="25%"
+            (input)="onChange()"
           >
           <input
-                  [formControl]="minuteControl"
-                  [step]="minuteStep"
-                  [min]="0"
-                  [max]="59"
-                  type="number"
-                  fxFlex="30%"
-                  (input)="onChange()"
+            [formControl]="minuteControl"
+            [step]="minuteStep"
+            [min]="0"
+            [max]="59"
+            type="number"
+            fxFlex="25%"
+            (input)="onChange()"
           >
-          <button [disabled]="instance?.component?.disabled"
-                  fxFlex="15%"
-                  (click)="changePeriod()"
+          <input
+            [formControl]="secondControl"
+            [step]="secondStep"
+            [min]="0"
+            [max]="59"
+            type="number"
+            fxFlex="25%"
+            (input)="onChange()"
+            *ngIf="instance?.component?.dataFormat === 'HH:mm:ss' ||
+             instance?.component?.dataFormat === 'HH:mm:ss.SSS'"
+          >
+          <button 
+            [disabled]="instance?.component?.disabled"
+            fxFlex="25%"
+            (click)="changePeriod()"
           >
             {{period}}
           </button>
@@ -50,14 +62,17 @@ export class MaterialTimeComponent extends MaterialComponent {
   public period = 'AM';
   public hourControl: FormControl = new FormControl();
   public minuteControl: FormControl = new FormControl();
+  public secondControl: FormControl = new FormControl();
   @Output() selectedEvent = new EventEmitter<any>();
   @Input() hourStep = 1;
   @Input() minuteStep = 1;
+  @Input() secondStep = 1;
 
   setDisabled(disabled) {
     if (disabled) {
       this.hourControl.disable();
       this.minuteControl.disable();
+      this.secondControl.disable();
     }
   }
 
@@ -68,7 +83,8 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   onChange() {
-    const value = this.getTwentyFourHourTime(`${this.hourControl.value}:${this.minuteControl.value} ${this.period}`);
+    const value = this.getTwentyFourHourTime(`${this.hourControl.value}
+      :${this.minuteControl.value}:${this.secondControl.value || ''} ${this.period}`);
     this.control.setValue(value);
     if (this.instance) {
       super.onChange();
@@ -90,7 +106,7 @@ export class MaterialTimeComponent extends MaterialComponent {
 
   getTwentyFourHourTime(amPmString) {
     const moment = moment_;
-    return moment(amPmString, ['h:mm A']).format('HH:mm');
+    return moment(amPmString, ['h:mm:ss A']).format(this.instance.component.dataFormat);
   }
 
   changePeriod() {
