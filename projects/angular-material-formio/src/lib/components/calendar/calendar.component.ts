@@ -30,6 +30,8 @@ import { MaterialComponent } from '../MaterialComponent';
           <mat-formio-time
                   #time
                   [hourStep]="hourStep"
+                  [instance]="instance"
+                  [renderElementOnly]="true"
                   [minuteStep]="minuteStep"
                   (selectedEvent)="onTime($event)"
                   class="ml-3 formio-time"
