@@ -55,7 +55,7 @@ import * as moment_ from 'moment';
             {{period}}
           </button>
         </div>
-        <mat-error *ngIf="instance?.error">{{ instance.error.message }}</mat-error>
+        <mat-error>{{ error.message }}</mat-error>
       </div>
     </ng-template>
   `
@@ -81,6 +81,10 @@ export class MaterialTimeComponent extends MaterialComponent {
     }
   }
 
+  get error() {
+    return this.instance.error;
+  }
+
   get dataFormat() {
     let format = this.instance.component.dataFormat;
     format = format ? format : 'HH:mm';
@@ -89,16 +93,21 @@ export class MaterialTimeComponent extends MaterialComponent {
 
   setInstance(instance) {
     super.setInstance(instance);
-    this.control.setValue('00:00:00');
+    // this.control.setValue('00:00:00');
     this.onChange();
   }
 
   onChange() {
-    const hours = this.hourControl.value || '00';
+    const hours = this.hourControl.value; 
     const minutes = this.minuteControl.value || '00';
     const seconds = this.secondControl.value || '';
-    const rawValue = `${hours}:${minutes}${seconds ? ':' + seconds : ''} ${this.period}`;
-    const value = this.getTwentyFourHourTime(rawValue);
+    const rawValue = `${hours || '00'}:${minutes}${seconds ? ':' + seconds : ''} ${this.period}`;
+    let value = this.getTwentyFourHourTime(rawValue);
+
+    if (!hours) {
+      value = this.instance.emptyValue;
+    }
+
     this.control.setValue(value);
     if (this.instance) {
       super.onChange();
