@@ -61,6 +61,7 @@ import {FormControl} from '@angular/forms';
                 [enableTime]="enableTime"
                 [hourStep]="instance.component.timePicker.hourStep"
                 [minuteStep]="instance.component.timePicker.minuteStep"
+                [instance]="instance"
         ></mat-formio-calendar>
         <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>

@@ -6,7 +6,11 @@ import * as moment_ from 'moment';
 @Component({
   selector: 'mat-formio-time',
   template: `
-    <mat-formio-form-field [instance]="instance" [componentTemplate]="componentTemplate"></mat-formio-form-field>
+    <mat-formio-form-field
+      [instance]="instance"
+      [componentTemplate]="componentTemplate"
+      [renderElementOnly]="renderElementOnly"
+    ></mat-formio-form-field>
     <ng-template #componentTemplate let-hasLabel>
       <mat-label fxFill *ngIf="hasLabel">
         <span [instance]="instance" matFormioLabel></span>
@@ -67,6 +71,7 @@ export class MaterialTimeComponent extends MaterialComponent {
   @Input() hourStep = 1;
   @Input() minuteStep = 1;
   @Input() secondStep = 1;
+  @Input() renderElementOnly = false;
 
   setDisabled(disabled) {
     if (disabled) {
@@ -76,6 +81,12 @@ export class MaterialTimeComponent extends MaterialComponent {
     }
   }
 
+  get dataFormat() {
+    let format = this.instance.component.dataFormat;
+    format = format ? format : 'HH:mm';
+    return format;
+  }
+
   setInstance(instance) {
     super.setInstance(instance);
     this.control.setValue('00:00:00');
@@ -83,13 +94,16 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   onChange() {
-    const value = this.getTwentyFourHourTime(`${this.hourControl.value}
-      :${this.minuteControl.value}:${this.secondControl.value || ''} ${this.period}`);
+    const hours = this.hourControl.value || '00';
+    const minutes = this.minuteControl.value || '00';
+    const seconds = this.secondControl.value || '';
+    const rawValue = `${hours}:${minutes}${seconds ? ':' + seconds : ''} ${this.period}`;
+    const value = this.getTwentyFourHourTime(rawValue);
     this.control.setValue(value);
     if (this.instance) {
       super.onChange();
     }
-    this.selectedEvent.emit(this.control)
+    this.selectedEvent.emit(this.control);
   }
 
   setValue(value) {
@@ -106,7 +120,7 @@ export class MaterialTimeComponent extends MaterialComponent {
 
   getTwentyFourHourTime(amPmString) {
     const moment = moment_;
-    return moment(amPmString, ['h:mm:ss A']).format(this.instance.component.dataFormat);
+    return moment(amPmString, ['h:mm:ss A']).format(this.dataFormat);
   }
 
   changePeriod() {
