@@ -23,7 +23,8 @@ export class MaterialNestedComponent extends MaterialComponent implements AfterV
 
   render() {
     this.viewContainers = this.components.toArray();
-    requestAnimationFrame(() => this.renderComponents());
+    this.renderComponents();
+    this.ref.detectChanges();
   }
 
   ngAfterViewInit() {
