@@ -17,12 +17,12 @@
   <div class="mat-formio-component" *ngTemplateOutlet="componentTemplate; context: componentTemplateContext"></div>
 
   <span *ngIf="hasLabel([
-                                      labelPositions.BOTTOM,
-                                      labelPositions.RIGHT_RIGHT,
-                                      labelPositions.RIGHT_LEFT,
-                                      labelPositions.LEFT_LEFT,
-                                      labelPositions.LEFT_RIGHT
-                                   ])"
+                          labelPositions.BOTTOM,
+                          labelPositions.RIGHT_RIGHT,
+                          labelPositions.RIGHT_LEFT,
+                          labelPositions.LEFT_LEFT,
+                          labelPositions.LEFT_RIGHT
+                        ])"
         class="mat-formio-label"
         [ngClass]="{
           'mat-formio-label-align-right': hasLabel([labelPositions.LEFT_RIGHT, labelPositions.RIGHT_RIGHT]),
