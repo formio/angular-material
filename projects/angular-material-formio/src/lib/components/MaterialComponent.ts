@@ -92,6 +92,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     if (this.input) {
       // Set the input masks.
       this.instance.setInputMask(this.input.nativeElement);
+      this.instance.addFocusBlurEvents(this.input.nativeElement);
     }
   }
 }
