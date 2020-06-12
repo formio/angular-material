@@ -37,7 +37,10 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     const {key} = this.instance.component;
     const validationValue = this.getFormValue(this.instance.path);
 
-    this.instance.dataValue = validationValue;
+    if (validationValue === null) {
+      return;
+    }
+
     this.instance.setPristine(false);
 
     const validationResult = Validator.checkComponent(
@@ -56,7 +59,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
   }
 
   storeFormData() {
-    if (this.instance.parent.submission && this.instance.parent.submission.data) {
+    if (this.instance.parent && this.instance.parent.submission && this.instance.parent.submission.data) {
       sessionStorage.setItem('formData', JSON.stringify(this.instance.parent.submission.data));
     }
   }
@@ -65,7 +68,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     const formData = JSON.parse(sessionStorage.getItem('formData'));
 
     if (!formData) {
-      return;
+      return null;
     }
 
     return get(formData, path);
