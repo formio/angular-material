@@ -105,7 +105,7 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
     return `<mat-list style="display: flex;">
       {% (components || []).forEach(function(component) { %}
         {% if (!component.hasOwnProperty('tableView') || component.tableView) { %}
-          <mat-list-item style="width: {{ colWidth }}%;">${content}</mat-list-item>
+          <mat-list-item style="width: {{ colWidth }}%; margin: 0 0.8rem">${content}</mat-list-item>
         {% } %}
       {% }) %}
     </mat-list>`;
