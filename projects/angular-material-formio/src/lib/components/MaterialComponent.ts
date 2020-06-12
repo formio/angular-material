@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit, AfterViewChecked, AfterContentInit} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
 import FormioComponent from './Base';
 import Validator from 'formiojs/validator/Validator.js';
 import { FormioControl } from '../FormioControl';
@@ -21,7 +21,6 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     this.instance.disabled = this.instance.shouldDisabled;
     this.setVisible(this.instance.visible);
     this.renderComponents();
-    this.onChange();
   }
 
   ngOnInit() {
@@ -39,6 +38,7 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     const validationValue = this.getFormValue(this.instance.path);
 
     this.instance.dataValue = validationValue;
+    this.instance.setPristine(false);
 
     const validationResult = Validator.checkComponent(
       this.instance,
@@ -47,9 +47,6 @@ export class MaterialComponent implements AfterViewInit, OnInit {
     );
 
     if (validationResult.length) {
-      // alternatively, but does not work correct either
-      // this.instance.error = validationResult[0];
-      // this.control.setErrors({ incorrect: true });
       this.instance.setCustomValidity(validationResult, false);
       if (!!validationValue) {
         this.control.markAsTouched();
