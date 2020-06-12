@@ -12,6 +12,7 @@ export class FormioFormFieldComponent {
   @Input() labelTemplate: TemplateRef<any>;
   @Input() renderTopLabel = false;
   @Input() showDescription = true;
+  @Input() renderElementOnly = false;
 
   @Input('instance')
   set instance(instance) {
@@ -35,7 +36,7 @@ export class FormioFormFieldComponent {
                                         !labelPositions.length ||
                                         !component.labelPosition;
 
-    if (hasNoLabel || labelPositionIsNotSpecified) {
+    if (hasNoLabel || labelPositionIsNotSpecified || this.renderElementOnly) {
       return false;
     }
 

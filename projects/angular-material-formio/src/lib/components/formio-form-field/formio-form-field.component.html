@@ -1,4 +1,4 @@
-<div class="mat-formio-component-wrapper" *ngIf="instance"
+<div class="mat-formio-component-wrapper" *ngIf="instance && !renderElementOnly"
      [ngClass]="{
         'mat-formio-label-right': hasLabel([labelPositions.RIGHT_RIGHT, labelPositions.RIGHT_LEFT]),
         'mat-formio-label-left': hasLabel([labelPositions.LEFT_LEFT, labelPositions.LEFT_RIGHT])
@@ -35,6 +35,10 @@
   <mat-hint *ngIf="showDescription && instance.component.description" class="mat-formio-component-description">
     {{ instance.component.description }}
   </mat-hint>
+</div>
+
+<div class="mat-formio-component-wrapper" *ngIf="renderElementOnly">
+  <div class="mat-formio-component" *ngTemplateOutlet="componentTemplate; context: componentTemplateContext"></div>
 </div>
 
 <ng-template #defaultLabel>
