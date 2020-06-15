@@ -1,6 +1,8 @@
 import {Component, Input, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnInit} from '@angular/core';
 import FormioComponent from './Base';
+import Validator from 'formiojs/validator/Validator.js';
 import { FormioControl } from '../FormioControl';
+import get from 'lodash/get';
 
 @Component({
   selector: 'mat-formio-comp',
@@ -23,11 +25,53 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     if (this.instance) {
-      if (this.instance.parent.options.validateOnInit) {
-        this.control.markAsTouched();
+      if (this.shouldValidateOnInit()) {
+        this.storeFormData();
+        this.validateOnInit();
       }
       this.instance.component.defaultValue ? this.setValue(this.instance.component.defaultValue) : '';
     }
+  }
+
+  validateOnInit() {
+    const {key} = this.instance.component;
+    const validationValue = this.getFormValue(this.instance.path);
+
+    if (validationValue === null) {
+      return;
+    }
+
+    this.instance.setPristine(false);
+
+    const validationResult = Validator.checkComponent(
+      this.instance,
+      {[key]: validationValue},
+      {[key]: validationValue}
+    );
+
+    if (validationResult.length) {
+      this.instance.setCustomValidity(validationResult, false);
+      if (!!validationValue) {
+        this.control.markAsTouched();
+      }
+      this.ref.detectChanges();
+    }
+  }
+
+  storeFormData() {
+    if (this.instance.parent && this.instance.parent.submission && this.instance.parent.submission.data) {
+      sessionStorage.setItem('formData', JSON.stringify(this.instance.parent.submission.data));
+    }
+  }
+
+  getFormValue(path) {
+    const formData = JSON.parse(sessionStorage.getItem('formData'));
+
+    if (!formData) {
+      return null;
+    }
+
+    return get(formData, path);
   }
 
   renderComponents() {}
@@ -57,6 +101,19 @@ export class MaterialComponent implements AfterViewInit, OnInit {
 
   beforeSubmit() {
     this.control.markAsTouched();
+  }
+
+  hasError() {
+    return !!this.instance && !!this.instance.error;
+  }
+
+  shouldValidateOnInit() {
+    if (!this.instance) {
+      return;
+    }
+
+    return this.instance.options.validateOnInit
+      || this.instance.parent.options.validateOnInit;
   }
 
   setDisabled(disabled) {
