@@ -1,6 +1,6 @@
 {
   "name": "angular-material-formio",
-  "version": "1.29.0",
+  "version": "1.30.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,8 +19,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.8.0-rc.8",
-    "formiojs": "^4.10.0-rc.12"
+    "angular-formio": "^4.8.3-rc.1",
+    "formiojs": "^4.10.3-rc.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.23",
