@@ -30,7 +30,12 @@ export class MaterialNumberComponent extends MaterialTextfieldComponent implemen
   }
 
   getValue() {
-    return this.instance && !_.isNil(this.control.value) ? this.instance.parseNumber(this.control.value) : this.control.value;
+    let value = this.control.value;
+    if (value && this.instance) {
+      value = value.replace(this.instance.prefix, '');
+      return !_.isNil(value) && value !== '' ? this.instance.parseNumber(value) : value;
+    }
+    return value;
   }
 
   setValue(value) {
