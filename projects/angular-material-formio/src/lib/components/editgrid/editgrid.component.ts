@@ -16,7 +16,8 @@ enum EditRowState {
   NEW = 'new',
   EDITING ='editing',
   SAVED = 'saved',
-  REMOVED = 'removed'
+  REMOVED = 'removed',
+  DRAFT = 'draft'
 };
 
 /* tslint:disable no-bitwise only-arrow-functions */
@@ -55,13 +56,12 @@ EditGridComponent.prototype.checkRow = function(data, editRow, flags: any = {}) 
 
 const DEFAULT_HEADER_TEMPLATES = [
   hashCode((EditGridComponent as any).defaultHeaderTemplate),
-  hashCode(`<div class="row">
-  {% util.eachComponent(components, function(component) { %}
-    <div class="col-sm-2">
-      {{ component.label }}
-    </div>
-  {% }) %}
-</div>`)
+  hashCode(`
+  <div class="row">
+    {% (components || []).forEach(function(component) { %}
+      <div class="col-sm-2">{{ component.label }}</div>
+    {% }) %}
+  </div>`)
 ];
 
 const DEFAULT_ROW_TEMPLATES = [
@@ -85,64 +85,8 @@ const DEFAULT_ROW_TEMPLATES = [
 
 @Component({
   selector: 'mat-formio-editgrid',
-  styles: [':host .delete-button { margin-left: auto; order: 2; }'],
-  template: `
-    <mat-formio-form-field [instance]="instance"
-                           [componentTemplate]="componentTemplate"
-                           [labelTemplate]="labelTemplate"
-    ></mat-formio-form-field>
-    <ng-template #componentTemplate let-hasLabel>
-
-      <span fxLayout="column" fxLayoutGap="1em" fxFill>
-        <ng-container *ngIf="hasLabel">
-            <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
-        </ng-container>
-        <mat-accordion>
-          <mat-expansion-panel *ngIf="header" disabled="true">
-            <mat-expansion-panel-header>
-              <span #header fxFill></span>
-            </mat-expansion-panel-header>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel *ngFor="let row of instance.editRows; index as i;"
-                               [expanded]="instance.isOpen(row)"
-          >
-            <mat-expansion-panel-header (click)="editRow(row, i)">
-              <span *ngIf="row.state !== RowStates.NEW" #rows fxFill></span>
-            </mat-expansion-panel-header>
-
-            <mat-formio [form]="instance.component" #forms (change)="validate(i)"></mat-formio>
-
-            <span fxLayout="row" fxLayoutGap="1em">
-              <button mat-raised-button color="primary" [disabled]="!valid" (click)="saveRow(row, i)">Save</button>
-              <button mat-raised-button color="secondary" (click)="cancelRow(i)">Cancel</button>
-              <button mat-raised-button color="warn" (click)="instance.removeRow(i)" class="delete-button">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </span>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel *ngIf="footer" disabled="true">
-            <mat-expansion-panel-header>
-              <span #footer></span>
-            </mat-expansion-panel-header>
-          </mat-expansion-panel>
-        </mat-accordion>
-
-        <span fxFill="none" *ngIf="instance.hasAddButton()">
-          <button mat-raised-button color="primary" (click)="addAnother()">
-            <mat-icon>add</mat-icon> Add Another
-          </button>
-        </span>
-      </span>
-    </ng-template>
-
-    <ng-template #labelTemplate>
-      <mat-card-title>
-        <span [instance]="instance" matFormioLabel></span>
-      </mat-card-title>
-    </ng-template>
-  `
+  styleUrls: ['./editgrid.component.css'],
+  templateUrl: './editgrid.component.html'
 })
 export class MaterialEditGridComponent extends MaterialNestedComponent implements AfterViewInit {
   @ViewChild('header', { static: false }) headerElement: ElementRef;
@@ -159,9 +103,9 @@ export class MaterialEditGridComponent extends MaterialNestedComponent implement
 
   getRowTemplate(content) {
     return `<mat-list style="display: flex;">
-      {% util.eachComponent(components, function(component) { %}
+      {% (components || []).forEach(function(component) { %}
         {% if (!component.hasOwnProperty('tableView') || component.tableView) { %}
-          <mat-list-item style="width: {{ colWidth }}%;">${content}</mat-list-item>
+          <mat-list-item style="width: {{ colWidth }}%; margin: 0 0.8rem">${content}</mat-list-item>
         {% } %}
       {% }) %}
     </mat-list>`;
