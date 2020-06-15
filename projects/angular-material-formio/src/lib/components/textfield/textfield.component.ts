@@ -77,10 +77,10 @@ export class MaterialTextfieldComponent extends MaterialComponent implements Aft
   isError() {
     if (this.instance.error) {
       this.control.setErrors(this.instance.component.validate);
-      return true
+      return true;
     }
     else {
-      return false
+      return false;
     }
   }
 
@@ -90,7 +90,7 @@ export class MaterialTextfieldComponent extends MaterialComponent implements Aft
 
       for (const msg of messages) {
         if (msg.context && this.control.hasError(msg.context.validator)) {
-          return this.instance.error.message
+          return this.instance.error.message;
         }
       }
     }
