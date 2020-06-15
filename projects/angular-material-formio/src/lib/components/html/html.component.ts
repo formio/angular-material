@@ -11,16 +11,11 @@ export class MaterialHtmlComponent extends MaterialComponent implements AfterVie
 
   ngAfterViewInit() {
     super.ngAfterViewInit();
-    this.htmlBody.nativeElement.innerHTML = this.instance.renderContent();
-  }
-
-  setInstance(instance) {
-    if (instance.component.refreshOnChange) {
-      instance.checkRefreshOn = () => {
-        this.htmlBody.nativeElement.innerHTML = instance.renderContent();
+    if (this.instance.component.refreshOnChange) {
+      this.instance.checkRefreshOn = () => {
+        this.htmlBody.nativeElement.innerHTML = this.instance.renderContent();
       };
     }
-    return super.setInstance(instance);
   }
 }
 HtmlComponent.MaterialComponent = MaterialHtmlComponent;
