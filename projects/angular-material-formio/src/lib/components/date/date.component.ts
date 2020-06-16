@@ -1,9 +1,8 @@
-import { Component, NgModule, ViewChild } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import { MaterialComponent } from '../MaterialComponent';
 import DateTimeComponent from 'formiojs/components/datetime/DateTime.js';
 import { momentDate } from 'formiojs/utils/utils.js';
 import {FormControl} from '@angular/forms';
-
 @Component({
   selector: 'mat-formio-date',
   host: {
@@ -127,7 +126,10 @@ export class MaterialDateComponent extends MaterialComponent {
     if (this.enableTime && this.enableDate) {
       const [hours, minutes] = this.selectedTime.split(':');
       newDate = isSelectedTime
-          ? momentDate(this.selectedDate).hours(hours).minutes(minutes).utc().format()
+          ? momentDate(this.selectedDate)
+           .hours(Number.parseInt(hours))
+           .minutes(Number.parseInt(minutes))
+           .utc()
           : this.selectedDate;
     }
 
@@ -137,9 +139,13 @@ export class MaterialDateComponent extends MaterialComponent {
 
     if (this.enableTime && !this.enableDate) {
       const [hours, minutes] = this.selectedTime.split(':');
-      const today = momentDate(new Date());
-      newDate = today.hours(hours).minutes(minutes).seconds(0).utc().format();
+      newDate = momentDate(new Date())
+        .hours(Number.parseInt(hours))
+        .minutes(Number.parseInt(minutes))
+        .seconds(0)
+        .utc();
     }
+
     return newDate;
   }
 
