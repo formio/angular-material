@@ -19,8 +19,8 @@
     "@angular/material": "^8.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.8.3-rc.1",
-    "formiojs": "^4.10.3-rc.1"
+    "angular-formio": "^4.8.3-rc.3",
+    "formiojs": "^4.10.3-rc.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.23",
