@@ -47,7 +47,7 @@ import * as moment_ from 'moment';
             *ngIf="instance?.component?.dataFormat === 'HH:mm:ss' ||
              instance?.component?.dataFormat === 'HH:mm:ss.SSS'"
           >
-          <button 
+          <button
             [disabled]="instance?.component?.disabled"
             fxFlex="25%"
             (click)="changePeriod()"
@@ -55,7 +55,7 @@ import * as moment_ from 'moment';
             {{period}}
           </button>
         </div>
-        <mat-error>{{ error.message }}</mat-error>
+        <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </div>
     </ng-template>
   `
@@ -81,10 +81,6 @@ export class MaterialTimeComponent extends MaterialComponent {
     }
   }
 
-  get error() {
-    return this.instance.error;
-  }
-
   get dataFormat() {
     let format = this.instance.component.dataFormat;
     format = format ? format : 'HH:mm';
@@ -98,7 +94,7 @@ export class MaterialTimeComponent extends MaterialComponent {
   }
 
   onChange() {
-    const hours = this.hourControl.value; 
+    const hours = this.hourControl.value;
     const minutes = this.minuteControl.value || '00';
     const seconds = this.secondControl.value || '';
     const rawValue = `${hours || '00'}:${minutes}${seconds ? ':' + seconds : ''} ${this.period}`;
