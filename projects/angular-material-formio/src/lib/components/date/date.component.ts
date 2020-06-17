@@ -213,7 +213,6 @@ export class MaterialDateComponent extends MaterialComponent {
   onChange() {
     const value = this.dateFilter(this.getValue()) && this.checkMinMax(this.getValue()) ? this.getValue() : '';
     this.setDisplayControlValue(value);
-    this.instance.updateValue(value, {modified: true});
   }
 
   beforeSubmit() {
