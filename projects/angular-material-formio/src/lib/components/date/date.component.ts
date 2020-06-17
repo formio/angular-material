@@ -22,46 +22,46 @@ import {FormControl} from '@angular/forms';
         </mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
-                  *ngIf="enableTime && enableDate"
-                  matInput
-                  type="datetime-local"
-                  [placeholder]="instance.component.placeholder"
-                  [formControl]="displayControl"
-                  (input)="onChange()"
-                  readonly
+            *ngIf="enableTime && enableDate"
+            matInput
+            type="datetime-local"
+            [placeholder]="instance.component.placeholder"
+            [formControl]="displayControl"
+            (input)="onChangeInput()"
+            [readonly]="!allowManualInput"
           >
           <input
-                  *ngIf="enableTime && !enableDate"
-                  matInput
-                  [placeholder]="instance.component.placeholder"
-                  [formControl]="displayControl"
-                  [matMask]="formatTime"
-                  (input)="onChange()"
-                  readonly
+            *ngIf="enableTime && !enableDate"
+            matInput
+            [placeholder]="instance.component.placeholder"
+            [formControl]="displayControl"
+            [matMask]="formatTime"
+            (input)="onChangeInput()"
+            [readonly]="!allowManualInput"
           >
           <input
-                  *ngIf="!enableTime && enableDate"
-                  matInput
-                  [placeholder]="instance.component.placeholder"
-                  [formControl]="displayControl"
-                  (input)="onChange()"
-                  readonly
+            *ngIf="!enableTime && enableDate"
+            matInput
+            [placeholder]="instance.component.placeholder"
+            [formControl]="displayControl"
+            (input)="onChangeInput()"
+            [readonly]="!allowManualInput"
           >
         </mat-form-field>
 
         <mat-formio-calendar
-                #calendar
-                [minDate]="instance.component.datePicker.minDate || ''"
-                [maxDate]="instance.component.datePicker.maxDate || ''"
-                [dateFilter]="dateFilter"
-                [hidden]="!isPickerOpened"
-                (dateSelectEvent)="onChangeDate($event)"
-                (timeSelectEvent)="onChangeTime($event)"
-                [enableDate]="enableDate"
-                [enableTime]="enableTime"
-                [hourStep]="instance.component.timePicker.hourStep"
-                [minuteStep]="instance.component.timePicker.minuteStep"
-                [instance]="instance"
+          #calendar
+          [minDate]="instance.component.datePicker.minDate || ''"
+          [maxDate]="instance.component.datePicker.maxDate || ''"
+          [dateFilter]="dateFilter"
+          [hidden]="!isPickerOpened"
+          (dateSelectEvent)="onChangeDate($event)"
+          (timeSelectEvent)="onChangeTime($event)"
+          [enableDate]="enableDate"
+          [enableTime]="enableTime"
+          [hourStep]="instance.component.timePicker.hourStep"
+          [minuteStep]="instance.component.timePicker.minuteStep"
+          [instance]="instance"
         ></mat-formio-calendar>
         <mat-error *ngIf="instance.error">{{ instance.error.message }}</mat-error>
       </form>
@@ -75,6 +75,7 @@ export class MaterialDateComponent extends MaterialComponent {
   public isPickerOpened: boolean;
   public selectedDate: any;
   public selectedTime: any = '00:00';
+  public allowManualInput: boolean = true;
 
   @ViewChild('calendar', {static: false}) calendar;
 
@@ -111,6 +112,14 @@ export class MaterialDateComponent extends MaterialComponent {
     }
   }
 
+  onChangeInput() {
+    const value = this.dateFilter(this.displayControl.value) &&
+    this.checkMinMax(this.displayControl.value) ? this.displayControl.value : '';
+
+    this.control.setValue(value);
+    this.onChange();
+  }
+
   getDateTimeValue() {
     let newDate = '';
     let isSelectedTime = false;
@@ -127,8 +136,8 @@ export class MaterialDateComponent extends MaterialComponent {
     if (this.enableTime && this.enableDate) {
       const [hours, minutes] = this.selectedTime.split(':');
       newDate = isSelectedTime
-          ? momentDate(this.selectedDate).hours(hours).minutes(minutes).utc().format()
-          : this.selectedDate;
+        ? momentDate(this.selectedDate).hours(hours).minutes(minutes).utc().format()
+        : this.selectedDate;
     }
 
     if (!this.enableTime && this.enableDate) {
@@ -154,15 +163,16 @@ export class MaterialDateComponent extends MaterialComponent {
     this.isDisabled() ? this.displayControl.disable() : this.displayControl.enable();
 
     if (this.instance) {
+      this.allowManualInput = this.instance.component.allowInput === false ? false : true;
       if (this.instance.component && this.instance.component.datePicker) {
-       const {minDate: min, maxDate: max} = this.instance.component.datePicker;
+        const {minDate: min, maxDate: max} = this.instance.component.datePicker;
 
-       // It improves the date to the full format if the customer set only a year. Otherwise we will have conflicts into the moment.js.
-       const { minDate, maxDate } = this.improveMinMaxDate(min, max);
-       this.instance.component.datePicker.minDate = minDate;
-       this.instance.component.datePicker.maxDate = maxDate;
+        // It improves the date to the full format if the customer set only a year. Otherwise we will have conflicts into the moment.js.
+        const { minDate, maxDate } = this.improveMinMaxDate(min, max);
+        this.instance.component.datePicker.minDate = minDate;
+        this.instance.component.datePicker.maxDate = maxDate;
       }
-     }
+    }
   }
 
   toggleCalendar(event) {
