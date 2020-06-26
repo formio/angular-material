@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "angular-formio": "^4.8.3-rc.3",
+    "angular2-text-mask": "^9.0.0",
     "formiojs": "^4.10.3-rc.3"
   },
   "devDependencies": {
