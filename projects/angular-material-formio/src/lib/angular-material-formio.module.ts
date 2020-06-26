@@ -22,6 +22,7 @@ import {
   MatIconModule,
   MatTooltipModule, MatMenuModule
 } from '@angular/material';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { initRenderer } from './renderer';
 import { FormioComponent } from './formio.component';
@@ -145,6 +146,7 @@ export {
     MaskDirective
   ],
   imports: [
+    TextMaskModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
