@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core'
 import { MaterialComponent } from '../MaterialComponent';
 import DateTimeComponent from 'formiojs/components/datetime/DateTime.js';
-import { momentDate } from 'formiojs/utils/utils.js';
+import { momentDate, convertFormatToMoment, convertFormatToMask, getInputMask } from 'formiojs/utils/utils.js';
 import {FormControl} from '@angular/forms';
 @Component({
   selector: 'mat-formio-date',
@@ -21,29 +21,11 @@ import {FormControl} from '@angular/forms';
         </mat-datepicker-toggle>
         <mat-form-field class="example-full-width">
           <input
-            *ngIf="enableTime && enableDate"
-            matInput
-            type="datetime-local"
-            [placeholder]="instance.component.placeholder"
-            [formControl]="displayControl"
-            (input)="onChangeInput()"
-            [readonly]="!allowManualInput"
-          >
-          <input
-            *ngIf="enableTime && !enableDate"
             matInput
             [placeholder]="instance.component.placeholder"
             [formControl]="displayControl"
-            [matMask]="formatTime"
-            (input)="onChangeInput()"
-            [readonly]="!allowManualInput"
-          >
-          <input
-            *ngIf="!enableTime && enableDate"
-            matInput
-            [placeholder]="instance.component.placeholder"
-            [formControl]="displayControl"
-            (input)="onChangeInput()"
+            [textMask]="{mask: getMask()}"
+            (input)="onChange"
             [readonly]="!allowManualInput"
           >
         </mat-form-field>
@@ -87,19 +69,38 @@ export class MaterialDateComponent extends MaterialComponent {
   }
 
   setDisplayControlValue(value = null) {
-    const format = `YYYY-MM-DD${this.enableTime ? 'THH:mm' : ''}`;
+    const format = this.getFormat();
+
     value = value || this.getDateTimeValue();
 
     if (value) {
-      this.displayControl.setValue(momentDate(value).format(format));
+      value = momentDate(value).format(format);
+      this.displayControl.setValue(value);
     }
     else {
       this.displayControl.setValue('');
     }
   }
 
+  getFormat() {
+    const {format} = this.instance.component;
+
+    if (!format) {
+      return 'YYYY-MM-DD hh:mm A';
+    }
+
+    return convertFormatToMoment(format);
+  }
+
+  getMask() {
+    const {format} = this.instance.component;
+    const formioFormat = convertFormatToMask(format);
+
+    return getInputMask(formioFormat);
+  }
+
   onChangeDate(event) {
-    this.selectedDate = momentDate(event).utc().format();
+    this.selectedDate = momentDate(event).format(this.getFormat());
     this.control.setValue(this.selectedDate);
     this.setDateTime();
   }
@@ -109,14 +110,6 @@ export class MaterialDateComponent extends MaterialComponent {
     if (this.selectedDate || (this.enableTime && !this.enableDate)) {
       this.setDateTime();
     }
-  }
-
-  onChangeInput() {
-    const value = this.dateFilter(this.displayControl.value) &&
-    this.checkMinMax(this.displayControl.value) ? this.displayControl.value : '';
-
-    this.control.setValue(value);
-    this.onChange();
   }
 
   getDateTimeValue() {
@@ -138,7 +131,6 @@ export class MaterialDateComponent extends MaterialComponent {
           ? momentDate(this.selectedDate)
            .hours(Number.parseInt(hours))
            .minutes(Number.parseInt(minutes))
-           .utc()
           : this.selectedDate;
     }
 
@@ -151,13 +143,11 @@ export class MaterialDateComponent extends MaterialComponent {
       newDate = momentDate(new Date())
         .hours(Number.parseInt(hours))
         .minutes(Number.parseInt(minutes))
-        .seconds(0)
-        .utc();
+        .seconds(0);
     }
 
     return newDate;
   }
-
   setDateTime() {
     this.control.setValue(this.getDateTimeValue());
     this.onChange();
@@ -206,11 +196,13 @@ export class MaterialDateComponent extends MaterialComponent {
     return readonly || disabled || this.instance.root.options.readOnly
   }
 
-  public formatTime = (value) => {
+  public formatTime = (value) =>  {
+    const format = this.getFormat();
+
     if (!value) {
-      return this.instance.emptyValue;
+      return format;
     }
-    return momentDate(value).format(this.instance.component.format);
+    return momentDate(value).format(format);
   }
 
   setValue(value) {
