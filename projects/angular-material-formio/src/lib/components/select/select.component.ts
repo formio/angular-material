@@ -24,7 +24,6 @@ import SelectComponent from 'formiojs/components/select/Select.js';
           <div class="mat-option">
             <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
           </div>
-          <mat-option></mat-option>
           <mat-option *ngIf="!filteredOptionsLength" disabled>
             <span>Nothing was found</span>
           </mat-option>
