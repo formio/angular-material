@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialComponent } from '../MaterialComponent';
 import SelectComponent from 'formiojs/components/select/Select.js';
+import _ from 'lodash';
 @Component({
   selector: 'mat-formio-select',
   template: `
@@ -20,6 +21,7 @@ import SelectComponent from 'formiojs/components/select/Select.js';
                 [formControl]="control"
                 [placeholder]="instance.component.placeholder"
                 (selectionChange)="onChange()"
+                [compareWith]="compareObjects"
         >
           <div class="mat-option">
             <input class="mat-input-element" placeholder="Type to search" (input)="onFilter($event.target.value)">
@@ -45,7 +47,7 @@ export class MaterialSelectComponent extends MaterialComponent implements OnInit
   selectOptions: Promise<any[]>;
   filteredOptions: Promise<any[]>;
   filteredOptionsLength: number;
-
+  
   selectOptionsResolve: any;
 
   setInstance(instance: any) {
@@ -70,6 +72,10 @@ export class MaterialSelectComponent extends MaterialComponent implements OnInit
       this.filteredOptionsLength = filtered.length;
       return filtered;
     })
+  }
+
+  compareObjects(o1: any, o2: any): boolean {
+    return _.isEqual(o1, o2);
   }
 }
 SelectComponent.MaterialComponent = MaterialSelectComponent;
