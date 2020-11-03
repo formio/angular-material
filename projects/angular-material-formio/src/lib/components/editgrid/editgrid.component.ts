@@ -89,8 +89,8 @@ const DEFAULT_ROW_TEMPLATES = [
   templateUrl: './editgrid.component.html'
 })
 export class MaterialEditGridComponent extends MaterialNestedComponent implements AfterViewInit {
-  @ViewChild('header', { static: false }) headerElement: ElementRef;
-  @ViewChild('footer', { static: false }) footerElement: ElementRef;
+  @ViewChild('header') headerElement: ElementRef;
+  @ViewChild('footer') footerElement: ElementRef;
   @ViewChildren('rows') rowElements: QueryList<ElementRef>;
   @ViewChildren('forms') forms: QueryList<FormioComponent>;
   public header: string;
