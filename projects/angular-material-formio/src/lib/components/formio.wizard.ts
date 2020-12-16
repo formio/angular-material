@@ -26,18 +26,30 @@ import { MaterialNestedComponent } from './MaterialNestedComponent';
 export class MaterialWizardComponent extends MaterialNestedComponent {
   @ViewChild('stepper', {static: true}) stepper: MatStepper;
   public isLinear = true;
+  private prevNumOfPages = 0;
+
   setInstance(instance: any) {
     this.isLinear = (
       instance.options &&
       instance.options.breadcrumbSettings &&
       instance.options.breadcrumbSettings.clickable
     ) ? false : true;
-    instance.pages.forEach((page, pageIndex) => {
-      page.viewContainer = () => {
-        return this.viewContainers ? this.viewContainers[pageIndex] : null;
-      };
-    });
+
+    this.updatePages(instance);
+    instance.on('pagesChanged', () => this.updatePages());
+
     super.setInstance(instance);
+  }
+
+  updatePages(instance = this.instance) {
+    if (this.prevNumOfPages !== instance.pages.length) {
+      instance.pages.forEach((page, pageIndex) => {
+        page.viewContainer = () => {
+          return this.viewContainers ? this.viewContainers[pageIndex] : null;
+        };
+      });
+      this.prevNumOfPages = instance.pages.length;
+    }
   }
 
   resetWizard() {
