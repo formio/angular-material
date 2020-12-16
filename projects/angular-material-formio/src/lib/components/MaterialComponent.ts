@@ -10,7 +10,7 @@ import get from 'lodash/get';
 })
 export class MaterialComponent implements AfterViewInit, OnInit {
   @Input() instance: any;
-  @ViewChild('input', {static: false}) input: ElementRef;
+  @ViewChild('input') input: ElementRef;
   @Input() control: FormioControl = new FormioControl();
   constructor(public element: ElementRef, public ref: ChangeDetectorRef) {}
 

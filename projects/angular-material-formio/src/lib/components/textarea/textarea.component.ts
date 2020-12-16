@@ -33,7 +33,7 @@ import isNil from 'lodash/isNil';
   `
 })
 export class MaterialTextareaComponent extends MaterialComponent implements AfterViewInit {
-  @ViewChild('textarea', {static: false}) textarea: ElementRef;
+  @ViewChild('textarea') textarea: ElementRef;
 
   ngAfterViewInit() {
     // Attach the element so the wysiwyg will work.

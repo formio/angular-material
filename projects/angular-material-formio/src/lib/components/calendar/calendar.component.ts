@@ -49,7 +49,7 @@ export class MaterialCalendarComponent extends MaterialComponent {
   public selectedTime: any;
   public selectedTimeComponent: any;
 
-  @ViewChild('time', {static: false}) time;
+  @ViewChild('time') time;
 
   @Input() enableDate: boolean;
   @Input() enableTime: boolean;
