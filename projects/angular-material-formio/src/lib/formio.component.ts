@@ -1,4 +1,4 @@
-import { Component, Optional, ChangeDetectorRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, NgZone } from '@angular/core';
+import { Component, Optional, ChangeDetectorRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, NgZone, Input, Output } from '@angular/core';
 import { FormioBaseComponent } from 'angular-formio/FormioBaseComponent';
 import { FormioAppConfig } from 'angular-formio/formio.config';
 import { Form } from './renderer';

@@ -1,17 +1,17 @@
 {
   "name": "angular-material-formio",
-  "version": "1.30.0",
+  "version": "2.0.0-rc.1",
   "peerDependencies": {
-    "@angular/cdk": "^8.0.0",
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/flex-layout": "^8.0.0",
-    "@angular/forms": "^8.0.0",
-    "@angular/material": "^8.0.0"
+    "@angular/cdk": "^10.0.0 | ^11.0.0",
+    "@angular/common": "^10.0.0 | ^11.0.0",
+    "@angular/core": "^10.0.0 | ^11.0.0",
+    "@angular/flex-layout": "^10.0.0 | ^11.0.0",
+    "@angular/forms": "^10.0.0 | ^11.0.0",
+    "@angular/material": "^10.0.0 | ^11.0.0"
   },
   "dependencies": {
-    "angular-formio": "^4.8.3-rc.3",
-    "formiojs": "^4.10.3-rc.3",
+    "angular-formio": "^5.0.0-rc.4",
+    "formiojs": "^4.12.4-rc.3",
     "tslib": "^2.0.0"
   },
   "main": "src/public-api.ts"

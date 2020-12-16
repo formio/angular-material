@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatStepper } from '@angular/material';
+import { MatStepper } from '@angular/material/stepper';
 import Wizard from 'formiojs/Wizard';
 import Displays from 'formiojs/displays/Displays';
 import { MaterialNestedComponent } from './MaterialNestedComponent';

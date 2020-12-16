@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { MaterialNestedComponent } from '../MaterialNestedComponent';
 import DataGridComponent from 'formiojs/components/datagrid/DataGrid.js';
 import {CdkDragDrop, moveItemInArray, DragDropModule} from '@angular/cdk/drag-drop';

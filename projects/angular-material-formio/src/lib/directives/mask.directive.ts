@@ -1,6 +1,6 @@
 import { Directive, ElementRef, forwardRef, Input } from '@angular/core';
-import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
   selector: 'input[matMask]',
