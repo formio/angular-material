@@ -1,5 +1,5 @@
 {
-  "name": "angular-material-formio",
+  "name": "@formio/angular-material",
   "version": "2.0.0-rc.1",
   "peerDependencies": {
     "@angular/cdk": "^10.0.0 | ^11.0.0",
@@ -7,11 +7,11 @@
     "@angular/core": "^10.0.0 | ^11.0.0",
     "@angular/flex-layout": "^10.0.0 | ^11.0.0",
     "@angular/forms": "^10.0.0 | ^11.0.0",
-    "@angular/material": "^10.0.0 | ^11.0.0"
+    "@angular/material": "^10.0.0 | ^11.0.0",
+    "@formio/angular": "^5.0.0-rc.4",
+    "formiojs": "^4.12.4-rc.3"
   },
   "dependencies": {
-    "angular-formio": "^5.0.0-rc.4",
-    "formiojs": "^4.12.4-rc.3",
     "tslib": "^2.0.0"
   },
   "main": "src/public-api.ts"

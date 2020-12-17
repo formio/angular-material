@@ -7,14 +7,14 @@ This library introduces the powerful Form.io JSON forms into the Angular Materia
 To install this library into your application, you will need to run the following.
 
 ```
-npm install angular-material-formio
+npm install formiojs @formio/angular @formio/angular-material
 ```
 
 Then, you will need to add the following to your codebase.
 
 ***src/app/app.module.ts***
 ```ts
-import { MatFormioModule } from 'angular-material-formio';
+import { MatFormioModule } from '@formio/angular-material';
 
 @NgModule({
   declarations: [
