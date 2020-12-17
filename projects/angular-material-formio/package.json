@@ -1,6 +1,6 @@
 {
   "name": "@formio/angular-material",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0",
   "peerDependencies": {
     "@angular/cdk": "^10.0.0 | ^11.0.0",
     "@angular/common": "^10.0.0 | ^11.0.0",
