@@ -58,7 +58,7 @@ export class MaterialDateComponent extends MaterialComponent {
   public selectedTime: any = '00:00';
   public allowManualInput: boolean = true;
 
-  @ViewChild('calendar', {static: false}) calendar;
+  @ViewChild('calendar') calendar;
 
   get enableDate() {
     return this.instance && this.instance.component.enableDate !== false;

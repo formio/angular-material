@@ -7,7 +7,7 @@ import HtmlComponent from 'formiojs/components/html/HTML.js';
   template: `<div #htmlBody></div>`
 })
 export class MaterialHtmlComponent extends MaterialComponent implements AfterViewInit {
-  @ViewChild('htmlBody', {static: false}) htmlBody: ElementRef;
+  @ViewChild('htmlBody') htmlBody: ElementRef;
 
   ngAfterViewInit() {
     super.ngAfterViewInit();

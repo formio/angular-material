@@ -1,7 +1,7 @@
 /**
  * This file demonstrates how to create a custom component in Angular Material
  */
-import { Components, MaterialComponent, registerComponent } from 'angular-material-formio';
+import { Components, MaterialComponent, registerComponent } from '@formio/angular-material';
 import { Component } from '@angular/core';
 @Component({
   template:'<b>My Custom Component</b>'
