@@ -12,7 +12,7 @@
   "private": false,
   "peerDependencies": {
     "@formio/angular": "^5.0.0-rc.4",
-    "formiojs": "^4.12.4-rc.3",
+    "formiojs": "^4.14.11",
     "@angular/cdk": "^10.0.0 | ^11.0.0",
     "@angular/flex-layout": "^10.0.0 | ^11.0.0",
     "@angular/material": "^10.0.0 | ^11.0.0"
@@ -41,7 +41,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^14.14.14",
     "codelyzer": "^6.0.1",
-    "formiojs": "^4.12.4-rc.3",
+    "formiojs": "^4.14.11",
     "jasmine-core": "^3.6.0",
     "jasmine-spec-reporter": "^6.0.0",
     "karma": "^5.2.3",
